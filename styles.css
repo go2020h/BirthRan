@@ -103,6 +103,22 @@ ul, li {
   height: 600px;
 }
 
+/* バナーヘッダー（ホームページ以外のページ用） */
+.banner-header {
+  height: 200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.banner-header .poster_slide li img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.banner-header h1 {
+  font-size: 36px;
+}
+
 .header h1 {
   position: absolute;
   top: 50%;
@@ -1407,6 +1423,7 @@ footer .copy {
   padding: 10px 20px;
   border-radius: 30px;
   text-decoration: none;
+  margin-top: 15px;
   transition: background-color 0.3s ease;
 }
 

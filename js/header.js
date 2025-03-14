@@ -119,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </header>
 
-        <div class="header">
+        <div class="header banner-header">
           <h1 id="page-title">${pageTitle}<br><span class="subtitle">${pageSubtitle}</span></h1>
           <ul class="poster_slide">
-            <li><img src="https://placehold.jp/ff6b6b/ffffff/1200x200.png?text=バースデー・ランキング　公式サイト" alt="バナー"></li>
+            <li><img src="https://placehold.jp/ff6b6b/ffffff/1200x200.png?text=バースデー・ランキング　公式サイト" alt="バナー" style="height: 200px; max-width: 100%; object-fit: cover;"></li>
           </ul>
         </div>
 
