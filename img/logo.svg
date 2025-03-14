@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <style>
+    .logo-text { font-family: Arial, sans-serif; font-weight: bold; }
+    .main-text { font-size: 28px; fill: #3a5a78; }
+    .sub-text { font-size: 14px; fill: #5a7a98; }
+  </style>
+  <rect width="200" height="60" rx="10" fill="#f0f5fa" />
+  <text x="20" y="35" class="logo-text main-text">バスラン</text>
+  <text x="22" y="50" class="logo-text sub-text">バースデーランキング</text>
+</svg>

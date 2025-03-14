@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>キャスト＆STAFF | efitプレゼンツ☆ウィークリー・バースデー・ランキング</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* キャスト＆STAFF用スタイル */
+    .staff-section {
+      margin-bottom: 60px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .staff-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #333;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .staff-section h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: #0066cc;
+    }
+
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .staff-card {
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .staff-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .staff-info {
+      padding: 20px;
+    }
+
+    .staff-role {
+      font-size: 14px;
+      color: #0066cc;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .staff-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .staff-message {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .staff-table-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .staff-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .staff-table th,
+    .staff-table td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .staff-table th {
+      background-color: #0066cc;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .staff-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .staff-table tr:hover {
+      background-color: #f5f9ff;
+    }
+
+    .staff-message-section {
+      background-color: #f0f7ff;
+      padding: 40px;
+      border-radius: 10px;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .staff-message-section:before {
+      content: '\201C';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      font-size: 120px;
+      color: rgba(0, 102, 204, 0.1);
+      line-height: 1;
+    }
+
+    .staff-message-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #0066cc;
+      text-align: center;
+    }
+
+    .staff-message-content {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      text-align: center;
+    }
+
+    .staff-message-signature {
+      text-align: right;
+      font-style: italic;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .cast-section {
+      margin-bottom: 60px;
+    }
+
+    .cast-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cast-tab {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .cast-tab.active {
+      color: #0066cc;
+      border-bottom-color: #0066cc;
+    }
+
+    .cast-content {
+      display: none;
+    }
+
+    .cast-content.active {
+      display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+      .staff-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      
+      .staff-message-section {
+        padding: 30px 20px;
+      }
+
+      .cast-tabs {
+        flex-wrap: wrap;
+      }
+
+      .cast-tab {
+        padding: 10px 15px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body id="caststaff">
+  <!-- ヘッダープレースホルダー -->
+  <div id="header-placeholder">
+    <!-- ヘッダーを直接埋め込み -->
+    <header>
+      <div class="tbs-v9-gheader">
+        <div class="tbs-v9-gh-logo"><a href="index.html"><img src="img/logo.svg" alt="BirthRan" width="200" height="60"></a></div>
+        <nav>
+          <ul class="tbs-v9-gh-nav">
+            <li><a href="caststaff.html"><span>Cast&Staff キャスト＆スタッフ</span></a></li>
+            <li><a href="#"><span>番組</span></a></li>
+            <li><a href="delivery.html"><span>配信</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="header">
+      <h1 id="page-title">キャスト＆STAFF<br><span class="subtitle">キャスト＆スタッフ情報</span></h1>
+      <ul class="poster_slide">
+        <li><img src="img/main_visual.jpg" alt="メインビジュアル"></li>
+      </ul>
+    </div>
+
+    <div class="menu_outer">
+      <ul class="menu">
+        <li><a href="index.html"><span>ホーム</span></a></li>
+        <li><a href="about.html"><span>はじめに</span></a></li>
+        <li><a href="story.html"><span>あらすじ</span></a></li>
+        <li><a href="chart.html"><span>相関図</span></a></li>
+        <li><a href="news.html"><span>お知らせ</span></a></li>
+        <li class="active"><a href="caststaff.html"><span>キャスト＆STAFF</span></a></li>
+        <li><a href="delivery.html"><span>配信</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="con-wrap">
+    <div id="con-body">
+      <div class="wrap">
+        <!-- キャスト紹介セクション -->
+        <div class="staff-section cast-section">
+          <h2>出演者紹介</h2>
+          
+          <div class="cast-tabs">
+            <div class="cast-tab active" onclick="showCastContent('regular-mc')">レギュラーMC</div>
+            <div class="cast-tab" onclick="showCastContent('vision-supporter')">渋谷愛ビジョンサポーター</div>
+          </div>
+          
+          <div id="regular-mc" class="cast-content active">
+            <h3 style="text-align: center; margin-bottom: 30px; color: #0066cc;">週替わりレギュラーMC</h3>
+            <div class="staff-grid">
+              <!-- 第1週MC -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">第1週MC</div>
+                  <div class="staff-name">佐藤健太</div>
+                  <div class="staff-message">
+                    ラジオパーソナリティとして10年以上の経験を持つベテラン。明るく親しみやすいトークで、ゲストの魅力を引き出します。誕生日にまつわる豆知識が豊富で、毎回新しい発見をお届けします。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 第2週MC -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">第2週MC</div>
+                  <div class="staff-name">鈴木美咲</div>
+                  <div class="staff-message">
+                    元アイドルの経験を活かした明るいキャラクターで人気。特に女性ゲストとの親密なトークが得意で、視聴者に新たな一面を見せてくれます。バースデーソングの知識も豊富です。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 第3週MC -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">第3週MC</div>
+                  <div class="staff-name">田中誠</div>
+                  <div class="staff-message">
+                    お笑い芸人としての経験を活かした軽快なトークが魅力。ゲストとの掛け合いで思わぬエピソードを引き出すことも。誕生日占いや星座の知識が豊富で、番組に深みを与えています。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 第4週MC -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">第4週MC</div>
+                  <div class="staff-name">山田花子</div>
+                  <div class="staff-message">
+                    元女優の経験を持つ知的なキャラクターが魅力。落ち着いた雰囲気でゲストの内面に迫るインタビューが得意。世界各国の誕生日文化に詳しく、国際色豊かな話題を提供します。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 第5週MC -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">第5週MC</div>
+                  <div class="staff-name">高橋大輔</div>
+                  <div class="staff-message">
+                    スポーツキャスターとしての経験を持つ爽やかなパーソナリティ。特にスポーツ選手のゲストとの対談が人気。誕生日にちなんだスポーツの話題や、健康に関する情報も提供します。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="vision-supporter" class="cast-content">
+            <h3 style="text-align: center; margin-bottom: 30px; color: #0066cc;">渋谷愛ビジョンサポーター</h3>
+            <div class="staff-grid">
+              <!-- 渋谷愛ビジョンサポーター1 -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">渋谷愛ビジョンサポーター</div>
+                  <div class="staff-name">川村ケンスケ</div>
+                  <div class="staff-message">
+                    渋谷の街の最新トレンドに精通したリポーター。渋谷愛ビジョンからの中継や、街頭インタビューを担当。若者文化に詳しく、最新の話題を提供します。毎週木曜日の放送に出演し、渋谷の今を伝えます。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 渋谷愛ビジョンサポーター2 -->
+              <div class="staff-card">
+                <div class="staff-info">
+                  <div class="staff-role">渋谷愛ビジョンサポーター</div>
+                  <div class="staff-name">風谷南友</div>
+                  <div class="staff-message">
+                    元モデルの経験を活かしたおしゃれなセンスが魅力。渋谷のファッションやカフェ情報など、トレンドスポットからのリポートを担当。視聴者参加型企画の進行も務め、親しみやすいキャラクターで人気です。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 制作STAFFの意気込みセクション -->
+        <div class="staff-message-section">
+          <h3 class="staff-message-title">制作STAFFからのメッセージ</h3>
+          <p class="staff-message-content">
+            「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、視聴者の皆さまに「誕生日」という特別な日を通じて、新しい発見と感動をお届けする番組です。私たち制作チームは、この番組を通じて、視聴者の皆さまに「誕生日」という特別な日の魅力を再発見していただきたいと考えています。
+          </p>
+          <p class="staff-message-content">
+            ラジオ日本と渋谷愛ビジョンを結ぶクロスメディア展開により、視聴者の皆さまにより多角的な楽しみ方を提供できるよう工夫を重ねています。また、SNSを通じた視聴者参加型の企画も充実させ、ラジオ日本局内で『聴取率』『SNS（X）』のフォロワー数でNo.1を目指しています。
+          </p>
+          <p class="staff-message-content">
+            これからも、視聴者の皆さまに「驚き」と「感動」をお届けできるよう、スタッフ一同、全力で取り組んでまいります。どうぞ、これからも「efitプレゼンツ☆ウィークリー・バースデー・ランキング」をよろしくお願いいたします。
+          </p>
+          <p class="staff-message-signature">制作チーム一同</p>
+        </div>
+
+        <!-- 制作STAFF紹介セクション -->
+        <div class="staff-section">
+          <h2>制作STAFF紹介</h2>
+          <div class="staff-grid">
+            <!-- スタッフカード 1 -->
+            <div class="staff-card">
+              <div class="staff-info">
+                <div class="staff-role">企画構成</div>
+                <div class="staff-name">芳賀正光</div>
+                <div class="staff-message">
+                  「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、視聴者の皆さんに誕生日の新しい魅力を発見していただく番組です。毎回違った視点から誕生日を探求し、さまざまな発見をお届けします。どうぞお楽しみに！
+                </div>
+              </div>
+            </div>
+
+            <!-- スタッフカード 2 -->
+            <div class="staff-card">
+              <div class="staff-info">
+                <div class="staff-role">プロデューサー</div>
+                <div class="staff-name">梅本満</div>
+                <div class="staff-message">
+                  毎回新しいテーマで誕生日の魅力をお届けするこの番組。視聴者の皆さんに「へぇ～！」と驚いていただける内容を心がけています。渋谷愛ビジョンとの連動企画も充実させ、クロスメディア展開を強化していきます！
+                </div>
+              </div>
+            </div>
+
+            <!-- スタッフカード 3 -->
+            <div class="staff-card">
+              <div class="staff-info">
+                <div class="staff-role">総合演出</div>
+                <div class="staff-name">野村満</div>
+                <div class="staff-message">
+                  演出面では、視聴者の皆さんに分かりやすく、かつ魅力的な番組をお届けできるよう工夫を重ねています。ラジオという音声メディアの特性を活かしながら、渋谷愛ビジョンでの映像展開も意識した演出を心がけています。
+                </div>
+              </div>
+            </div>
+
+            <!-- スタッフカード 4 -->
+            <div class="staff-card">
+              <div class="staff-info">
+                <div class="staff-role">構成作家</div>
+                <div class="staff-name">川村ケンスケ</div>
+                <div class="staff-message">
+                  誕生日にまつわる興味深いデータやエピソードを発掘し、視聴者の皆さんに「へぇ～！」と驚いていただける構成を心がけています。渋谷愛ビジョンサポーターとしての経験も活かし、多角的な視点で番組を盛り上げます！
+                </div>
+              </div>
+            </div>
+            
+            <!-- スタッフカード 5 -->
+            <div class="staff-card">
+              <div class="staff-info">
+                <div class="staff-role">スーパーバイザー</div>
+                <div class="staff-name">田代優太郎</div>
+                <div class="staff-message">
+                  番組全体の品質管理を担当しています。視聴者の皆さんに楽しんでいただけるよう、細部までこだわった番組作りを心がけています。特にバスランカレンダーの企画は私のお気に入りで、皆さんの反応が楽しみです。
+                </div>
+              </div>
+            </div>
+            
+            <!-- スタッフカード 6 -->
+            <div class="staff-card">
+              <div class="staff-info">
+                <div class="staff-role">スーパーバイザー</div>
+                <div class="staff-name">松浦亮介</div>
+                <div class="staff-message">
+                  番組の方向性や内容について監修を行っています。視聴者の皆さんが「誕生日」という日常にある特別な日を、新しい視点で楽しめるよう工夫を凝らしています。特にmotherプレゼント企画には力を入れています。
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- スポンサー情報 -->
+          <div class="sponsors-section" style="margin-top: 60px; text-align: center;">
+            <h2 style="margin-bottom: 40px;">協賛・協力</h2>
+            <div class="sponsor-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 30px;">
+              <div class="sponsor-card" style="background-color: #f8f8f8; border-radius: 10px; padding: 25px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <h3 style="color: #0066cc; margin-bottom: 15px; font-size: 20px;">協力</h3>
+                <div style="margin: 20px 0;">
+                  <img src="img/shibuya_vision_logo.png" alt="渋谷愛ビジョン" style="max-width: 200px; height: auto;" onerror="this.style.display='none'; document.getElementById('shibuya-text').style.fontSize='24px';">
+                  <div id="shibuya-text" style="font-size: 18px; font-weight: bold; margin-top: 10px;">渋谷愛ビジョン</div>
+                </div>
+                <p style="color: #666; font-size: 14px;">番組制作に協力していただいています。渋谷愛ビジョンは、渋谷駅前を代表する大型ビジョンです。放送中の19:00～19:20と20:00～20:20に連動放送を行っています。</p>
+              </div>
+              
+              <div class="sponsor-card" style="background-color: #f8f8f8; border-radius: 10px; padding: 25px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <h3 style="color: #0066cc; margin-bottom: 15px; font-size: 20px;">スポンサー</h3>
+                <div style="margin: 20px 0;">
+                  <a href="https://efit.co.jp/" target="_blank" style="text-decoration: none;">
+                    <img src="img/efit_logo.png" alt="efit" style="max-width: 200px; height: auto;" onerror="this.style.display='none'; document.getElementById('efit-text').style.fontSize='24px';">
+                    <div id="efit-text" style="font-size: 18px; font-weight: bold; margin-top: 10px; color: #333;">efit</div>
+                  </a>
+                </div>
+                <p style="color: #666; font-size: 14px;">番組スポンサーとして、番組制作を支援していただいています。efitは、フィットネスやスポーツを通じて、人々の健康や生活の質を向上させることを目的とした企業です。誕生日プレゼント「mother」の提供も行っています。</p>
+              </div>
+              
+              <div class="sponsor-card" style="background-color: #f8f8f8; border-radius: 10px; padding: 25px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <h3 style="color: #0066cc; margin-bottom: 15px; font-size: 20px;">製作著作</h3>
+                <div style="margin: 20px 0;">
+                  <img src="img/radio_japan_logo.png" alt="ラジオ日本" style="max-width: 200px; height: auto;" onerror="this.style.display='none'; document.getElementById('radio-japan-text').style.fontSize='24px';">
+                  <div id="radio-japan-text" style="font-size: 18px; font-weight: bold; margin-top: 10px;">ラジオ日本</div>
+                </div>
+                <p style="color: #666; font-size: 14px;">毎週木曜日18:00～20:30、ラジオ日本神谷町スタジオから生放送でお届けしています。ラジオ日本局内で『聴取率』『SNS（X）』のフォロワー数でNo.1を目指しています。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section id="share">
+          <span>シェアする</span>
+          <ul>
+            <li><a href="https://twitter.com/share?url=https://birthran.com/caststaff.html&text=efitプレゼンツ☆ウィークリー・バースデー・ランキング キャスト＆STAFF" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/caststaff.html" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/caststaff.html" target="_blank"><i class="fab fa-line"></i></a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- フッタープレースホルダー -->
+  <div id="footer-placeholder">
+    <!-- フッターを直接埋め込み -->
+    <footer>
+      <div class="wrap">
+        <div id="share">
+          <span>シェアする</span>
+          <ul>
+            <li><a href="https://twitter.com/share?url=https://birthran.com/&text=efitプレゼンツ☆ウィークリー・バースデー・ランキング" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/" target="_blank"><i class="fab fa-line"></i></a></li>
+          </ul>
+        </div>
+        <div class="copy">
+          <small>Copyright &copy; 2025, All Rights Reserved.</small>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    function showCastContent(contentId) {
+      // すべてのコンテンツを非表示にする
+      document.querySelectorAll('.cast-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // すべてのタブを非アクティブにする
+      document.querySelectorAll('.cast-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // クリックされたコンテンツを表示する
+      document.getElementById(contentId).classList.add('active');
+      
+      // クリックされたタブをアクティブにする
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
