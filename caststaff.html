@@ -8,196 +8,87 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* キャスト＆STAFF用スタイル */
-    .staff-section {
-      margin-bottom: 60px;
-      padding: 30px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    }
-
-    .staff-section h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 32px;
-      color: #333;
-      position: relative;
-      padding-bottom: 15px;
-    }
-
-    .staff-section h2:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background-color: #0066cc;
-    }
-
     .staff-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 30px;
-      margin-top: 40px;
+      margin-top: 30px;
     }
 
     .staff-card {
-      background-color: #f8f8f8;
-      border-radius: 10px;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      text-align: center;
+      transition: transform 0.3s ease;
     }
 
     .staff-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
 
     .staff-info {
-      padding: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 15px 10px;
+      background: rgba(0, 0, 0, 0.5);
     }
 
     .staff-role {
+      color: #d4af37;
       font-size: 14px;
-      color: #0066cc;
       margin-bottom: 5px;
-      font-weight: bold;
+      margin-top: 10px;
     }
 
     .staff-name {
-      font-size: 20px;
+      color: #d4af37;
       font-weight: bold;
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    .staff-message {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #666;
-    }
-
-    .staff-table-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .staff-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #fff;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .staff-table th,
-    .staff-table td {
-      padding: 15px 20px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    .staff-table th {
-      background-color: #0066cc;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .staff-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .staff-table tr:hover {
-      background-color: #f5f9ff;
-    }
-
-    .staff-message-section {
-      background-color: #f0f7ff;
-      padding: 40px;
-      border-radius: 10px;
-      margin-top: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .staff-message-section:before {
-      content: '\201C';
-      position: absolute;
-      top: 0;
-      left: 20px;
-      font-size: 120px;
-      color: rgba(0, 102, 204, 0.1);
-      line-height: 1;
-    }
-
-    .staff-message-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #0066cc;
-      text-align: center;
-    }
-
-    .staff-message-content {
       font-size: 16px;
-      line-height: 1.8;
-      color: #555;
+      margin-bottom: 10px;
+    }
+
+    /* バブルキャンバス */
+    #bubble-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ページ全体のスタイル */
+    #caststaff {
+      background-color: #0a1525;
+      position: relative;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .staff-section h2, .cast-section h2 {
+      color: #d4af37;
       text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 10px;
     }
 
-    .staff-message-signature {
-      text-align: right;
-      font-style: italic;
-      margin-top: 20px;
-      font-weight: bold;
-      color: #333;
+    .wrap {
+      background-color: #0a1525;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    .cast-section {
-      margin-bottom: 60px;
-    }
-
-    .cast-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .cast-tab {
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s ease;
-    }
-
-    .cast-tab.active {
-      color: #0066cc;
-      border-bottom-color: #0066cc;
-    }
-
-    .cast-content {
-      display: none;
-    }
-
-    .cast-content.active {
-      display: block;
-    }
-
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       .staff-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .staff-message-section {
-        padding: 30px 20px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
       }
 
       .cast-tabs {
@@ -209,9 +100,182 @@
         font-size: 16px;
       }
     }
+
+    /* スポンサー情報 */
+    .sponsors-section {
+      margin-top: 60px;
+      text-align: center;
+      color: white;
+      padding: 30px;
+      background: rgba(10, 21, 37, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .sponsors-section h2, .sponsors-section h3 {
+      color: #d4af37;
+      text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    }
+
+    .sponsors-section h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    .sponsor-group {
+      margin-bottom: 30px;
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .sponsor-group:hover {
+      transform: translateY(-5px);
+    }
+
+    .sponsor-description {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+
+    .sponsor-logo {
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .sponsor-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .sponsor-logo img {
+      max-width: 200px;
+      height: auto;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    /* シェアボタン */
+    #share {
+      margin-top: 40px;
+      text-align: center;
+      color: white;
+    }
+
+    #share ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+    }
+
+    #share ul li {
+      margin: 0 10px;
+    }
+
+    #share ul li a {
+      color: #d4af37;
+      font-size: 24px;
+    }
+
+    /* フッター */
+    footer {
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      color: #fff;
+      padding: 30px 0;
+      margin-top: 50px;
+      width: 100%;
+      left: 0;
+      right: 0;
+      position: relative;
+    }
+    
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    
+    #social-links {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    #social-links ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #social-links li {
+      margin: 0 10px;
+    }
+    
+    #social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    #social-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    .x-logo {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    
+    .copy {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .copy small {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #fff;
+    }
   </style>
 </head>
 <body id="caststaff" class="caststaff cmn">
+  <!-- バブルアニメーション用キャンバス -->
+  <canvas id="bubble-canvas"></canvas>
+  
   <!-- ヘッダー -->
   <div id="header-placeholder"></div>
 
@@ -220,106 +284,69 @@
       <div class="wrap">
         <!-- キャスト紹介セクション -->
         <div class="staff-section cast-section">
-          <h2>出演者紹介</h2>
+          <h2>愛あるパーソナリティ</h2>
           
-          <div class="cast-tabs">
-            <div class="cast-tab active" onclick="showCastContent('regular-mc')">レギュラーMC</div>
-            <div class="cast-tab" onclick="showCastContent('vision-supporter')">渋谷愛ビジョンサポーター</div>
-          </div>
-          
-          <div id="regular-mc" class="cast-content active">
-            <h3 style="text-align: center; margin-bottom: 30px; color: #0066cc;">週替わりレギュラーMC</h3>
-            <div class="staff-grid">
-              <!-- 第1週MC -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/4CAF50/ffffff/300x300.png?text=佐藤健太" alt="佐藤健太" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">第1週MC</div>
-                  <div class="staff-name">佐藤健太</div>
-                  <div class="staff-message">
-                    ラジオパーソナリティとして10年以上の経験を持つベテラン。明るく親しみやすいトークで、ゲストの魅力を引き出します。誕生日にまつわる豆知識が豊富で、毎回新しい発見をお届けします。
-                  </div>
-                </div>
-              </div>
-              
-              <!-- 第2週MC -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/2196F3/ffffff/300x300.png?text=鈴木美香" alt="鈴木美香" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">第2週MC</div>
-                  <div class="staff-name">鈴木美香</div>
-                  <div class="staff-message">
-                    元アイドルの経験を活かした明るいキャラクターで人気。特に女性ゲストとの親密なトークが得意で、視聴者に新たな一面を見せてくれます。バースデーソングの知識も豊富です。
-                  </div>
-                </div>
-              </div>
-              
-              <!-- 第3週MC -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/FF5722/ffffff/300x300.png?text=田中雄太" alt="田中雄太" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">第3週MC</div>
-                  <div class="staff-name">田中雄太</div>
-                  <div class="staff-message">
-                    お笑い芸人としての経験を活かした軽快なトークが魅力。ゲストとの掛け合いで思わぬエピソードを引き出すことも。誕生日占いや星座の知識が豊富で、番組に深みを与えています。
-                  </div>
-                </div>
-              </div>
-              
-              <!-- 第4週MC -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/E91E63/ffffff/300x300.png?text=山田花子" alt="山田花子" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">第4週MC</div>
-                  <div class="staff-name">山田花子</div>
-                  <div class="staff-message">
-                    元女優の経験を持つ知的なキャラクターが魅力。落ち着いた雰囲気でゲストの内面に迫るインタビューが得意。世界各国の誕生日文化に詳しく、国際色豊かな話題を提供します。
-                  </div>
-                </div>
-              </div>
-              
-              <!-- 第5週MC -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/9C27B0/ffffff/300x300.png?text=高橋大輔" alt="高橋大輔" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">第5週MC</div>
-                  <div class="staff-name">高橋大輔</div>
-                  <div class="staff-message">
-                    スポーツキャスターとしての経験を持つ爽やかなパーソナリティ。特にスポーツ選手のゲストとの対談が人気。誕生日にちなんだスポーツの話題や、健康に関する情報も提供します。
-                  </div>
-                </div>
-              </div>
+          <div class="staff-grid">
+            <!-- 第1週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(1)" style="cursor: pointer;">
+              <img src="https://placehold.jp/4CAF50/ffffff/200x200.png?text=松田和佳" alt="松田和佳" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第１週</div>
+              <div class="staff-name">松田和佳</div>
+            </div>
+            
+            <!-- 第2週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(2)" style="cursor: pointer;">
+              <img src="https://placehold.jp/2196F3/ffffff/200x200.png?text=ゆうにゃん" alt="ゆうにゃん" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第２週</div>
+              <div class="staff-name">ゆうにゃん</div>
+            </div>
+            
+            <!-- 第3週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(3)" style="cursor: pointer;">
+              <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=神谷明采" alt="神谷明采" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第3週</div>
+              <div class="staff-name">神谷明采</div>
+            </div>
+            
+            <!-- 第4週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(4)" style="cursor: pointer;">
+              <img src="https://placehold.jp/E91E63/ffffff/200x200.png?text=宮崎美穂" alt="宮崎美穂" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第4週</div>
+              <div class="staff-name">宮崎美穂</div>
+            </div>
+            
+            <!-- 第5週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(5)" style="cursor: pointer;">
+              <img src="https://placehold.jp/9C27B0/ffffff/200x200.png?text=ChumuNote" alt="ChumuNote" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第5週</div>
+              <div class="staff-name">ChumuNote</div>
+            </div>
+            
+            <!-- スーパーバイザー -->
+            <div class="staff-card" onclick="showPersonalityDialog(6)" style="cursor: pointer;">
+              <img src="https://placehold.jp/607D8B/ffffff/200x200.png?text=川村ケンスケ" alt="川村ケンスケ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">スーパーバイザー</div>
+              <div class="staff-name">川村ケンスケ</div>
+            </div>
+            
+            <!-- 風谷南友 -->
+            <div class="staff-card" onclick="showPersonalityDialog(7)" style="cursor: pointer;">
+              <img src="https://placehold.jp/3F51B5/ffffff/200x200.png?text=風谷南友" alt="風谷南友" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">特別出演</div>
+              <div class="staff-name">風谷南友</div>
             </div>
           </div>
           
-          <div id="vision-supporter" class="cast-content">
-            <h3 style="text-align: center; margin-bottom: 30px; color: #0066cc;">渋谷愛ビジョンサポーター</h3>
-            <div class="staff-grid">
-              <!-- 渋谷愛ビジョンサポーター1 -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/FF9800/ffffff/300x300.png?text=川村ケンスケ" alt="川村ケンスケ" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">渋谷愛ビジョンサポーター</div>
-                  <div class="staff-name">川村ケンスケ</div>
-                  <div class="staff-message">
-                    渋谷の街の最新トレンドに精通したリポーター。渋谷愛ビジョンからの中継や、街頭インタビューを担当。若者文化に詳しく、最新の話題を提供します。毎週木曜日の放送に出演し、渋谷の今を伝えます。
-                  </div>
-                </div>
-              </div>
-              
-              <!-- 渋谷愛ビジョンサポーター2 -->
-              <div class="staff-card">
-                <img src="https://placehold.jp/00BCD4/ffffff/300x300.png?text=風谷南友" alt="風谷南友" style="width: 100%; height: 200px; object-fit: cover;">
-                <div class="staff-info">
-                  <div class="staff-role">渋谷愛ビジョンサポーター</div>
-                  <div class="staff-name">風谷南友</div>
-                  <div class="staff-message">
-                    元モデルの経験を活かしたおしゃれなセンスが魅力。渋谷のファッションやカフェ情報など、トレンドスポットからのリポートを担当。視聴者参加型企画の進行も務め、親しみやすいキャラクターで人気です。
-                  </div>
-                </div>
+          <!-- パーソナリティダイアログ -->
+          <div id="personality-dialog" class="staff-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+            <div class="staff-dialog-content" style="background-color: #1a2b49; color: white; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; opacity: 0; transform: scale(0.9); transition: opacity 0.3s ease, transform 0.3s ease;">
+              <span class="close-button" onclick="closePersonalityDialog()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white;">&times;</span>
+              <div id="personality-dialog-content" style="display: flex; flex-direction: column; align-items: center;">
+                <!-- ダイアログ内容はJavaScriptで生成 -->
               </div>
             </div>
           </div>
+
         </div>
 
         <!-- 制作STAFFの意気込みセクション -->
@@ -339,170 +366,462 @@
 
         <!-- 制作STAFF紹介セクション -->
         <div class="staff-section">
-          <h2>制作STAFF紹介</h2>
+          <h2>愛あるSTAFF</h2>
           <div class="staff-grid">
             <!-- スタッフカード 1 -->
-            <div class="staff-card">
-              <img src="https://placehold.jp/607D8B/ffffff/300x300.png?text=芳賀正光" alt="芳賀正光" style="width: 100%; height: 200px; object-fit: cover;">
-              <div class="staff-info">
-                <div class="staff-role">企画構成</div>
-                <div class="staff-name">芳賀正光</div>
-                <div class="staff-message">
-                  「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、視聴者の皆さんに誕生日の新しい魅力を発見していただく番組です。毎回違った視点から誕生日を探求し、さまざまな発見をお届けします。どうぞお楽しみに！
-                </div>
-              </div>
+            <div class="staff-card" onclick="showStaffDialog(1)" style="cursor: pointer;">
+              <img src="img/cast/staff1.jpg" alt="芳賀正光" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">企画構成</div>
+              <div class="staff-name">芳賀正光</div>
             </div>
 
             <!-- スタッフカード 2 -->
-            <div class="staff-card">
-              <img src="https://placehold.jp/795548/ffffff/300x300.png?text=中野由美" alt="中野由美" style="width: 100%; height: 200px; object-fit: cover;">
-              <div class="staff-info">
-                <div class="staff-role">プロデューサー</div>
-                <div class="staff-name">中野由美</div>
-                <div class="staff-message">
-                  毎回新しいテーマで誕生日の魅力をお届けするこの番組。視聴者の皆さんに「へぇ～！」と驚いていただける内容を心がけています。渋谷愛ビジョンとの連動企画も充実させ、クロスメディア展開を強化していきます！
-                </div>
-              </div>
+            <div class="staff-card" onclick="showStaffDialog(2)" style="cursor: pointer;">
+              <img src="https://placehold.jp/795548/ffffff/200x200.png?text=梅本満" alt="梅本満" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">プロデューサー</div>
+              <div class="staff-name">梅本満</div>
             </div>
 
             <!-- スタッフカード 3 -->
-            <div class="staff-card">
-              <img src="https://placehold.jp/009688/ffffff/300x300.png?text=高木誠" alt="高木誠" style="width: 100%; height: 200px; object-fit: cover;">
-              <div class="staff-info">
-                <div class="staff-role">総合演出</div>
-                <div class="staff-name">高木誠</div>
-                <div class="staff-message">
-                  演出面では、視聴者の皆さんに分かりやすく、かつ魅力的な番組をお届けできるよう工夫を重ねています。ラジオという音声メディアの特性を活かしながら、渋谷愛ビジョンでの映像展開も意識した演出を心がけています。
-                </div>
-              </div>
+            <div class="staff-card" onclick="showStaffDialog(3)" style="cursor: pointer;">
+              <img src="https://placehold.jp/009688/ffffff/200x200.png?text=野村満" alt="野村満" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">総合演出</div>
+              <div class="staff-name">野村満</div>
             </div>
 
             <!-- スタッフカード 4 -->
-            <div class="staff-card">
-              <img src="https://placehold.jp/3F51B5/ffffff/300x300.png?text=西田明美" alt="西田明美" style="width: 100%; height: 200px; object-fit: cover;">
-              <div class="staff-info">
-                <div class="staff-role">構成作家</div>
-                <div class="staff-name">西田明美</div>
-                <div class="staff-message">
-                  誕生日にまつわる興味深いデータやエピソードを発掘し、視聴者の皆さんに「へぇ～！」と驚いていただける構成を心がけています。渋谷愛ビジョンサポーターとしての経験も活かし、多角的な視点で番組を盛り上げます！
-                </div>
-              </div>
+            <div class="staff-card" onclick="showStaffDialog(4)" style="cursor: pointer;">
+              <img src="https://placehold.jp/3F51B5/ffffff/200x200.png?text=神取美佳" alt="神取美佳" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">ミキサー・制作</div>
+              <div class="staff-name">神取美佳</div>
             </div>
-            
+
             <!-- スタッフカード 5 -->
-            <div class="staff-card">
-              <img src="https://placehold.jp/3F51B5/ffffff/300x300.png?text=田代優太郎" alt="田代優太郎" style="width: 100%; height: 200px; object-fit: cover;">
-              <div class="staff-info">
-                <div class="staff-role">スーパーバイザー</div>
-                <div class="staff-name">田代優太郎</div>
-                <div class="staff-message">
-                  番組全体の品質管理を担当しています。視聴者の皆さんに楽しんでいただけるよう、細部までこだわった番組作りを心がけています。特にバスランカレンダーの企画は私のお気に入りで、皆さんの反応が楽しみです。
-                </div>
-              </div>
+            <div class="staff-card" onclick="showStaffDialog(5)" style="cursor: pointer;">
+              <img src="img/cast/staff5.png" alt="Konomi" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">AP</div>
+              <div class="staff-name">Konomi</div>
             </div>
-            
+
             <!-- スタッフカード 6 -->
-            <div class="staff-card">
-              <img src="https://placehold.jp/3F51B5/ffffff/300x300.png?text=松浦亮介" alt="松浦亮介" style="width: 100%; height: 200px; object-fit: cover;">
-              <div class="staff-info">
-                <div class="staff-role">スーパーバイザー</div>
-                <div class="staff-name">松浦亮介</div>
-                <div class="staff-message">
-                  番組の方向性や内容について監修を行っています。視聴者の皆さんが「誕生日」という日常にある特別な日を、新しい視点で楽しめるよう工夫を凝らしています。特にmotherプレゼント企画には力を入れています。
-                </div>
+            <div class="staff-card" onclick="showStaffDialog(6)" style="cursor: pointer;">
+              <img src="https://placehold.jp/00BCD4/ffffff/200x200.png?text=松浦" alt="松浦" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">WEBディレクター</div>
+              <div class="staff-name">松浦</div>
+            </div>
+
+            <!-- スタッフカード 7 -->
+            <div class="staff-card" onclick="showStaffDialog(7)" style="cursor: pointer;">
+              <img src="https://placehold.jp/9C27B0/ffffff/200x200.png?text=SNSディレクター" alt="SNSディレクター" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">SNSディレクター</div>
+              <div class="staff-name">SNS担当</div>
+            </div>
+          </div>
+
+          <!-- スタッフダイアログ -->
+          <div id="staff-dialog" class="staff-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+            <div class="staff-dialog-content" style="background-color: #1a2b49; color: white; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;">
+              <span class="close-button" onclick="closeStaffDialog()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white;">&times;</span>
+              <div id="staff-dialog-content" style="display: flex; flex-direction: column; align-items: center;">
+                <!-- ダイアログ内容はJavaScriptで生成 -->
               </div>
             </div>
           </div>
-          
-          <!-- スポンサー情報 -->
-          <div class="sponsors-section" style="margin-top: 60px; text-align: center;">
-            <h2 style="margin-bottom: 40px;">協賛・協力</h2>
-            <div class="sponsor-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 30px;">
-              <div class="sponsor-card" style="background-color: #f8f8f8; border-radius: 10px; padding: 25px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-                <h3 style="color: #0066cc; margin-bottom: 15px; font-size: 20px;">協力</h3>
-                <div style="margin: 20px 0;">
-                  <img src="img/shibuya_vision_logo.png" alt="渋谷愛ビジョン" style="max-width: 200px; height: auto;" onerror="this.style.display='none'; document.getElementById('shibuya-text').style.fontSize='24px';">
-                  <div id="shibuya-text" style="font-size: 18px; font-weight: bold; margin-top: 10px;">渋谷愛ビジョン</div>
-                </div>
-                <p style="color: #666; font-size: 14px;">番組制作に協力していただいています。渋谷愛ビジョンは、渋谷駅前を代表する大型ビジョンです。放送中の19:00～19:20と20:00～20:20に連動放送を行っています。</p>
-              </div>
-              
-              <div class="sponsor-card" style="background-color: #f8f8f8; border-radius: 10px; padding: 25px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-                <h3 style="color: #0066cc; margin-bottom: 15px; font-size: 20px;">スポンサー</h3>
-                <div style="margin: 20px 0;">
-                  <a href="https://efit.co.jp/" target="_blank" style="text-decoration: none;">
-                    <img src="img/efit_logo.png" alt="efit" style="max-width: 200px; height: auto;" onerror="this.style.display='none'; document.getElementById('efit-text').style.fontSize='24px';">
-                    <div id="efit-text" style="font-size: 18px; font-weight: bold; margin-top: 10px; color: #333;">efit</div>
-                  </a>
-                </div>
-                <p style="color: #666; font-size: 14px;">番組スポンサーとして、番組制作を支援していただいています。efitは、フィットネスやスポーツを通じて、人々の健康や生活の質を向上させることを目的とした企業です。誕生日プレゼント「mother」の提供も行っています。</p>
-              </div>
-              
-              <div class="sponsor-card" style="background-color: #f8f8f8; border-radius: 10px; padding: 25px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-                <h3 style="color: #0066cc; margin-bottom: 15px; font-size: 20px;">製作著作</h3>
-                <div style="margin: 20px 0;">
-                  <img src="img/radio_japan_logo.png" alt="ラジオ日本" style="max-width: 200px; height: auto;" onerror="this.style.display='none'; document.getElementById('radio-japan-text').style.fontSize='24px';">
-                  <div id="radio-japan-text" style="font-size: 18px; font-weight: bold; margin-top: 10px;">ラジオ日本</div>
-                </div>
-                <p style="color: #666; font-size: 14px;">毎週木曜日18:00～20:30、ラジオ日本神谷町スタジオから生放送でお届けしています。ラジオ日本局内で『聴取率』『SNS（X）』のフォロワー数でNo.1を目指しています。</p>
+
+          <!-- 協賛・協力 -->
+          <div class="sponsors-section">
+            <h2>協賛・協力</h2>
+            <div class="sponsor-group">
+              <h3>渋谷愛ビジョン</h3>
+              <p class="sponsor-description">情報提供・制作協力</p>
+              <p class="sponsor-description">渋谷の街を彩る大型ビジョンで番組情報を放映</p>
+            </div>
+            <div class="sponsor-group">
+              <h3>スポンサー</h3>
+              <p class="sponsor-description">番組メインスポンサー</p>
+              <div class="sponsor-logo" style="background-color: white; padding: 20px; border-radius: 5px; display: inline-block;">
+                <a href="https://efit.co.jp/" target="_blank">
+                  <img src="img/efit.png" alt="efit" style="max-width: 200px; height: auto;">
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        <section id="share">
-          <span>シェアする</span>
-          <ul>
-            <li><a href="https://twitter.com/share?url=https://birthran.com/caststaff.html&text=efitプレゼンツ☆ウィークリー・バースデー・ランキング キャスト＆STAFF" target="_blank"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/caststaff.html" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/caststaff.html" target="_blank"><i class="fab fa-line"></i></a></li>
-          </ul>
-        </section>
       </div>
     </div>
   </div>
 
   <!-- フッター -->
-  <div id="footer-placeholder">
-    <!-- フッターを直接書き込む -->
-    <footer>
-      <div class="wrap">
-        <div id="share">
-          <span>シェアする</span>
-          <ul>
-            <li><a href="https://twitter.com/share?url=https://birthran.com/&text=efitプレゼンツ☆ウィークリー・バースデー・ランキング" target="_blank"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/" target="_blank"><i class="fab fa-line"></i></a></li>
-          </ul>
-        </div>
-        <div class="copy">
-          <small>Copyright &copy; 2025, All Rights Reserved.</small>
-        </div>
+  <footer>
+    <div class="wrap">
+      <div id="social-links">
+        <ul>
+          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">𝕏</a></li>
+        </ul>
       </div>
-    </footer>
-  </div>
+      <div class="footer-links">
+        <a href="index.html">ホーム</a>
+        <a href="about.html">はじめに</a>
+        <a href="story.html">あらすじ</a>
+        <a href="chart.html">相関図</a>
+        <a href="news.html">お知らせ</a>
+        <a href="caststaff.html">キャスト＆STAFF</a>
+        <a href="delivery.html">配信</a>
+      </div>
+      <div class="copy">
+        <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/header.js"></script>
   <script>
-    function showCastContent(contentId) {
-      // すべてのコンテンツを非表示にする
-      document.querySelectorAll('.cast-content').forEach(content => {
-        content.classList.remove('active');
-      });
+    // スタッフ情報の配列
+    const staffData = [
+      {
+        id: 1,
+        name: "芳賀正光",
+        role: "企画構成",
+        birthday: "2月16日",
+        image: "img/cast/staff1.jpg",
+        message: "誕生日をお祝いしたい人が居る。誕生日をお祝いしてくれる人が居る。とても幸せなことです。私は…、誕生日に産んでくれてありがとう、育ててくれてありがとうという想いを込めて両親にプレゼントを渡しています。その時に出会える最高の笑顔が大好きなんです。この番組を通じ誕生日をお祝いすることがとても素敵な時間であることを見直して欲しいと願っています。"
+      },
+      {
+        id: 2,
+        name: "梅本満",
+        role: "プロデューサー",
+        birthday: "",
+        image: "https://placehold.jp/795548/ffffff/150x200.png?text=梅本満",
+        message: "言葉にするより、文章や手紙にした方が、その人への想いがより深く伝わることがあります。「誕生日おめでとう」と肉声で言われるのもいいけど、メッセージでもらったらもっとうれしい。\n『渋谷愛ビジョン』はそんな感動をもたらしてくれる街頭ビジョンです。またラジオも手紙やメッセージととても相性のいいメディアです。\n\nその2つがコラボして、\"史上最強のバースディメッセージ\"を皆さんにお届けすることになりました。なんとランキングにして発表するという恐るべき番組です。\nメッセージに感動しながらランキングにハラハラドキドキする、前代未聞の誕生日番組が誕生しました!\n4月2日がその「バスラン」のバースディです。"
+      },
+      {
+        id: 3,
+        name: "野村満",
+        role: "総合演出",
+        birthday: "",
+        image: "https://placehold.jp/009688/ffffff/150x200.png?text=野村満",
+        message: "ラジオ一筋　？十年！　最近は、のむDと呼ばれてます。\nこれまでいろいろな番組に携わってきましたが、誕生日おめでとうを2時間半やる番組なんて初めてです。\n誰もが持ってる誕生日、祝われても、祝っても幸せな気持ちになれる誕生日。\n皆さんのやさしい気持ちを伝えられる番組になるよう尽力致します！"
+      },
+      {
+        id: 4,
+        name: "神取美佳",
+        role: "ミキサー・制作",
+        birthday: "",
+        image: "https://placehold.jp/3F51B5/ffffff/150x200.png?text=神取美佳",
+        message: "音声と映像の調和を担当し、視聴者の皆さんに最高の音質と映像をお届けできるよう努めています。誕生日の特別な雰囲気を音と映像で表現することを心がけています。"
+      },
+      {
+        id: 5,
+        name: "Konomi",
+        role: "AP",
+        birthday: "5月25日",
+        image: "img/cast/staff5.png",
+        message: "誕生日って自分にとっても特別な日だけど、誰かの誕生日と聞くと、言葉が通じなくても、世代が違っても「おめでとう」と伝えたくなるハッピーな日ですよね。\n「今日は◯◯さんの誕生日なんだよ。知ってた？」と自分のことのように話題にしてしまう、不思議な日でもあります。\n誰にとっても平等に存在する、特別な一日。\n「おめでとう」が溢れて心があたたかくなる時間をバスランで紡げたらいいなと願っています。"
+      },
+      {
+        id: 6,
+        name: "松浦",
+        role: "WEBディレクター",
+        birthday: "",
+        image: "https://placehold.jp/00BCD4/ffffff/150x200.png?text=松浦",
+        message: "ウェブサイトの企画・制作を担当しています。視聴者の皆さんに使いやすく、情報が充実したウェブサイトを提供できるよう心がけています。"
+      },
+      {
+        id: 7,
+        name: "SNS担当",
+        role: "SNSディレクター",
+        birthday: "",
+        image: "https://placehold.jp/9C27B0/ffffff/150x200.png?text=SNSディレクター",
+        message: "SNSでの情報発信や視聴者とのコミュニケーションを担当しています。番組の魅力をSNSでも存分にお伝えできるよう、日々新しいコンテンツを発信しています。"
+      }
+    ];
+
+    // パーソナリティ情報の配列
+    const personalityData = [
+      {
+        id: 1,
+        name: "松田和佳",
+        role: "第１週",
+        birthday: "5月29日",
+        image: "https://placehold.jp/4CAF50/ffffff/150x200.png?text=松田和佳",
+        message: "フリーアナウンサーとして活躍中。明るく親しみやすいトークで、ゲストの魅力を引き出します。"
+      },
+      {
+        id: 2,
+        name: "ゆうにゃん",
+        role: "第２週",
+        birthday: "2月22日",
+        image: "https://placehold.jp/2196F3/ffffff/150x200.png?text=ゆうにゃん",
+        message: "インフルエンサーとして活躍中。SNSでの発信力を活かした新しい視点でのトークが魅力です。"
+      },
+      {
+        id: 3,
+        name: "神谷明采",
+        role: "第3週",
+        birthday: "4月19日",
+        image: "https://placehold.jp/FF5722/ffffff/150x200.png?text=神谷明采",
+        message: "東京大学大学院生。知的で洞察力のある視点からのトークで、番組に深みを与えています。"
+      },
+      {
+        id: 4,
+        name: "宮崎美穂",
+        role: "第4週",
+        birthday: "7月30日",
+        image: "https://placehold.jp/E91E63/ffffff/150x200.png?text=宮崎美穂",
+        message: "元AKB48・マルチタレント。アイドルとしての経験を活かした親しみやすいトークが特徴です。"
+      },
+      {
+        id: 5,
+        name: "ChumuNote",
+        role: "第5週",
+        birthday: "5月19日",
+        image: "https://placehold.jp/9C27B0/ffffff/150x200.png?text=ChumuNote",
+        message: "VTuberとして活躍中。デジタルとリアルを繋ぐ新しい視点での番組進行が魅力です。"
+      },
+      {
+        id: 6,
+        name: "川村ケンスケ",
+        role: "スーパーバイザー",
+        birthday: "5月2日",
+        image: "https://placehold.jp/607D8B/ffffff/150x200.png?text=川村ケンスケ",
+        message: "これまでMVを500本以上（自分調べで曖昧です）監督してきた映像ディレクターとして、この番組での私の役割は…ランキング１位のかたに、わたしが選曲した１曲をプレゼントすることです。言ってみれば…１位になったその人を主役に据えてMVを撮りたい！（MVの成り立ちとは真逆ですが）といった発想だったりするかもしれませんね。最高の、全力の、選曲で、バースデー・ランキングを飾りたいと思います。"
+      },
+      {
+        id: 7,
+        name: "風谷南友",
+        role: "特別出演",
+        birthday: "3月21日",
+        image: "https://placehold.jp/3F51B5/ffffff/150x200.png?text=風谷南友",
+        message: "女優・愛８、勝負の姫君。演技力を活かした表現力豊かなトークで番組を盛り上げます。"
+      }
+    ];
+
+    // スタッフダイアログを表示する関数
+    function showStaffDialog(staffId) {
+      const staff = staffData.find(s => s.id === staffId);
+      if (!staff) return;
+
+      const dialogContent = document.getElementById('staff-dialog-content');
+      let birthdayHtml = staff.birthday ? `<div style="font-size: 16px; margin-bottom: 15px; color: #ccc;">${staff.birthday}</div>` : '';
       
-      // すべてのタブを非アクティブにする
-      document.querySelectorAll('.cast-tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      
-      // クリックされたコンテンツを表示する
-      document.getElementById(contentId).classList.add('active');
-      
-      // クリックされたタブをアクティブにする
-      event.currentTarget.classList.add('active');
+      dialogContent.innerHTML = `
+        <div style="display: flex; width: 100%;">
+          <div style="flex: 0 0 40%;">
+            <img src="${staff.image}" alt="${staff.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+          </div>
+          <div style="flex: 0 0 60%; padding-left: 30px;">
+            <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white;">${staff.name}</h2>
+            <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${staff.role}</div>
+            ${birthdayHtml}
+            <div style="line-height: 1.8; color: white;">
+              ${staff.message}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const dialog = document.getElementById('staff-dialog');
+      dialog.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // スクロール防止
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 1;
+      dialogContentElement.style.transform = 'scale(1)';
     }
+
+    // スタッフダイアログを閉じる関数
+    function closeStaffDialog() {
+      const dialog = document.getElementById('staff-dialog');
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 0;
+      dialogContentElement.style.transform = 'scale(0.9)';
+      
+      setTimeout(() => {
+        dialog.style.display = 'none';
+        document.body.style.overflow = 'auto'; // スクロール再開
+      }, 300);
+    }
+
+    // パーソナリティダイアログを表示する関数
+    function showPersonalityDialog(personalityId) {
+      const personality = personalityData.find(p => p.id === personalityId);
+      if (!personality) return;
+
+      const dialogContent = document.getElementById('personality-dialog-content');
+      let birthdayHtml = personality.birthday ? `<div style="font-size: 16px; margin-bottom: 15px; color: #ccc;">${personality.birthday}</div>` : '';
+      
+      dialogContent.innerHTML = `
+        <div style="display: flex; width: 100%;">
+          <div style="flex: 0 0 40%;">
+            <img src="${personality.image}" alt="${personality.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+          </div>
+          <div style="flex: 0 0 60%; padding-left: 30px;">
+            <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white;">${personality.name}</h2>
+            <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${personality.role}</div>
+            ${birthdayHtml}
+            <div style="line-height: 1.8; color: white;">
+              ${personality.message}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const dialog = document.getElementById('personality-dialog');
+      dialog.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // スクロール防止
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 1;
+      dialogContentElement.style.transform = 'scale(1)';
+    }
+
+    // パーソナリティダイアログを閉じる関数
+    function closePersonalityDialog() {
+      const dialog = document.getElementById('personality-dialog');
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 0;
+      dialogContentElement.style.transform = 'scale(0.9)';
+      
+      setTimeout(() => {
+        dialog.style.display = 'none';
+        document.body.style.overflow = 'auto'; // スクロール再開
+      }, 300);
+    }
+
+    // ESCキーでダイアログを閉じる
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeStaffDialog();
+        closePersonalityDialog();
+      }
+    });
+
+    // ダイアログの外側をクリックしたら閉じる
+    document.getElementById('staff-dialog').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeStaffDialog();
+      }
+    });
+    document.getElementById('personality-dialog').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closePersonalityDialog();
+      }
+    });
+
+    // バブルアニメーション用の関数
+    function initBubbles() {
+      const canvas = document.getElementById('bubble-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // キャンバスサイズをウィンドウサイズに合わせる
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // バブルの設定
+      const bubbles = [];
+      // バブルの数を増やす
+      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.04); // 画面サイズに応じてバブルの数を調整
+      
+      // バブルを生成
+      for (let i = 0; i < bubbleCount; i++) {
+        const size = Math.random() < 0.5 ? 
+                    Math.random() * 30 + 10 : // 小さいバブル (50%)
+                    Math.random() < 0.6 ? 
+                      Math.random() * 50 + 40 : // 中くらいのバブル (30%)
+                      Math.random() * 80 + 90; // 大きいバブル (20%)
+        
+        bubbles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: size / 2,
+          // バブルの色を変更
+          color: `rgba(255, 255, 255, ${0.1 + Math.random() * 0.15})`, // 不透明度を変更
+          angle: Math.random() * Math.PI * 2, // 移動方向
+          speed: 0.1 + Math.random() * 0.5,   // 移動速度
+          rotationSpeed: (Math.random() - 0.5) * 0.01, // 回転速度
+          opacity: 0.2 + Math.random() * 0.3  // 不透明度を変更
+        });
+      }
+      
+      // アニメーションループ
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 背景のグラデーションを描画（オプション）
+        // const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        // gradient.addColorStop(0, '#0a1525');
+        // gradient.addColorStop(1, '#0a1525');
+        // ctx.fillStyle = gradient;
+        // ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // 各バブルを描画・更新
+        bubbles.forEach(bubble => {
+          // バブルを描画（輪郭をぼかす）
+          ctx.beginPath();
+          ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+          
+          // ぼかし効果を追加
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+          ctx.shadowBlur = bubble.radius * 0.5;
+          
+          ctx.fillStyle = bubble.color;
+          ctx.globalAlpha = bubble.opacity;
+          ctx.fill();
+          
+          // バブルの位置を更新
+          bubble.x += Math.cos(bubble.angle) * bubble.speed;
+          bubble.y += Math.sin(bubble.angle) * bubble.speed;
+          
+          // バブルの角度をわずかに変化させる（より自然な動き）
+          bubble.angle += bubble.rotationSpeed;
+          
+          // 画面外に出たバブルを反対側から再登場させる
+          if (bubble.x - bubble.radius > canvas.width) {
+            bubble.x = -bubble.radius;
+          } else if (bubble.x + bubble.radius < 0) {
+            bubble.x = canvas.width + bubble.radius;
+          }
+          
+          if (bubble.y - bubble.radius > canvas.height) {
+            bubble.y = -bubble.radius;
+          } else if (bubble.y + bubble.radius < 0) {
+            bubble.y = canvas.height + bubble.radius;
+          }
+        });
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+    }
+    
+    // ページ読み込み時にバブルアニメーションを初期化
+    document.addEventListener('DOMContentLoaded', function() {
+      initBubbles();
+      
+      // ヘッダーを読み込む
+      $(function() {
+        // ヘッダーを読み込む
+        $("#header-placeholder").load("includes/header.html", function() {
+          // ヘッダーが読み込まれた後の処理
+          const currentPage = 'caststaff';
+          const navLinks = document.querySelectorAll('#header nav ul li a');
+          
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.includes(currentPage)) {
+              link.classList.add('current');
+            }
+          });
+        });
+      });
+    });
   </script>
 </body>
 </html>

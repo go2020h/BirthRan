@@ -6,6 +6,99 @@
   <title>あらすじ - BirthRan</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* フッター */
+    footer {
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      color: #fff;
+      padding: 30px 0;
+      margin-top: 50px;
+      width: 100%;
+      left: 0;
+      right: 0;
+      position: relative;
+    }
+    
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    
+    #social-links {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    #social-links ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #social-links li {
+      margin: 0 10px;
+    }
+    
+    #social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    #social-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    .x-logo {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    
+    .copy {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .copy small {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body id="story" class="story cmn">
   <!-- ヘッダー -->
@@ -16,6 +109,47 @@
       <div class="wrap">
         <section id="contents">
           <h2 class="section-title">番組の楽しみ方</h2>
+          
+          <!-- 番組内容セクション -->
+          <div class="program-content-section">
+            <h3 class="section-subtitle">■番組内容</h3>
+            <div class="content-container">
+              <div class="content-item">
+                <h4>『バスラン！ベスト３』</h4>
+                <p>毎日！渋谷愛ビジョンと番組あてに寄せられるたくさんのバースデー愛メッセージ。それを日ごとに集計してベスト３を発表していきます。1位を獲得した人には、MV監督の巨匠・川村ケンスケが愛を込めて選曲した音楽をプレゼント！</p>
+                <p>バースデー愛メッセージを読み上げるのは勝負の姫君として勝運を授けている女優の風谷南友。運気を上げる美声に酔いしれてください。</p>
+                <p>ランクインした有名人の電話ゲスト出演なども交えながら素敵な誕生日を演出していきます。</p>
+                <div class="content-image">
+                  <img src="https://placehold.jp/4CAF50/ffffff/400x200.png?text=バスラン！ベスト３" alt="バスラン！ベスト３">
+                </div>
+              </div>
+              
+              <div class="content-item">
+                <h4>『おめありレコメンド』</h4>
+                <p>番組がセレクトした「おめでとう」「ありがとう」愛が詰まった商品やサービスをご紹介するコーナーです。スタジオにサンプルを用意してご紹介！企画・開発担当者さんに電話を繋いでその魅力を紐解いていきます。</p>
+                <div class="content-image">
+                  <img src="https://placehold.jp/FF9800/ffffff/400x200.png?text=おめありレコメンド" alt="おめありレコメンド">
+                </div>
+              </div>
+              
+              <div class="content-item">
+                <h4>『パーソナリティへありがとう』</h4>
+                <p>個性豊かなバスランのパーソナリティが得意とする分野、世の中に発信したい愛ある情報を紹介するコーナーです。</p>
+                <p>このコーナーを聴いたリスナーは、パーソナリティに素敵な情報を『ありがとう』と伝えたくなること間違いなし！こうご期待！！</p>
+                <div class="content-image">
+                  <img src="https://placehold.jp/E91E63/ffffff/400x200.png?text=パーソナリティへありがとう" alt="パーソナリティへありがとう">
+                </div>
+              </div>
+              
+              <div class="content-item">
+                <h4>『ピックアップ愛メッセージ』</h4>
+                <p>渋谷愛ビジョンには誕生日の愛メッセージだけでなく、結婚記念日や母の日、父の日、友人へのお礼、何気ない「おめでとう」「ありがとう」の愛メッセージが溢れています。その中から番組パーソナリティが1つをピックアップしてご紹介！愛の伝道師を担っていただくコーナーです。</p>
+                <div class="content-image">
+                  <img src="https://placehold.jp/9C27B0/ffffff/400x200.png?text=ピックアップ愛メッセージ" alt="ピックアップ愛メッセージ">
+                </div>
+              </div>
+            </div>
+          </div>
           
           <!-- 番組の流れセクション -->
           <div class="program-flow-section">
@@ -160,7 +294,7 @@
                 <h4>ハッシュタグで参加</h4>
                 <p>ハッシュタグ「#ウィークリーバースデー」をつけて投稿すると、番組内で紹介されるチャンスも！誕生日にまつわる思い出やメッセージを投稿してください。</p>
                 <div class="social-links">
-                  <a href="#" class="social-button twitter"><i class="fab fa-twitter"></i> X（旧Twitter）で投稿する</a>
+                  <a href="#" class="social-button twitter"><i class="fab fa-twitter"></i> Twitterで投稿する</a>
                   <a href="#" class="social-button instagram"><i class="fab fa-instagram"></i> Instagramで投稿する</a>
                 </div>
               </div>
@@ -210,37 +344,33 @@
           
         </section>
 
-        <section id="share">
-          <span>シェアする</span>
-          <ul>
-            <li><a href="https://twitter.com/share?url=https://birthran.com/story.html&text=efitプレゼンツ☆ウィークリー・バースデー・ランキング あらすじ" target="_blank"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/story.html" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/story.html" target="_blank"><i class="fab fa-line"></i></a></li>
-          </ul>
-        </section>
+        
       </div>
     </div>
   </div>
 
   <!-- フッター -->
-  <div id="footer-placeholder">
-    <!-- フッターを直接書き込む -->
-    <footer>
-      <div class="wrap">
-        <div id="share">
-          <span>シェアする</span>
-          <ul>
-            <li><a href="https://twitter.com/share?url=https://birthran.com/&text=efitプレゼンツ☆ウィークリー・バースデー・ランキング" target="_blank"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/" target="_blank"><i class="fab fa-line"></i></a></li>
-          </ul>
-        </div>
-        <div class="copy">
-          <small>Copyright &copy; 2025, All Rights Reserved.</small>
-        </div>
+  <footer>
+    <div class="wrap">
+      <div id="social-links">
+        <ul>
+          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">𝕏</a></li>
+        </ul>
       </div>
-    </footer>
-  </div>
+      <div class="footer-links">
+        <a href="index.html">ホーム</a>
+        <a href="about.html">はじめに</a>
+        <a href="story.html">あらすじ</a>
+        <a href="chart.html">相関図</a>
+        <a href="news.html">お知らせ</a>
+        <a href="caststaff.html">キャスト＆STAFF</a>
+        <a href="delivery.html">配信</a>
+      </div>
+      <div class="copy">
+        <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/script.js"></script>

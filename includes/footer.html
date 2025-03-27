@@ -1,15 +1,111 @@
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* フッター */
+  footer {
+    background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+    color: #fff;
+    padding: 30px 0;
+    margin-top: 50px;
+  }
+  
+  footer .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  #social-links {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  #social-links ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #social-links li {
+    margin: 0 10px;
+  }
+  
+  #social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  #social-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+  }
+  
+  .x-logo {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .copy {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .copy small {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+  }
+  
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #fff;
+  }
+</style>
+
 <footer>
   <div class="wrap">
-    <div id="share">
-      <span>u30b7u30a7u30a2u3059u308b</span>
+    <div id="social-links">
       <ul>
-        <li><a href="https://twitter.com/share?url=https://birthran.com/&text=BirthRan" target="_blank"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-        <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/" target="_blank"><i class="fab fa-line"></i></a></li>
+        <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">𝕏</a></li>
       </ul>
     </div>
+    <div class="footer-links">
+      <a href="index.html">ホーム</a>
+      <a href="about.html">はじめに</a>
+      <a href="story.html">あらすじ</a>
+      <a href="chart.html">相関図</a>
+      <a href="news.html">お知らせ</a>
+      <a href="caststaff.html">キャスト＆STAFF</a>
+      <a href="delivery.html">配信</a>
+    </div>
     <div class="copy">
-      <small>Copyright &copy; 2025, All Rights Reserved.</small>
+      <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
     </div>
   </div>
 </footer>

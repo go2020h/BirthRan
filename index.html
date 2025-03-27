@@ -6,17 +6,509 @@
   <title>efitプレゼンツ☆ウィークリー・バースデー・ランキング</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* バブルキャンバス */
+    #bubble-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    /* メニューセクション */
+    .menu_outer {
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* ヒーローセクション */
+    #hero-section {
+      position: relative;
+      z-index: 0;
+      margin-top: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #16152e;
+    }
+    
+    /* ヒーローセクションの画像 */
+    .hero-image {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      opacity: 1;
+    }
+    
+    /* コンテンツセクション */
+    #con-wrap {
+      position: relative;
+      z-index: 5;
+    }
+    
+    /* キャッチコピー */
+    .catchcopy-section {
+      padding: 40px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      border-radius: 10px;
+      margin: 30px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .catchcopy-content {
+      position: relative;
+    }
+    
+    .catchcopy-content h2 {
+      color: #d4af37;
+      font-size: 28px;
+      margin: 15px 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+    
+    .catchcopy-content h3 {
+      color: #ffffff;
+      font-size: 22px;
+      margin: 20px 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      letter-spacing: 0.5px;
+    }
+    
+    /* バブルスタイル */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+      100% {
+        transform: translateY(0) rotate(360deg);
+      }
+    }
+    
+    /* 番組情報 */
+    .program-info {
+      background-color: #f8f8f8;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .program-info h2 {
+      color: #0066cc;
+      border-bottom: 2px solid #0066cc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    /* 週間のハイライト */
+    .weekly-highlight {
+      margin-bottom: 40px;
+    }
+    
+    .weekly-highlight h2 {
+      color: #0066cc;
+      border-bottom: 2px solid #0066cc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    /* ゲスト */
+    .guest {
+      flex: 1;
+      min-width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .guest h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .guest img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #f0f0f0;
+    }
+    
+    .guest p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    /* ランキング */
+    .ranking {
+      flex: 1;
+      min-width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .ranking h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .ranking ol {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .ranking li {
+      margin-bottom: 10px;
+    }
+    
+    .ranking strong {
+      font-weight: bold;
+    }
+    
+    .ranking p {
+      margin: 5px 0 0 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    /* 愛あるゲスト */
+    .love-guest-section {
+      margin-bottom: 40px;
+    }
+    
+    .love-guest-section h2 {
+      margin-bottom: 20px;
+    }
+    
+    .love-guest-content {
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .love-guest-content h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .love-guest-content p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .love-guest-content ol {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .love-guest-content li {
+      margin-bottom: 10px;
+    }
+    
+    .love-guest-content strong {
+      font-weight: bold;
+    }
+    
+    /* プレゼント */
+    .present-section {
+      margin-bottom: 40px;
+    }
+    
+    .present-section h2 {
+      margin-bottom: 20px;
+    }
+    
+    .present-content {
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .present-content h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .present-content p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    /* メッセージボタン */
+    .message-button-section {
+      margin-bottom: 50px;
+      text-align: center;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .message-text {
+      color: #333333;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .message-button {
+      display: inline-block;
+      background-color: #ff4081;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .message-button:hover {
+      background-color: #ff5a92;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* フッター */
+    footer {
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      color: #fff;
+      padding: 30px 0;
+      margin-top: 50px;
+      width: 100%;
+      left: 0;
+      right: 0;
+      position: relative;
+    }
+    
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    
+    #social-links {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    #social-links ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #social-links li {
+      margin: 0 10px;
+    }
+    
+    #social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    #social-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    .x-logo {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    
+    .copy {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .copy small {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #fff;
+    }
+    
+    /* 出演者のリアルバイタルデータ */
+    .vital-data-section {
+      margin: 60px 0;
+      padding: 40px 0;
+      background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+    }
+    
+    .vital-data-section .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .vital-data-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 28px;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .vital-data-content {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .vital-data-content h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #0066cc;
+      font-weight: bold;
+    }
+    
+    .vital-data-content p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .vital-data-placeholder {
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .vital-data-placeholder div {
+      text-align: center;
+    }
+    
+    .vital-data-placeholder p {
+      color: #666;
+      font-size: 16px;
+    }
+    
+    .vital-data-content a {
+      display: inline-block;
+      background-color: #0066cc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+  </style>
 </head>
 <body id="home">
-  <!-- ヘッダープレースホルダー -->
-  <div id="header-placeholder"></div>
+  <!-- ヒーローセクション -->
+  <div id="hero-section">
+    <canvas id="bubble-canvas"></canvas>
+    <img src="img/hero.png" alt="ヒーロー画像" class="hero-image">
+  </div>
+
+  <!-- メニューセクション -->
+  <div class="menu_outer">
+    <ul class="menu">
+      <li class="active"><a href="index.html"><span>ホーム</span></a></li>
+      <li><a href="about.html"><span>はじめに</span></a></li>
+      <li><a href="story.html"><span>あらすじ</span></a></li>
+      <li><a href="chart.html"><span>相関図</span></a></li>
+      <li><a href="news.html"><span>お知らせ</span></a></li>
+      <li><a href="caststaff.html"><span>キャスト＆STAFF</span></a></li>
+      <li><a href="delivery.html"><span>配信</span></a></li>
+    </ul>
+  </div>
 
   <div id="con-wrap">
     <div id="con-body">
       <div class="wrap">
+        <!-- キャッチコピー -->
+        <div class="catchcopy-section">
+          <div class="catchcopy-content">
+            <h2>毎日が誰かの誕生日☆彡</h2>
+            <h3>最もバースデーメッセージが贈られたのは誰なのか♡</h3>
+            <h2>『ウィークリー・バースデー・ランキング』</h2>
+          </div>
+        </div>
+
+        <!-- 番組概要 -->
+        <div class="program-overview">
+          <h2>番組概要</h2>
+          <div class="overview-content">
+            <p>大好きな人、大切なひとへ、「おめでとう」や「ありがとう」愛を伝えるメッセ―ジボードとして誕生した『渋谷愛ビジョン』と『ラジオ日本』がコラボしてお届けする愛溢れるラジオ番組。</p>
+            <p>幸せを呼ぶ魔法の言葉「おめでとう」「ありがとう」そして、「おかえりなさい」「またね」<br>というメッセージが世界中に溢れることを願って、毎週木曜日の夜、生放送でお届けします。</p>
+            <p>番組では、渋谷愛ビジョンとラジオ日本に寄せられるたくさんのバースデー愛メッセージを日ごとに集計しベスト３を発表していきます。</p>
+            <p>リスナーの皆さんからいただいた愛あるメッセージをあなたの大切なひとにお届けします。素敵な笑顔を一緒に紡いでいきましょう♡</p>
+          </div>
+        </div>
+
         <!-- 番組情報 -->
-        <div class="program-info" style="background-color: #f8f8f8; padding: 25px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-          <h2 style="color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 10px; margin-bottom: 20px;">番組情報</h2>
+        <div class="program-info">
+          <h2>番組情報</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 20px;">
             <div style="flex: 1; min-width: 300px;">
               <h3 style="font-size: 18px; margin-bottom: 15px;">放送情報</h3>
@@ -36,12 +528,12 @@
         </div>
 
         <!-- 週間のハイライト -->
-        <div class="weekly-highlight" style="margin-bottom: 40px;">
-          <h2 style="color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 10px; margin-bottom: 20px;">週間のハイライト</h2>
+        <div class="weekly-highlight">
+          <h2>週間のハイライト</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 30px;">
             <!-- ゲスト -->
-            <div style="flex: 1; min-width: 300px; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-              <h3 style="font-size: 18px; margin-bottom: 15px; color: #333;">ゲスト</h3>
+            <div class="guest">
+              <h3>ゲスト</h3>
               <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                 <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0;">
                   <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=ゲスト" alt="ゲスト" style="width: 100%; height: 100%; object-fit: cover;">
@@ -59,8 +551,8 @@
             </div>
             
             <!-- ランキング -->
-            <div style="flex: 1; min-width: 300px; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-              <h3 style="font-size: 18px; margin-bottom: 15px; color: #333;">ランキング</h3>
+            <div class="ranking">
+              <h3>ランキング</h3>
               <ol style="padding-left: 25px; margin-bottom: 20px;">
                 <li style="margin-bottom: 10px;">
                   <strong>1位</strong> - 3月15日更新
@@ -82,69 +574,53 @@
           </div>
         </div>
 
-        <!-- パーソナリティ -->
-        <div class="personalities" style="margin-bottom: 40px;">
-          <h2 style="color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 10px; margin-bottom: 20px;">パーソナリティ</h2>
-          <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
-            <!-- レギュラーメンバー -->
-            <div style="flex: 1; min-width: 300px;">
-              <h3 style="font-size: 18px; margin-bottom: 15px;">レギュラーメンバー</h3>
-              <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-                <div style="width: calc(20% - 12px); min-width: 100px; text-align: center;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; margin: 0 auto 10px;">
-                    <img src="https://placehold.jp/4CAF50/ffffff/160x160.png?text=MC1" alt="MC1" style="width: 100%; height: 100%; object-fit: cover;">
-                  </div>
-                  <p style="margin: 0; font-size: 14px;"><strong>MC1</strong><br>田中太郎</p>
-                </div>
-                <div style="width: calc(20% - 12px); min-width: 100px; text-align: center;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; margin: 0 auto 10px;">
-                    <img src="https://placehold.jp/2196F3/ffffff/160x160.png?text=MC2" alt="MC2" style="width: 100%; height: 100%; object-fit: cover;">
-                  </div>
-                  <p style="margin: 0; font-size: 14px;"><strong>MC2</strong><br>佐藤次郎</p>
-                </div>
-                <div style="width: calc(20% - 12px); min-width: 100px; text-align: center;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; margin: 0 auto 10px;">
-                    <img src="https://placehold.jp/FF9800/ffffff/160x160.png?text=MC3" alt="MC3" style="width: 100%; height: 100%; object-fit: cover;">
-                  </div>
-                  <p style="margin: 0; font-size: 14px;"><strong>MC3</strong><br>鈴木三郎</p>
-                </div>
-                <div style="width: calc(20% - 12px); min-width: 100px; text-align: center;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; margin: 0 auto 10px;">
-                    <img src="https://placehold.jp/E91E63/ffffff/160x160.png?text=MC4" alt="MC4" style="width: 100%; height: 100%; object-fit: cover;">
-                  </div>
-                  <p style="margin: 0; font-size: 14px;"><strong>MC4</strong><br>高橋四郎</p>
-                </div>
-                <div style="width: calc(20% - 12px); min-width: 100px; text-align: center;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; margin: 0 auto 10px;">
-                    <img src="https://placehold.jp/9C27B0/ffffff/160x160.png?text=MC5" alt="MC5" style="width: 100%; height: 100%; object-fit: cover;">
-                  </div>
-                  <p style="margin: 0; font-size: 14px;"><strong>MC5</strong><br>井上五郎</p>
-                </div>
-              </div>
-            </div>
+        <!-- 愛あるゲスト -->
+        <div class="love-guest-section">
+          <h2>愛あるゲスト</h2>
+          <div class="love-guest-content">
+            <h3>『誕生日が近い！ゲスト募集中！！』</h3>
+            <p>番組では、誕生日が近いゲストを大募集しています。</p>
+            <p>条件は…、</p>
+            <ol>
+              <li>出演日から３週間以内に誕生日を迎える方</li>
+              <li>バスランでベスト３に入ると自負している方</li>
+            </ol>
+            <p>ゲスト出演していただいた方には、誕生日プレゼントとして</p>
+            <ol>
+              <li>渋谷愛ビジョンの放映枠／20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供させていただきます。<br>ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。</li>
+              <li>2年間充電無しでバイタルデータを蓄積することができるMOTHER　Braceletで健康チェック。</li>
+              <li>今月のバースデープレゼント<br>毎月どんな商品をセレクトするのか！？お楽しみに～。</li>
+            </ol>
+            <p>以上、愛が詰まった３つのサービス＆商品をプレゼントさせていただきます。</p>
           </div>
-          
-          <!-- サポートメンバー -->
-          <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-            <div style="flex: 1; min-width: 300px;">
-              <h3 style="font-size: 18px; margin-bottom: 15px;">サポートメンバー</h3>
-              <div style="display: flex; gap: 20px;">
-                <div style="flex: 1; display: flex; align-items: center; gap: 15px;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0;">
-                    <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=ゲスト" alt="サポートメンバー1" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
+        <!-- プレゼント -->
+        <div class="present-section">
+          <h2>プレゼント</h2>
+          <div class="present-content">
+            <h3>『今月のバースデープレゼント』</h3>
+            <p>番組に出演してくれたゲストの皆様に誕生日プレゼントとしてご用意した商品を紹介するコーナーです。バスランSTAFFが本気愛で探してきた『おめあり愛』が詰まったGIFTにご期待ください。</p>
+          </div>
+        </div>
+
+        <!-- 出演者のリアルバイタルデータ -->
+        <div class="vital-data-section">
+          <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 28px; color: #333; font-weight: bold;">出演者のリアルバイタルデータ</h2>
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <div class="vital-data-content" style="background-color: white; border-radius: 10px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); padding: 30px; margin-bottom: 30px;">
+                  <h3 style="font-size: 22px; margin-bottom: 20px; color: #0066cc; font-weight: bold;">『MOTHER Braceletで見る健康状態』</h3>
+                  <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">番組に出演するパーソナリティとゲストの皆さんのリアルタイムバイタルデータをご覧いただけます。心拍数、睡眠の質、ストレスレベルなど、2年間充電なしで計測可能なMOTHER Braceletによる健康データを公開中！</p>
+                  <div class="vital-data-placeholder" style="background-color: #f8f8f8; border-radius: 10px; padding: 20px; margin-top: 20px;">
+                    <!-- ここにバイタルデータの表示エリアが入ります -->
+                    <div style="text-align: center;">
+                      <p style="color: #666; font-size: 16px;">バイタルデータ表示エリア</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 style="margin: 0 0 5px 0; font-size: 16px;">鈴木一郎</h4>
-                    <p style="margin: 0; font-size: 14px; color: #666;">サポートメンバー</p>
-                  </div>
-                </div>
-                <div style="flex: 1; display: flex; align-items: center; gap: 15px;">
-                  <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0;">
-                    <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=ゲスト" alt="サポートメンバー2" style="width: 100%; height: 100%; object-fit: cover;">
-                  </div>
-                  <div>
-                    <h4 style="margin: 0 0 5px 0; font-size: 16px;">田中二郎</h4>
-                    <p style="margin: 0; font-size: 14px; color: #666;">アシスタント</p>
+                  <div style="margin-top: 25px; text-align: center;">
+                    <a href="#" style="display: inline-block; background-color: #0066cc; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px; font-weight: bold; transition: background-color 0.3s;">詳細を見る</a>
                   </div>
                 </div>
               </div>
@@ -152,60 +628,135 @@
           </div>
         </div>
 
-        <div class="news_area">
-          <h2>新着情報<span class="ja">NEWS</span></h2>
-          <ul class="news_list">
-            <li>
-              <a href="#">
-                <span class="date">2025.03.14</span>
-                <span class="title">公式サイトリニューアルのお知らせ<span class="new">NEW</span></span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="date">2025.03.10</span>
-                <span class="title">次回放送内容の予告を公開しました</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="date">2025.03.05</span>
-                <span class="title">スペシャルイベント開催決定！</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="date">2025.03.01</span>
-                <span class="title">新コーナー「今週の誕生日」スタート</span>
-              </a>
-            </li>
-          </ul>
+        <!-- メッセージボタン -->
+        <div class="message-button-section">
+          <div class="message-text">
+            <p>大好きな人、大切なひとへ、おめでとう、ありがとうのメッセージを贈ろう</p>
+          </div>
+          <a href="https://ec.saivision.jp/" target="_blank" class="message-button">メッセージを送る</a>
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- フッタープレースホルダー -->
-  <div id="footer-placeholder">
-    <!-- フッターを直接記述 -->
-    <footer>
-      <div class="wrap">
-        <div id="share">
-          <span>シェアする</span>
-          <ul>
-            <li><a href="https://twitter.com/share?url=https://birthran.com/&text=BirthRan" target="_blank"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.facebook.com/share.php?u=https://birthran.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://social-plugins.line.me/lineit/share?url=https://birthran.com/" target="_blank"><i class="fab fa-line"></i></a></li>
-          </ul>
-        </div>
-        <div class="copy">
-          <small>Copyright &copy; 2025, All Rights Reserved.</small>
-        </div>
+  <!-- フッター -->
+  <footer>
+    <div class="wrap">
+      <div id="social-links">
+        <ul>
+          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="u5fcdu8005u30cfu30c1@u6e0bu8c37u611b8" class="x-logo">𝕏</a></li>
+        </ul>
       </div>
-    </footer>
-  </div>
+      <div class="footer-links">
+        <a href="index.html">ホーム</a>
+        <a href="about.html">はじめに</a>
+        <a href="story.html">あらすじ</a>
+        <a href="chart.html">相関図</a>
+        <a href="news.html">お知らせ</a>
+        <a href="caststaff.html">キャスト＆STAFF</a>
+        <a href="delivery.html">配信</a>
+      </div>
+      <div class="copy">
+        <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // バブルアニメーション用の関数
+    function initBubbles() {
+      const canvas = document.getElementById('bubble-canvas');
+      const ctx = canvas.getContext('2d');
+      const heroSection = document.getElementById('hero-section');
+      
+      // キャンバスのサイズをヒーローセクションのサイズに合わせる
+      function resizeCanvas() {
+        canvas.width = heroSection.offsetWidth;
+        canvas.height = heroSection.offsetHeight;
+      }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // バブルの数を設定
+      const bubbles = [];
+      // バブルの数を設定
+      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.04); // 画面サイズに応じてバブルの数を調整
+      
+      // バブルを生成
+      for (let i = 0; i < bubbleCount; i++) {
+        const size = Math.random() < 0.5 ? 
+                    Math.random() * 30 + 10 : // 小さいバブル (50%)
+                    Math.random() < 0.6 ? 
+                      Math.random() * 50 + 40 : // 中くらいのバブル (30%)
+                      Math.random() * 80 + 90; // 大きいバブル (20%)
+        
+        bubbles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: size / 2,
+          // バブルの色をランダムに設定
+          color: `rgba(255, 255, 255, ${0.1 + Math.random() * 0.15})`, // 不透明度をランダムに設定
+          angle: Math.random() * Math.PI * 2, // 移動角度
+          speed: 0.1 + Math.random() * 0.5,   // 移動速度
+          rotationSpeed: (Math.random() - 0.5) * 0.01, // 回転速度
+          opacity: 0.2 + Math.random() * 0.3  // 不透明度をランダムに設定
+        });
+      }
+      
+      // アニメーションループ
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 各バブルを描画・更新
+        bubbles.forEach(bubble => {
+          // バブルを描画
+          ctx.beginPath();
+          ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+          
+          // 影を付ける
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+          ctx.shadowBlur = bubble.radius * 0.5;
+          
+          ctx.fillStyle = bubble.color;
+          ctx.globalAlpha = bubble.opacity;
+          ctx.fill();
+          
+          // バブルの位置を更新
+          bubble.x += Math.cos(bubble.angle) * bubble.speed;
+          bubble.y += Math.sin(bubble.angle) * bubble.speed;
+          
+          // バブルの角度を更新
+          bubble.angle += bubble.rotationSpeed;
+          
+          // 画面外に出たバブルを反対側に移動
+          if (bubble.x - bubble.radius > canvas.width) {
+            bubble.x = -bubble.radius;
+          } else if (bubble.x + bubble.radius < 0) {
+            bubble.x = canvas.width + bubble.radius;
+          }
+          
+          if (bubble.y - bubble.radius > canvas.height) {
+            bubble.y = -bubble.radius;
+          } else if (bubble.y + bubble.radius < 0) {
+            bubble.y = canvas.height + bubble.radius;
+          }
+        });
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+    }
+    
+    // ページ読み込み完了時の処理
+    $(document).ready(function() {
+      // バブルアニメーションを初期化
+      initBubbles();
+    });
+  </script>
   <script src="js/script.js"></script>
   <script src="js/header.js"></script>
 </body>

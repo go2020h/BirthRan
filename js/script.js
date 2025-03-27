@@ -134,6 +134,14 @@ function initTopicsSlider() {
 function initAnimation() {
   const animElements = document.querySelectorAll('.wow');
   
+  // u30d2u30fcu30edu30fcu30bbu30afu30b7u30e7u30f3u306eu30a2u30cbu30e1u30fcu30b7u30e7u30f3u3092u78bau5b9fu306bu521du671fu5316
+  const heroSection = document.getElementById('hero-section');
+  if (heroSection) {
+    heroSection.style.opacity = '1';
+    heroSection.style.visibility = 'visible';
+    heroSection.style.animation = 'heroFadeIn 1.5s ease-in-out';
+  }
+  
   animElements.forEach(element => {
     const delay = element.getAttribute('data-wow-delay') || '0s';
     const delayMs = parseFloat(delay) * 1000;
