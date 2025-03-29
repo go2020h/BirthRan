@@ -1,3 +1,483 @@
+/* 「はじめに」ページ用スタイル */
+
+/* セクションタイトル */
+.section-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #5e0f8b, #9b59b6);
+  border-radius: 2px;
+}
+
+/* サブタイトル */
+.section-subtitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 25px;
+  position: relative;
+  padding-left: 15px;
+  border-left: 5px solid #5e0f8b;
+}
+
+/* 番組紹介セクション */
+.program-introduction {
+  margin-bottom: 60px;
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .intro-container {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.intro-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+  transform: scale(1.02);
+}
+
+.intro-content {
+  flex: 1.5;
+}
+
+.intro-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #5e0f8b;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.intro-title:after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(155, 89, 182, 0.3);
+}
+
+.intro-text {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.program-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.detail-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(155, 89, 182, 0.15);
+  color: #5e0f8b;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.detail-text {
+  font-size: 16px;
+  color: #333;
+}
+
+/* 番組の目標セクション */
+.program-goals {
+  margin-bottom: 60px;
+}
+
+.goals-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.goal-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.goal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.goal-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(155, 89, 182, 0.15);
+  color: #5e0f8b;
+  border-radius: 50%;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.goal-card h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.goal-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* 出演者構成セクション */
+.cast-section {
+  margin-bottom: 60px;
+}
+
+.cast-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.cast-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .cast-group {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.cast-image {
+  flex: 1;
+  min-width: 250px;
+}
+
+.cast-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.cast-img:hover {
+  transform: scale(1.02);
+}
+
+.cast-info {
+  flex: 1.5;
+}
+
+.cast-info h4 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #5e0f8b;
+  margin-bottom: 15px;
+}
+
+.cast-info p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.cast-link {
+  display: inline-block;
+  color: #5e0f8b;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.cast-link:hover {
+  color: #9b59b6;
+}
+
+.cast-link i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.cast-link:hover i {
+  transform: translateX(5px);
+}
+
+/* 渋谷愛ビジョン連動セクション */
+.vision-section {
+  margin-bottom: 60px;
+}
+
+.vision-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.vision-content {
+  text-align: center;
+}
+
+.vision-lead {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5e0f8b;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.vision-features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vision-features li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(155, 89, 182, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.vision-features li:hover {
+  transform: translateY(-3px);
+  background-color: rgba(155, 89, 182, 0.1);
+}
+
+.time-badge {
+  background-color: #5e0f8b;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.vision-features p {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+/* 視聴者参加型コンテンツセクション */
+.participation-section {
+  margin-bottom: 60px;
+}
+
+.participation-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.participation-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.participation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.participation-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(155, 89, 182, 0.15);
+  color: #5e0f8b;
+  border-radius: 50%;
+  font-size: 28px;
+  margin: 0 auto 20px;
+}
+
+.participation-card h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.participation-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.participation-link {
+  display: inline-block;
+  background-color: #5e0f8b;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.participation-link:hover {
+  background-color: #9b59b6;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(155, 89, 182, 0.3);
+}
+
+.participation-link i {
+  margin-left: 5px;
+}
+
+.vision-link {
+  display: inline-block;
+  color: #5e0f8b;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: color 0.3s ease;
+}
+
+.vision-link:hover {
+  color: #9b59b6;
+}
+
+.vision-link i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.vision-link:hover i {
+  transform: translateX(5px);
+}
+
+.vision-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  transition: transform 0.3s ease;
+}
+
+.vision-img:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 767px) {
+  .participation-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .participation-card {
+    padding: 20px;
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 767px) {
+  .section-title {
+    font-size: 28px;
+  }
+  
+  .section-subtitle {
+    font-size: 22px;
+  }
+  
+  .intro-title {
+    font-size: 24px;
+  }
+  
+  .goal-card {
+    padding: 20px;
+  }
+  
+  .cast-group {
+    padding: 20px;
+  }
+  
+  .vision-lead {
+    font-size: 20px;
+  }
+}
+
 /* u300cu306fu3058u3081u306bu300du30dau30fcu30b8u7528u30b9u30bfu30a4u30eb */
 
 .about-header {

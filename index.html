@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/calendar.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="css/footer.css">
   <!-- Supabaseクライアントライブラリ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.38.4/dist/umd/supabase.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1218,27 +1219,7 @@
   </div>
 
   <!-- フッター -->
-  <footer>
-    <div class="wrap">
-      <div id="social-links">
-        <ul>
-          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="Twitter@NinjaHachi_" class="x-logo">𝕏</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <a href="index.html">ホーム</a>
-        <a href="about.html">はじめに</a>
-        <a href="story.html">あらすじ</a>
-        <a href="chart.html">相関図</a>
-        <a href="news.html">お知らせ</a>
-        <a href="caststaff.html">キャスト＆STAFF</a>
-        <a href="#youtube-section">配信</a>
-      </div>
-      <div class="copy">
-        <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
-      </div>
-    </div>
-  </footer>
+  <div id="footer-placeholder"></div>
 
   <script>
     // 現在の日付を取得
@@ -1361,7 +1342,7 @@
     async function initCalendar() {
       console.log('initCalendar called');
       try {
-        // u9031u9593u30d3u30e5u30fcu3092u5148u306bu8868u793au3057u3066u304bu3089u30abu30ecu30f3u30c0u30fcu3092u30ecu30f3u30c0u30eau30f3u30b0
+        // u9031u9593u30d5u30e5u30fcu3092u5148u306bu623bu3057u3001u30d0u30b9u30e9u30f3u3092u8868u793a
         await renderWeekView();
         await renderCalendar(currentYear, currentMonth);
         setupPopupEvents();
@@ -1728,5 +1709,6 @@
   </script>
   <script src="js/script.js"></script>
   <script src="js/header.js"></script>
+  <script src="js/footer.js"></script>
 </body>
 </html>

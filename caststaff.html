@@ -4,55 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>キャスト＆STAFF | efitプレゼンツ☆ウィークリー・バースデー・ランキング</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/caststaff.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="css/footer.css">
   <style>
     /* キャスト＆STAFF用スタイル */
-    .staff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .staff-card {
+    #caststaff {
+      background-color: #0a1525;
       position: relative;
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s ease;
+      overflow-x: hidden;
+      color: white;
     }
 
-    .staff-card:hover {
-      transform: translateY(-5px);
+    .wrap {
+      background-color: #0a1525;
+      padding: 20px;
+      position: relative;
+      z-index: 5;
     }
 
-    .staff-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      padding: 15px 10px;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .staff-role {
-      color: #d4af37;
-      font-size: 14px;
-      margin-bottom: 5px;
-      margin-top: 10px;
-    }
-
-    .staff-name {
-      color: #d4af37;
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    /* バブルキャンバス */
+    /* バブルアニメーション */
     #bubble-canvas {
       position: fixed;
       top: 0;
@@ -63,7 +37,7 @@
       z-index: 1;
     }
 
-    /* メニューセクション */
+    /* メニューカバー */
     .menu_outer {
       position: relative;
       z-index: 10;
@@ -80,14 +54,6 @@
       overflow: hidden;
     }
 
-    /* ページ全体のスタイル */
-    #caststaff {
-      background-color: #0a1525;
-      position: relative;
-      overflow-x: hidden;
-      color: white;
-    }
-
     .staff-section h2, .cast-section h2 {
       color: #d4af37;
       text-align: center;
@@ -95,13 +61,6 @@
       margin-bottom: 20px;
       border-bottom: 1px solid #d4af37;
       padding-bottom: 10px;
-    }
-
-    .wrap {
-      background-color: #0a1525;
-      padding: 20px;
-      position: relative;
-      z-index: 5;
     }
 
     @media (max-width: 768px) {
@@ -174,7 +133,7 @@
       height: auto;
     }
 
-    /* 制作STAFFからのメッセージ */
+    /* 制作STAFFの意気込み */
     .staff-message-section {
       margin: 60px auto;
       max-width: 90%;
@@ -236,8 +195,8 @@
       color: #d4af37;
       font-size: 18px;
       text-align: right;
-      font-style: italic;
       margin-top: 30px;
+      font-style: italic;
       font-weight: bold;
     }
 
@@ -264,90 +223,116 @@
       font-size: 24px;
     }
 
-    
-    /* フッター スタイル */
-    footer {
-      background: linear-gradient(to bottom, #0f2342 0%, #1a2d5a 100%) !important;
-      color: #fff !important;
-      
-     
-      position: relative !important;
-      overflow: hidden !important;
-      width: 100vw !important;
-      z-index: 100 !important;
-      margin-top: 50px !important;
-      display: block !important;
-    }
-    
-    #social-links {
-      margin-bottom: 20px;
+    /* スタッフカード */
+    .staff-card {
+      position: relative;
+      overflow: hidden;
       text-align: center;
+      transition: transform 0.3s ease;
     }
-    
-    #social-links ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
+
+    .staff-card:hover {
+      transform: translateY(-5px);
     }
-    
-    #social-links li {
-      margin: 0 10px;
-    }
-    
-    #social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-size: 20px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    
-    #social-links a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-    }
-    
-    .x-logo {
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      font-size: 24px;
-    }
-    
-    .copy {
+
+    .staff-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
       text-align: center;
-      margin-top: 20px;
+      padding: 15px 10px;
+      background: rgba(0, 0, 0, 0.5);
     }
-    
-    .copy small {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    
-    .footer-links a {
-      color: #fff;
-      margin: 0 15px;
+
+    .staff-role {
+      color: #d4af37;
       font-size: 14px;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+
+    .staff-name {
+      color: #d4af37;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
     }
     
-    .footer-links a:hover {
-      opacity: 1;
+    /* スタッフダイアログ */
+    .staff-dialog {
+      display: none; 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(0,0,0,0.7); 
+      z-index: 1000; 
+      justify-content: center; 
+      align-items: center;
+    }
+    
+    .staff-dialog-content {
+      background-color: #1a2b49; 
+      color: white; 
+      padding: 30px; 
+      border-radius: 10px; 
+      max-width: 800px; 
+      width: 90%; 
+      max-height: 80vh; 
+      overflow-y: auto; 
+      position: relative;
+    }
+    
+    .close-button {
+      position: absolute; 
+      top: 10px; 
+      right: 15px; 
+      font-size: 24px; 
+      cursor: pointer; 
+      color: white;
+    }
+    
+    #staff-dialog-content {
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;
+    }
+    
+    /* パーソナリティダイアログ */
+    .personality-dialog {
+      display: none; 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(0,0,0,0.7); 
+      z-index: 1000; 
+      justify-content: center; 
+      align-items: center;
+    }
+    
+    .personality-dialog-content {
+      background-color: #1a2b49; 
+      color: white; 
+      padding: 30px; 
+      border-radius: 10px; 
+      max-width: 800px; 
+      width: 90%; 
+      max-height: 80vh; 
+      overflow-y: auto; 
+      position: relative; 
+      opacity: 0; 
+      transform: scale(0.9); 
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    #personality-dialog-content {
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;
     }
   </style>
 </head>
@@ -416,23 +401,23 @@
         <!-- スーパーバイザー -->
         <div class="staff-card" onclick="showPersonalityDialog(6)" style="cursor: pointer;">
           <img src="img/cast/cast6.jpg" alt="川村ケンスケ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">スーパーバイザー</div>
+          <div class="staff-role">誕生日総合研究所</div>
           <div class="staff-name">川村ケンスケ</div>
         </div>
         
         <!-- 風谷南友 -->
         <div class="staff-card" onclick="showPersonalityDialog(7)" style="cursor: pointer;">
           <img src="img/cast/cast7.jpg" alt="風谷南友" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">特別出演</div>
+          <div class="staff-role">勝負の姫君</div>
           <div class="staff-name">風谷南友</div>
         </div>
       </div>
       
       <!-- パーソナリティダイアログ -->
-      <div id="personality-dialog" class="staff-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
-        <div class="staff-dialog-content" style="background-color: #1a2b49; color: white; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; opacity: 0; transform: scale(0.9); transition: opacity 0.3s ease, transform 0.3s ease;">
-          <span class="close-button" onclick="closePersonalityDialog()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white;">×</span>
-          <div id="personality-dialog-content" style="display: flex; flex-direction: column; align-items: center;">
+      <div id="personality-dialog" class="personality-dialog">
+        <div class="personality-dialog-content">
+          <span class="close-button" onclick="closePersonalityDialog()">×</span>
+          <div id="personality-dialog-content">
             <!-- ダイアログ内容はJavaScriptで生成 -->
           </div>
         </div>
@@ -482,32 +467,24 @@
         </div>
 
         <!-- スタッフカード 8 -->
-        <div class="staff-card" onclick="showStaffDialog(8)" style="cursor: pointer;">
+        <div class="staff-card" onclick="showStaffDialog(6)" style="cursor: pointer;">
           <img src="img/cast/staff6.jpg" alt="後藤英樹" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
           <div class="staff-role">制作</div>
           <div class="staff-name">後藤英樹</div>
         </div>
 
         <!-- スタッフカード 6 -->
-        <div class="staff-card" onclick="showStaffDialog(6)" style="cursor: pointer;">
-          <img src="https://placehold.jp/00BCD4/ffffff/200x200.png?text=松浦" alt="松浦亮介" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+        <div class="staff-card" onclick="showStaffDialog(7)" style="cursor: pointer;">
+          <img src="img/cast/staff7.jpg" alt="松浦亮介" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
           <div class="staff-role">WEBディレクター</div>
           <div class="staff-name">松浦亮介</div>
         </div>
 
-        <!-- スタッフカード 7 -->
-        <div class="staff-card" onclick="showStaffDialog(7)" style="cursor: pointer;">
-          <img src="https://placehold.jp/9C27B0/ffffff/200x200.png?text=SNSディレクター" alt="SNSディレクター" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">SNSディレクター</div>
-          <div class="staff-name">SNS担当</div>
-        </div>
-      </div>
-
       <!-- スタッフダイアログ -->
-      <div id="staff-dialog" class="staff-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
-        <div class="staff-dialog-content" style="background-color: #1a2b49; color: white; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;">
-          <span class="close-button" onclick="closeStaffDialog()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white;">×</span>
-          <div id="staff-dialog-content" style="display: flex; flex-direction: column; align-items: center;">
+      <div id="staff-dialog" class="staff-dialog">
+        <div class="staff-dialog-content">
+          <span class="close-button" onclick="closeStaffDialog()">×</span>
+          <div id="staff-dialog-content">
             <!-- ダイアログ内容はJavaScriptで生成 -->
           </div>
         </div>
@@ -557,31 +534,13 @@
 
   </div>
 
-  <footer style="background: linear-gradient(to bottom, #0f2342 0%, #1a2d5a 100%) !important; color: #fff !important; padding: 50px 0 20px !important; margin-left: calc(50% - 50vw) !important; margin-right: calc(50% - 50vw) !important; position: relative !important; z-index: 100 !important; width: 100vw !important; margin-top: 50px !important; display: block !important; clear: both !important;">
-    <div class="wrap" style="background-color: transparent !important; display: flex !important; flex-direction: column !important; align-items: center !important; max-width: 1200px !important; margin: 0 auto !important; padding: 0 20px !important; width: 100% !important;">
-      <div id="social-links">
-        <ul>
-          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">𝕏</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <a href="index.html">ホーム</a>
-        <a href="about.html">はじめに</a>
-        <a href="story.html">あらすじ</a>
-        <a href="chart.html">相関図</a>
-        <a href="news.html">お知らせ</a>
-        <a href="caststaff.html">キャスト＆STAFF</a>
-        <a href="index.html#youtube-section">配信</a>
-      </div>
-      <div class="copy">
-        <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
-      </div>
-    </div>
-  </footer>
+  <!-- フッタープレースホルダー -->
+  <div id="footer-placeholder"></div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/header.js"></script>
+  <script src="js/footer.js"></script>
   <script>
     // スタッフ情報の配列
     const staffData = [
@@ -590,7 +549,7 @@
         name: "芳賀正光",
         role: "企画構成",
         birthday: "2月16日",
-        image: "img/cast/staff1-2.jpg",
+        image: "img/cast/staff1.jpg",
         message: "誕生日をお祝いしたい人が居る。誕生日をお祝いしてくれる人が居る。とても幸せなことです。私は…、誕生日に産んでくれてありがとう、育ててくれてありがとうという想いを込めて両親にプレゼントを渡しています。その時に出会える最高の笑顔が大好きなんです。この番組を通じ誕生日をお祝いすることがとても素敵な時間であることを見直して欲しいと願っています。"
       },
       {
@@ -598,7 +557,7 @@
         name: "梅本満",
         role: "プロデューサー",
         birthday: "",
-        image: "img/cast/staff2.jpg",
+        image: "img/cast/staff2-2.jpg",
         message: "言葉にするより、文章や手紙にした方が、その人への想いがより深く伝わることがあります。「誕生日おめでとう」と肉声で言われるのもいいけど、メッセージでもらったらもっとうれしい。\n『渋谷愛ビジョン』はそんな感動をもたらしてくれる街頭ビジョンです。またラジオも手紙やメッセージととても相性のいいメディアです。\n\nその2つがコラボして、\"史上最強のバースディメッセージ\"を皆さんにお届けすることになりました。なんとランキングにして発表するという恐るべき番組です。\nメッセージに感動しながらランキングにハラハラドキドキする、前代未聞の誕生日番組が誕生しました!\n4月2日がその「バスラン」のバースディです。"
       },
       {
@@ -625,29 +584,23 @@
         image: "img/cast/staff5.png",
         message: "誕生日って自分にとっても特別な日だけど、誰かの誕生日と聞くと、言葉が通じなくても、世代が違っても｢おめでとう｣と伝えたくなるハッピーな日ですよね。\n「今日は◯◯さんの誕生日なんだよ。知ってた？」と自分のことのように話題にしてしまう、不思議な日でもあります。\n誰にとっても平等に存在する、特別な一日。\n「おめでとう｣が溢れて心があたたかくなる時間をバスランで紡げたらいいなと願っています。"
       },
+      
       {
         id: 6,
-        name: "松浦亮介",
-        role: "WEBディレクター",
-        birthday: "",
-        image: "https://placehold.jp/00BCD4/ffffff/150x200.png?text=松浦",
-        message: "ウェブサイトの企画・制作を担当しています。視聴者の皆さんに使いやすく、情報が充実したウェブサイトを提供できるよう心がけています。"
-      },
-      {
-        id: 7,
-        name: "SNS担当",
-        role: "SNSディレクター",
-        birthday: "",
-        image: "https://placehold.jp/9C27B0/ffffff/150x200.png?text=SNSディレクター",
-        message: "SNSでの情報発信や視聴者とのコミュニケーションを担当しています。番組の魅力をSNSでも存分にお伝えできるよう、日々新しいコンテンツを発信しています。"
-      },
-      {
-        id: 8,
         name: "後藤英樹",
         role: "制作",
         birthday: "6月19日",
         image: "img/cast/staff6-2.jpg",
-        message: "”感情が動く瞬間を作る”をモットーに日々番組を制作しています。一人ひとりの｢おめでとう｣を通して、感謝と愛のあふれる番組になるよう精一杯頑張ります！"
+        message: "感情が動く瞬間を作るをモットーに日々番組を制作しています。一人ひとりの｢おめでとう｣を通して、感謝と愛のあふれる番組になるよう精一杯頑張ります！"
+      },
+      {
+        id: 7,
+        name: "松浦亮介",
+        role: "WEBディレクター",
+        birthday: "11月11日",
+        image: "img/cast/staff7-2.jpg",
+        message: "11月11日生まれです。1が並ぶからか、わりと覚えてもらえてることが多くて、毎年「今日だったよね？」と声をかけてもらえるのがちょっと嬉しいです。\nしかもポッキー＆プリッツの日でもあるので、軽いプレゼントとしてポッキーをもらうことも。気負わず祝ってもらえる、その“ちょうどよさ”が気に入っています。\n\n誕生日って、誰にとっても一年に一度の大切な日ですが、「おめでとう」の一言だけで笑顔が生まれる、不思議な力があると思っています。この番組の“バースデーランキング”も、そんな笑顔のきっかけになればうれしいです。僕も、自分の誕生日にちょっと得した気分になった経験を胸に、番組づくりで誰かの特別な1日をほんの少し明るくできたらと思っています。\n\nしかもポッキー＆プリッツの日でもあるので、軽いプレゼントとしてポッキーをもらうことも。気負わず祝ってもらえる、その“ちょうどよさ”が気に入っています。\n\n誕生日って、誰にとっても一年に一度の大切な日ですが、「おめでとう」の一言だけで笑顔が生まれる、不思議な力があると思っています。\n\nこの番組の“バースデーランキング”も、そんな笑顔のきっかけになればうれしいです。僕も、自分の誕生日にちょっと得した気分になった経験を胸に、番組づくりで誰かの特別な1日をほんの少し明るくできたらと思っています。"
+
       }
     ];
 
@@ -696,7 +649,7 @@
       {
         id: 6,
         name: "川村ケンスケ",
-        role: "スーパーバイザー",
+        role: "誕生日総合研究所",
         birthday: "5月2日",
         image: "img/cast/cast6.jpg",
         message: "これまでMVを500本以上（自分調べで曖昧です）監督してきた映像ディレクターとして、この番組での私の役割は…ランキング１位のかたに、わたしが選曲した１曲をプレゼントすることです。言ってみれば…１位になったその人を主役に据えてMVを撮りたい！（MVの成り立ちとは真逆ですが）といった発想だったりするかもしれませんね。最高の、全力の、選曲で、バースデー・ランキングを飾りたいと思います。"
@@ -704,7 +657,7 @@
       {
         id: 7,
         name: "風谷南友",
-        role: "特別出演",
+        role: "勝負の姫君",
         birthday: "3月21日",
         image: "img/cast/cast7.jpg",
         message: "女優・愛８、勝負の姫君。演技力を活かした表現力豊かなトークで番組を盛り上げます。"
@@ -717,19 +670,20 @@
       if (!staff) return;
 
       const dialogContent = document.getElementById('staff-dialog-content');
-      let birthdayHtml = staff.birthday ? `<div style="font-size: 16px; margin-bottom: 15px; color: #ccc;">${staff.birthday}</div>` : '';
+      let birthdayHtml = staff.birthday ? `<span style="font-size: 16px; color: #ccc; margin-left: 15px;">${staff.birthday}</span>` : '';
       
       dialogContent.innerHTML = `
-        <div style="display: flex; width: 100%;">
-          <div style="flex: 0 0 40%;">
-            <img src="${staff.image}" alt="${staff.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
-          </div>
-          <div style="flex: 0 0 60%; padding-left: 30px;">
-            <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white;">${staff.name}</h2>
-            <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${staff.role}</div>
-            ${birthdayHtml}
-            <div style="line-height: 1.8; color: white;">
-              ${staff.message}
+        <div style="display: flex; width: 100%; flex-direction: column; max-width: 100%;">
+          <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
+            <div style="flex: 0 0 40%; min-width: 250px; margin-bottom: 20px;">
+              <img src="${staff.image}" alt="${staff.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+            </div>
+            <div style="flex: 1; padding-left: 30px; padding-right: 20px;">
+              <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white; display: flex; align-items: center;">${staff.name}${birthdayHtml}</h2>
+              <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${staff.role}</div>
+              <div style="line-height: 1.8; color: white; white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; max-width: 100%;">
+${staff.message}
+              </div>
             </div>
           </div>
         </div>
@@ -737,7 +691,8 @@
 
       const dialog = document.getElementById('staff-dialog');
       dialog.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // スクロール防止
+      document.body.style.overflow = '';
+      document.body.style.overflowX = 'hidden';
       const dialogContentElement = dialog.querySelector('.staff-dialog-content');
       dialogContentElement.style.opacity = 1;
       dialogContentElement.style.transform = 'scale(1)';
@@ -752,7 +707,8 @@
       
       setTimeout(() => {
         dialog.style.display = 'none';
-        document.body.style.overflow = 'auto'; // スクロール再開
+        document.body.style.overflow = '';
+        document.body.style.overflowX = 'hidden';
       }, 300);
     }
 
@@ -762,9 +718,9 @@
       if (!personality) return;
 
       const dialogContent = document.getElementById('personality-dialog-content');
-      let birthdayHtml = personality.birthday ? `<div style="font-size: 16px; margin-bottom: 15px; color: #ccc;">${personality.birthday}</div>` : '';
+      let birthdayHtml = personality.birthday ? `<span style="font-size: 16px; color: #ccc; margin-left: 15px;">${personality.birthday}</span>` : '';
       
-      // u30c0u30a4u30a2u30edu30b0u7528u306eu753bu50cfu30d1u30b9u3092u751fu6210
+      // ダイアログ用の画像パスを生成
       let dialogImagePath = '';
       switch(personalityId) {
         case 1:
@@ -793,16 +749,17 @@
       }
       
       dialogContent.innerHTML = `
-        <div style="display: flex; width: 100%;">
-          <div style="flex: 0 0 40%;">
-            <img src="${dialogImagePath}" alt="${personality.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
-          </div>
-          <div style="flex: 0 0 60%; padding-left: 30px;">
-            <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white;">${personality.name}</h2>
-            <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${personality.role}</div>
-            ${birthdayHtml}
-            <div style="line-height: 1.8; color: white;">
-              ${personality.message}
+        <div style="display: flex; width: 100%; flex-direction: column; max-width: 100%;">
+          <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
+            <div style="flex: 0 0 40%; min-width: 250px; margin-bottom: 20px;">
+              <img src="${dialogImagePath}" alt="${personality.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+            </div>
+            <div style="flex: 1; padding-left: 30px; padding-right: 20px;">
+              <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white; display: flex; align-items: center;">${personality.name}${birthdayHtml}</h2>
+              <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${personality.role}</div>
+              <div style="line-height: 1.8; color: white; white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; max-width: 100%;">
+${personality.message}
+              </div>
             </div>
           </div>
         </div>
@@ -810,8 +767,9 @@
 
       const dialog = document.getElementById('personality-dialog');
       dialog.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // スクロール防止
-      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      document.body.style.overflow = '';
+      document.body.style.overflowX = 'hidden';
+      const dialogContentElement = dialog.querySelector('.personality-dialog-content');
       dialogContentElement.style.opacity = 1;
       dialogContentElement.style.transform = 'scale(1)';
     }
@@ -819,13 +777,14 @@
     // パーソナリティダイアログを閉じる関数
     function closePersonalityDialog() {
       const dialog = document.getElementById('personality-dialog');
-      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      const dialogContentElement = dialog.querySelector('.personality-dialog-content');
       dialogContentElement.style.opacity = 0;
       dialogContentElement.style.transform = 'scale(0.9)';
       
       setTimeout(() => {
         dialog.style.display = 'none';
-        document.body.style.overflow = 'auto'; // スクロール再開
+        document.body.style.overflow = '';
+        document.body.style.overflowX = 'hidden';
       }, 300);
     }
 

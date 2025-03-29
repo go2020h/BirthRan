@@ -7,98 +7,170 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/story.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="css/footer.css">
   <style>
-    /* フッター */
-    footer {
-      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
-      color: #fff;
-      padding: 30px 0;
-      margin-top: 50px;
-      width: 100%;
-      left: 0;
-      right: 0;
-      position: relative;
+    /* スタイル */
+    .program-content-section {
+      margin-bottom: 50px;
     }
     
-    footer .wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      width: 100%;
-    }
-    
-    #social-links {
+    .section-subtitle {
+      font-size: 1.5rem;
       margin-bottom: 20px;
-      text-align: center;
+      color: #333;
+      border-left: 5px solid #5e0f8b;
+      padding-left: 15px;
     }
     
-    #social-links ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .content-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
     }
     
-    #social-links li {
-      margin: 0 10px;
+    @media (min-width: 768px) {
+      .content-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
     
-    #social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
+    .content-item {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .content-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .content-item h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #5e0f8b;
+    }
+    
+    .content-item p {
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    
+    .content-image {
+      margin-top: 15px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .content-image img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .content-item:hover .content-image img {
+      transform: scale(1.05);
+    }
+    
+    .story-timeline {
+      position: relative;
+      padding: 30px 0;
+    }
+    
+    .timeline-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background-color: #5e0f8b;
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      width: 100%;
+    }
+    
+    .timeline-content {
+      position: relative;
+      width: calc(50% - 30px);
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-left: auto;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: -15px;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-right: 15px solid #fff;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -15px;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 15px solid #fff;
+    }
+    
+    .timeline-date {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #5e0f8b;
       color: #fff;
-      font-size: 20px;
-      transition: all 0.3s ease;
-      text-decoration: none;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
     }
     
-    #social-links a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
+    .timeline-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #333;
     }
     
-    .x-logo {
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      font-size: 24px;
+    .timeline-text {
+      line-height: 1.7;
+      color: #555;
     }
     
-    .copy {
-      text-align: center;
-      margin-top: 20px;
-    }
-    
-    .copy small {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-    }
-    
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
-      margin: 0 10px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s ease;
-    }
-    
-    .footer-links a:hover {
-      color: #fff;
+    @media (max-width: 767px) {
+      .timeline-line {
+        left: 30px;
+      }
+      
+      .timeline-content {
+        width: calc(100% - 60px);
+        margin-left: 60px !important;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::before,
+      .timeline-item:nth-child(even) .timeline-content::before {
+        left: -15px;
+        right: auto;
+        border-right: 15px solid #fff;
+        border-left: none;
+      }
     }
   </style>
 </head>
@@ -352,30 +424,11 @@
   </div>
 
   <!-- フッター -->
-  <footer>
-    <div class="wrap">
-      <div id="social-links">
-        <ul>
-          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">𝕏</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <a href="index.html">ホーム</a>
-        <a href="about.html">はじめに</a>
-        <a href="story.html">あらすじ</a>
-        <a href="chart.html">相関図</a>
-        <a href="news.html">お知らせ</a>
-        <a href="caststaff.html">キャスト＆STAFF</a>
-        <a href="index.html#youtube-section">配信</a>
-      </div>
-      <div class="copy">
-        <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
-      </div>
-    </div>
-  </footer>
+  <div id="footer-placeholder"></div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/header.js"></script>
+  <script src="js/footer.js"></script>
 </body>
 </html>
