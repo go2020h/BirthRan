@@ -1,0 +1,270 @@
+/* レスポンシブデザイン用スタイル */
+
+/* 大画面デバイス（デスクトップ） */
+@media screen and (min-width: 1200px) {
+  .wrap {
+    max-width: 1200px;
+  }
+}
+
+/* 中画面デバイス（タブレット横向き） */
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+  .wrap {
+    max-width: 960px;
+  }
+  
+  .calendar-day {
+    height: 90px;
+  }
+  
+  .calendar-day .love-message {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    max-height: 50px;
+  }
+}
+
+/* 小画面デバイス（タブレット縦向き） */
+@media screen and (max-width: 991px) and (min-width: 768px) {
+  .wrap {
+    max-width: 720px;
+  }
+  
+  .menu li {
+    margin: 0 5px;
+  }
+  
+  .calendar-day {
+    height: 80px;
+  }
+  
+  .calendar-day .love-message {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 40px;
+    font-size: 11px;
+  }
+  
+  .info-container, .highlight-container, .vital-data-container {
+    flex-direction: column;
+  }
+  
+  .info-card, .highlight-card, .vital-data-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .cast-grid, .staff-grid, .platform-grid, .archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 超小画面デバイス（スマートフォン） */
+@media screen and (max-width: 767px) {
+  .wrap {
+    max-width: 100%;
+    padding: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .menu {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 0;
+    justify-content: flex-start;
+    margin: 0 auto;
+  }
+  
+  .menu li {
+    margin: 0 3px;
+    flex: 0 0 auto;
+  }
+  
+  .menu li a {
+    padding: 5px 8px;
+    font-size: 14px;
+  }
+  
+  .catchcopy-wrapper h2 {
+    font-size: 24px;
+  }
+  
+  .catchcopy-wrapper h3 {
+    font-size: 16px;
+  }
+  
+  .calendar-wrapper, .youtube-wrapper, .program-info-wrapper,
+  .weekly-highlight-wrapper, .love-guest-section, .vital-data-wrapper,
+  .message-section {
+    margin-bottom: 30px;
+  }
+  
+  .calendar-content, .youtube-section, .program-info,
+  .weekly-highlight, .vital-data-section {
+    padding: 20px;
+  }
+  
+  .calendar-content h2, .youtube-section h2, .program-info h2,
+  .weekly-highlight h2, .vital-data-section h2 {
+    font-size: 20px;
+  }
+  
+  .weekdays, .calendar-days {
+    gap: 5px;
+  }
+  
+  .calendar-day {
+    height: 70px;
+    padding: 5px;
+  }
+  
+  .calendar-day .day-number {
+    font-size: 12px;
+    padding: 1px 4px;
+  }
+  
+  .calendar-day .love-message {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 30px;
+    font-size: 10px;
+    margin-top: 15px;
+  }
+  
+  .calendar-popup {
+    padding: 15px;
+    max-width: 95%;
+  }
+  
+  .calendar-popup h2 {
+    font-size: 20px;
+  }
+  
+  .calendar-header h3 {
+    font-size: 18px;
+  }
+  
+  .calendar-nav-btn {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .calendar-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .week-days {
+    gap: 5px;
+  }
+  
+  .week-day {
+    height: 70px;
+    padding: 5px;
+  }
+  
+  .week-day-name {
+    font-size: 12px;
+  }
+  
+  .week-day-number {
+    font-size: 16px;
+  }
+  
+  .info-container, .highlight-container, .vital-data-container {
+    flex-direction: column;
+  }
+  
+  .info-card, .highlight-card, .vital-data-card {
+    width: 100%;
+    margin-bottom: 20px;
+    min-width: auto;
+  }
+  
+  .present-list li {
+    flex-direction: column;
+  }
+  
+  .present-icon {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .footer-links a {
+    margin: 5px;
+    font-size: 12px;
+  }
+  
+  .cast-grid, .staff-grid, .character-grid, .platform-grid, .archive-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .schedule-date, .schedule-time, .schedule-title {
+    margin-bottom: 5px;
+  }
+  
+  .archive-tabs {
+    padding-bottom: 10px;
+  }
+  
+  .archive-tab {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* 極小画面デバイス */
+@media screen and (max-width: 480px) {
+  .calendar-day {
+    height: 60px;
+  }
+  
+  .calendar-day .love-message {
+    display: none;
+  }
+  
+  .week-day {
+    height: 60px;
+  }
+  
+  .week-day-name {
+    font-size: 10px;
+  }
+  
+  .week-day-number {
+    font-size: 14px;
+  }
+  
+  .catchcopy-wrapper h2 {
+    font-size: 20px;
+  }
+  
+  .catchcopy-wrapper h3 {
+    font-size: 14px;
+  }
+  
+  .section-title {
+    font-size: 22px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}

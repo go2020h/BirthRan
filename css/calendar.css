@@ -1,0 +1,423 @@
+/* カレンダー関連のスタイル */
+
+/* カレンダーラッパー */
+.calendar-wrapper {
+  background: linear-gradient(135deg, #FF9A8B 0%, #FF6B88 55%, #FF99AC 100%);
+  padding-top: 40px; /* 上の余白を40pxに変更 */
+  padding-bottom: 40px; /* 下の余白を40pxに変更 */
+  margin-top: 0; /* 上の余白を減らす */
+  margin-bottom: 30px; /* 下の余白も減らす */
+  border-radius: 0 !important; /* 角を丸くしない */
+  box-shadow: 0 5px 15px rgba(255, 107, 136, 0.3);
+}
+
+.calendar-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.calendar-content {
+  background-color: #fff;
+  padding: 20px; /* パディングを減らす */
+  border-radius: 0 !important; /* 角を丸くしない */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-content h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.calendar-content h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 5px;
+  background: linear-gradient(to right, #FF9A8B, #FF6B88, #FF99AC);
+  border-radius: 10px;
+}
+
+/* カレンダーヘッダー */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.calendar-header h3 {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(to right, #FF9A8B, #FF6B88, #FF99AC);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.calendar-nav-btn {
+  background: #FF6B88;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 107, 136, 0.3);
+}
+
+.calendar-nav-btn:hover {
+  background: #FF99AC;
+  box-shadow: 0 6px 12px rgba(255, 107, 136, 0.4);
+}
+
+/* 曜日表示 */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  padding: 15px 0;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.weekdays div:first-child {
+  color: #FF6B88; /* 日曜日色 */
+}
+
+.weekdays div:last-child {
+  color: #5D9CEC; /* 土曜日色 */
+}
+
+/* カレンダー日付 */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  border-radius: 0 !important; /* 角を丸くしない */
+  font-weight: 500;
+  transition: none; /* アニメーションを無効にする */
+  background: #f8f9fa;
+  color: #333;
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #eee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-day:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* ホバー時のボックスシャドウを変更 */
+  transform: none; /* ホバー時の変形を無効にする */
+  border-color: #eee; /* ホバー時のボーダー色を変更 */
+}
+
+.calendar-day .day-number {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.calendar-day .love-message {
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  line-clamp: 4;
+  max-height: 60px;
+  border-radius: 0 !important; /* 角を丸くしない */
+}
+
+.calendar-day.today {
+  background: #f8f9fa; /* 背景色 */
+  border-color: #4A89DC;
+  border-width: 2px; /* ボーダー幅 */
+}
+
+.calendar-day.today .day-number,
+.calendar-day.today .love-message {
+  color: #333; /* 文字色 */
+}
+
+.calendar-day.message-day,
+.calendar-day.broadcast-day {
+  background: #f8f9fa; /* 通常の背景色 */
+  color: #333; /* 通常の文字色 */
+  border-color: #eee; /* 通常のボーダー色 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 通常のボックスシャドウ */
+}
+
+.calendar-day.message-day:hover,
+.calendar-day.broadcast-day:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* ホバー時のボックスシャドウを変更 */
+  transform: none; /* ホバー時の変形を無効にする */
+  border-color: #eee; /* ホバー時のボーダー色を変更 */
+}
+
+/* カレンダー凡例 */
+.calendar-legend {
+  display: none; /* 凡例を非表示にする */
+}
+
+/* カレンダーポップアップ */
+.calendar-popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.calendar-popup {
+  background-color: #fff;
+  border-radius: 0 !important; /* 角を丸くしない */
+  padding: 20px;
+  width: 100%;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: popup-fade 0.3s ease;
+}
+
+@keyframes popup-fade {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.calendar-popup h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.calendar-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: #FF6B88;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 107, 136, 0.3);
+}
+
+.calendar-popup-close:hover {
+  background: #FF99AC;
+  box-shadow: 0 6px 12px rgba(255, 107, 136, 0.4);
+}
+
+/* カレンダー表示ボタン */
+.view-calendar-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #FF9A8B 0%, #FF6B88 100%);
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 107, 136, 0.3);
+  border: none;
+  width: 100%;
+}
+
+.view-calendar-btn:hover {
+  box-shadow: 0 8px 20px rgba(255, 107, 136, 0.4);
+  background: linear-gradient(135deg, #FF6B88 0%, #FF9A8B 100%);
+}
+
+.view-calendar-btn i {
+  margin-right: 8px;
+}
+
+/* 週間表示 */
+.week-view {
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: block;
+  width: 100%;
+  max-width: 800px; /* 最大幅を800pxに設定 */
+  margin-left: auto; /* 左の余白を自動に設定 */
+  margin-right: auto; /* 右の余白を自動に設定 */
+  overflow: hidden;
+}
+
+.week-view-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+  display: block;
+}
+
+.week-days {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  min-height: 80px;
+  visibility: visible;
+  overflow: hidden;
+}
+
+.week-day {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  border-radius: 0 !important; /* 角を丸くしない */
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  transition: none; /* アニメーションを無効にする */
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.week-day:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* ホバー時のボックスシャドウを変更 */
+  border-color: #eee; /* ホバー時のボーダー色を変更 */
+  transform: none; /* ホバー時の変形を無効にする */
+}
+
+.week-day-number {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333 !important; /* 黒色 */
+  margin-right: 5px; /* 右の余白 */
+  min-width: 20px; /* 最小幅 */
+}
+
+.week-day-name {
+  font-weight: bold;
+  margin-right: 15px; /* 右の余白 */
+  color: #333 !important; /* 黒色 */
+  font-size: 11px;
+  min-width: 20px; /* 最小幅 */
+}
+
+.week-day[data-day="0"] .week-day-name { /* 日曜日 */
+  color: #e74c3c !important; /* 赤色 */
+}
+
+.week-day[data-day="6"] .week-day-name { /* 土曜日 */
+  color: #3498db !important; /* 青色 */
+}
+
+.week-day[data-day="1"] .week-day-name,
+.week-day[data-day="2"] .week-day-name,
+.week-day[data-day="3"] .week-day-name,
+.week-day[data-day="4"] .week-day-name,
+.week-day[data-day="5"] .week-day-name {
+  color: #333 !important; /* 黒色 */
+}
+
+.week-day.today {
+  background: #f8f9fa; /* 背景色 */
+  border-color: #4A89DC;
+  border-width: 2px; /* ボーダー幅 */
+}
+
+.week-day.today .week-day-name,
+.week-day.today .week-day-number {
+  color: #333 !important; /* 黒色 */
+}
+
+.week-day-message {
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: left; /* 左寄せ */
+  color: #000 !important; /* 黒色 */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  max-height: 30px;
+  flex: 1; /* 余白を全て使用 */
+  border-radius: 0 !important; /* 角を丸くしない */
+  background-color: rgba(155, 89, 182, 0.1); /* 薄い紫色の背景 */
+  padding: 3px 6px; /* パディングを追加 */
+  margin-left: 5px; /* 左側の余白 */
+  border-left: 3px solid #9b59b6; /* 左側に紫色のボーダー */
+  font-weight: 500; /* やや太字 */
+}
+
+.author-name {
+  font-weight: bold;
+  margin-right: 4px;
+  color: #9b59b6; /* 紫色 */
+}
+
+.comment-text {
+  color: #333;
+}
+
+.week-day.has-message {
+  background: rgba(155, 89, 182, 0.05); /* 薄い紫色の背景 */
+  border-color: #ddd;
+  border-left: 3px solid #9b59b6; /* 左側に紫色のボーダー */
+}
+
+.week-day.has-message .week-day-name,
+.week-day.has-message .week-day-number,
+.week-day.broadcast .week-day-name,
+.week-day.broadcast .week-day-number {
+  color: #333;
+}

@@ -1,0 +1,964 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>繧ｭ繝｣繧ｹ繝茨ｼ・TAFF | efit繝励Ξ繧ｼ繝ｳ繝・・繧ｦ繧｣繝ｼ繧ｯ繝ｪ繝ｼ繝ｻ繝舌・繧ｹ繝・・繝ｻ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* 繧ｭ繝｣繧ｹ繝茨ｼ・TAFF逕ｨ繧ｹ繧ｿ繧､繝ｫ */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .staff-card {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .staff-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .staff-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 15px 10px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .staff-role {
+      color: #d4af37;
+      font-size: 14px;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+
+    .staff-name {
+      color: #d4af37;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    /* 繝舌ヶ繝ｫ繧ｭ繝｣繝ｳ繝舌せ */
+    #bubble-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 繝｡繝九Η繝ｼ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ */
+    .menu_outer {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 繝偵・繝ｭ繝ｼ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ */
+    #hero-section {
+      position: relative;
+      z-index: 0;
+      margin-top: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #0a1525;
+      overflow: hidden;
+    }
+
+    /* 繝壹・繧ｸ蜈ｨ菴薙・繧ｹ繧ｿ繧､繝ｫ */
+    #caststaff {
+      background-color: #0a1525;
+      position: relative;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .staff-section h2, .cast-section h2 {
+      color: #d4af37;
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 10px;
+    }
+
+    .wrap {
+      background-color: #0a1525;
+      padding: 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    @media (max-width: 768px) {
+      .staff-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+      }
+
+      .cast-tabs {
+        flex-wrap: wrap;
+      }
+
+      .cast-tab {
+        padding: 10px 15px;
+        font-size: 16px;
+      }
+    }
+
+    /* 繧ｹ繝昴Φ繧ｵ繝ｼ諠・ｱ */
+    .sponsors-section {
+      margin-top: 60px;
+      text-align: center;
+      color: white;
+      padding: 30px;
+      background: rgba(10, 21, 37, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .sponsors-section h2, .sponsors-section h3 {
+      color: #d4af37;
+      text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    }
+
+    .sponsors-section h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    .sponsor-group {
+      margin-bottom: 30px;
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .sponsor-group:hover {
+      transform: translateY(-5px);
+    }
+
+    .sponsor-description {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+
+    .sponsor-logo {
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .sponsor-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .sponsor-logo img {
+      max-width: 200px;
+      height: auto;
+    }
+
+    /* 蛻ｶ菴彜TAFF縺九ｉ縺ｮ繝｡繝・そ繝ｼ繧ｸ */
+    .staff-message-section {
+      margin: 60px auto;
+      max-width: 90%;
+      background: linear-gradient(to bottom, rgba(10, 21, 37, 0.9) 0%, rgba(26, 58, 108, 0.9) 100%);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .staff-message-section::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 120px;
+      color: rgba(212, 175, 55, 0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    
+    .staff-message-title {
+      color: #d4af37;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .staff-message-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #d4af37, transparent);
+    }
+    
+    .staff-message-content {
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-align: justify;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .staff-message-content strong {
+      color: #d4af37;
+      font-weight: bold;
+    }
+    
+    .staff-message-signature {
+      color: #d4af37;
+      font-size: 18px;
+      text-align: right;
+      font-style: italic;
+      margin-top: 30px;
+      font-weight: bold;
+    }
+
+    /* 繧ｷ繧ｧ繧｢繝懊ち繝ｳ */
+    #share {
+      margin-top: 40px;
+      text-align: center;
+      color: white;
+    }
+
+    #share ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+    }
+
+    #share ul li {
+      margin: 0 10px;
+    }
+
+    #share ul li a {
+      color: #d4af37;
+      font-size: 24px;
+    }
+
+    /* 繝輔ャ繧ｿ繝ｼ */
+    .footer-wrapper {
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      color: #fff;
+      padding: 30px 0;
+      margin-top: 50px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      width: 100vw;
+      overflow: hidden;
+    }
+    
+    footer {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      box-sizing: border-box;
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      color: #fff;
+      padding: 30px 0;
+      margin-top: 50px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      box-sizing: border-box;
+    }
+    
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    
+    #social-links {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    #social-links ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #social-links li {
+      margin: 0 10px;
+    }
+    
+    #social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    #social-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    .x-logo {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    
+    .copy {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .copy small {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .footer-links a {
+      color: #fff;
+      margin: 0 15px;
+      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body id="caststaff" class="caststaff cmn" style="margin: 0; padding: 0; overflow-x: hidden; width: 100%;">
+  <!-- 繝偵・繝ｭ繝ｼ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ -->
+  <div id="hero-section">
+    <canvas id="bubble-canvas"></canvas>
+  </div>
+  
+  <!-- 繝倥ャ繝繝ｼ -->
+  <div id="header-placeholder" style="position: relative; z-index: 10;"></div>
+
+  <div id="con-wrap" style="position: relative; z-index: 5;">
+    <div id="con-body">
+      <div class="wrap">
+        <!-- 繧ｭ繝｣繧ｹ繝育ｴｹ莉九そ繧ｯ繧ｷ繝ｧ繝ｳ -->
+        <div class="staff-section cast-section">
+          <h2>諢帙≠繧九ヱ繝ｼ繧ｽ繝翫Μ繝・ぅ</h2>
+          
+          <div class="staff-grid">
+            <!-- 隨ｬ1騾ｱ -->
+            <div class="staff-card" onclick="showPersonalityDialog(1)" style="cursor: pointer;">
+              <img src="img/cast/cast1.jpg" alt="譚ｾ逕ｰ蜥御ｽｳ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">隨ｬ・鷹ｱ</div>
+              <div class="staff-name">譚ｾ逕ｰ蜥御ｽｳ</div>
+            </div>
+            
+            <!-- 隨ｬ2騾ｱ -->
+            <div class="staff-card" onclick="showPersonalityDialog(2)" style="cursor: pointer;">
+              <img src="img/cast/cast2.jpg" alt="繧・≧縺ｫ繧・ｓ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">隨ｬ・帝ｱ</div>
+              <div class="staff-name">繧・≧縺ｫ繧・ｓ</div>
+            </div>
+            
+            <!-- 隨ｬ3騾ｱ -->
+            <div class="staff-card" onclick="showPersonalityDialog(3)" style="cursor: pointer;">
+              <img src="img/cast/cast3.jpg" alt="逾櫁ｰｷ譏朱㊦" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">隨ｬ3騾ｱ</div>
+              <div class="staff-name">逾櫁ｰｷ譏朱㊦</div>
+            </div>
+            
+            <!-- 隨ｬ4騾ｱ -->
+            <div class="staff-card" onclick="showPersonalityDialog(4)" style="cursor: pointer;">
+              <img src="img/cast/cast4.jpg" alt="螳ｮ蟠守ｾ守ｩ・ style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">隨ｬ4騾ｱ</div>
+              <div class="staff-name">螳ｮ蟠守ｾ守ｩ・/div>
+            </div>
+            
+            <!-- 隨ｬ5騾ｱ -->
+            <div class="staff-card" onclick="showPersonalityDialog(5)" style="cursor: pointer;">
+              <img src="img/cast/cast5.jpg" alt="ChumuNote" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">隨ｬ5騾ｱ</div>
+              <div class="staff-name">ChumuNote</div>
+            </div>
+            
+            <!-- 繧ｹ繝ｼ繝代・繝舌う繧ｶ繝ｼ -->
+            <div class="staff-card" onclick="showPersonalityDialog(6)" style="cursor: pointer;">
+              <img src="img/cast/cast6.jpg" alt="蟾晄搗繧ｱ繝ｳ繧ｹ繧ｱ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">繧ｹ繝ｼ繝代・繝舌う繧ｶ繝ｼ</div>
+              <div class="staff-name">蟾晄搗繧ｱ繝ｳ繧ｹ繧ｱ</div>
+            </div>
+            
+            <!-- 鬚ｨ隹ｷ蜊怜暑 -->
+            <div class="staff-card" onclick="showPersonalityDialog(7)" style="cursor: pointer;">
+              <img src="img/cast/cast7.jpg" alt="鬚ｨ隹ｷ蜊怜暑" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">迚ｹ蛻･蜃ｺ貍・/div>
+              <div class="staff-name">鬚ｨ隹ｷ蜊怜暑</div>
+            </div>
+          </div>
+          
+          <!-- 繝代・繧ｽ繝翫Μ繝・ぅ繝繧､繧｢繝ｭ繧ｰ -->
+          <div id="personality-dialog" class="staff-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+            <div class="staff-dialog-content" style="background-color: #1a2b49; color: white; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; opacity: 0; transform: scale(0.9); transition: opacity 0.3s ease, transform 0.3s ease;">
+              <span class="close-button" onclick="closePersonalityDialog()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white;">ﾃ・/span>
+              <div id="personality-dialog-content" style="display: flex; flex-direction: column; align-items: center;">
+                <!-- 繝繧､繧｢繝ｭ繧ｰ蜀・ｮｹ縺ｯJavaScript縺ｧ逕滓・ -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 蛻ｶ菴彜TAFF縺ｮ諢乗ｰ苓ｾｼ縺ｿ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ -->
+        <div class="staff-message-section">
+          <h3 class="staff-message-title">蛻ｶ菴彜TAFF縺九ｉ縺ｮ繝｡繝・そ繝ｼ繧ｸ</h3>
+          <p class="staff-message-content">
+            <strong>縲憩fit繝励Ξ繧ｼ繝ｳ繝・・繧ｦ繧｣繝ｼ繧ｯ繝ｪ繝ｼ繝ｻ繝舌・繧ｹ繝・・繝ｻ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ縲・/strong>縺ｯ縲∬ｦ冶・閠・・逧・＆縺ｾ縺ｫ<strong>縲瑚ｪ慕函譌･縲・/strong>縺ｨ縺・≧迚ｹ蛻･縺ｪ譌･繧帝壹§縺ｦ縲∵眠縺励＞逋ｺ隕九→諢溷虚繧偵♀螻翫￠縺吶ｋ逡ｪ邨・〒縺吶らｧ√◆縺｡蛻ｶ菴懊メ繝ｼ繝縺ｯ縲√％縺ｮ逡ｪ邨・ｒ騾壹§縺ｦ縲∬ｦ冶・閠・・逧・＆縺ｾ縺ｫ<strong>縲瑚ｪ慕函譌･縲・/strong>縺ｨ縺・≧迚ｹ蛻･縺ｪ譌･縺ｮ鬲・鴨繧貞・逋ｺ隕九＠縺ｦ縺・◆縺縺阪◆縺・→閠・∴縺ｦ縺・∪縺吶・          </p>
+          <p class="staff-message-content">
+            <strong>繝ｩ繧ｸ繧ｪ譌･譛ｬ</strong>縺ｨ<strong>貂玖ｰｷ諢帙ン繧ｸ繝ｧ繝ｳ</strong>繧堤ｵ舌・繧ｯ繝ｭ繧ｹ繝｡繝・ぅ繧｢螻暮幕縺ｫ繧医ｊ縲∬ｦ冶・閠・・逧・＆縺ｾ縺ｫ繧医ｊ螟夊ｧ堤噪縺ｪ讌ｽ縺励∩譁ｹ繧呈署萓帙〒縺阪ｋ繧医≧蟾･螟ｫ繧帝㍾縺ｭ縺ｦ縺・∪縺吶ゅ∪縺溘ヾNS繧帝壹§縺溯ｦ冶・閠・盾蜉蝙九・莨∫判繧ょ・螳溘＆縺帙√Λ繧ｸ繧ｪ譌･譛ｬ螻蜀・〒<strong>縲手・蜿也紫縲上惨NS・・・峨・/strong>縺ｮ繝輔か繝ｭ繝ｯ繝ｼ謨ｰ縺ｧ<strong>No.1</strong>繧堤岼謖・＠縺ｦ縺・∪縺吶・          </p>
+          <p class="staff-message-content">
+            縺薙ｌ縺九ｉ繧ゅ∬ｦ冶・閠・・逧・＆縺ｾ縺ｫ<strong>縲碁ｩ壹″縲・/strong>縺ｨ<strong>縲梧─蜍輔・/strong>繧偵♀螻翫￠縺ｧ縺阪ｋ繧医≧縲√せ繧ｿ繝・ヵ荳蜷後∝・蜉帙〒蜿悶ｊ邨・ｓ縺ｧ縺ｾ縺・ｊ縺ｾ縺吶ゅ←縺・◇縲√％繧後°繧峨ｂ<strong>縲憩fit繝励Ξ繧ｼ繝ｳ繝・・繧ｦ繧｣繝ｼ繧ｯ繝ｪ繝ｼ繝ｻ繝舌・繧ｹ繝・・繝ｻ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ縲・/strong>繧偵ｈ繧阪＠縺上♀鬘倥＞縺・◆縺励∪縺吶・          </p>
+          <p class="staff-message-signature">蛻ｶ菴懊メ繝ｼ繝荳蜷・/p>
+        </div>
+
+        <!-- 蛻ｶ菴彜TAFF邏ｹ莉九そ繧ｯ繧ｷ繝ｧ繝ｳ -->
+        <div class="staff-section">
+          <h2>諢帙≠繧鬼TAFF</h2>
+          <div class="staff-grid">
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・1 -->
+            <div class="staff-card" onclick="showStaffDialog(1)" style="cursor: pointer;">
+              <img src="img/cast/staff1.jpg" alt="闃ｳ雉豁｣蜈・ style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">莨∫判讒区・</div>
+              <div class="staff-name">闃ｳ雉豁｣蜈・/div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・2 -->
+            <div class="staff-card" onclick="showStaffDialog(2)" style="cursor: pointer;">
+              <img src="img/cast/staff2.jpg" alt="譴・悽貅" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">繝励Ο繝・Η繝ｼ繧ｵ繝ｼ</div>
+              <div class="staff-name">譴・悽貅</div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・3 -->
+            <div class="staff-card" onclick="showStaffDialog(3)" style="cursor: pointer;">
+              <img src="img/cast/staff3.jpg" alt="驥取搗貅" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">邱丞粋貍泌・</div>
+              <div class="staff-name">驥取搗貅</div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・4 -->
+            <div class="staff-card" onclick="showStaffDialog(4)" style="cursor: pointer;">
+              <img src="img/cast/staff4.jpg" alt="逾槫叙鄒惹ｽｳ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">繝溘く繧ｵ繝ｼ繝ｻ蛻ｶ菴・/div>
+              <div class="staff-name">逾槫叙鄒惹ｽｳ</div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・5 -->
+            <div class="staff-card" onclick="showStaffDialog(5)" style="cursor: pointer;">
+              <img src="img/cast/staff5.png" alt="Konomi" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">AP</div>
+              <div class="staff-name">Konomi</div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・8 -->
+            <div class="staff-card" onclick="showStaffDialog(8)" style="cursor: pointer;">
+              <img src="img/cast/staff6.jpg" alt="蠕瑚陸闍ｱ讓ｹ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">蛻ｶ菴・/div>
+              <div class="staff-name">蠕瑚陸闍ｱ讓ｹ</div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・6 -->
+            <div class="staff-card" onclick="showStaffDialog(6)" style="cursor: pointer;">
+              <img src="https://placehold.jp/00BCD4/ffffff/200x200.png?text=譚ｾ豬ｦ" alt="譚ｾ豬ｦ莠ｮ莉・ style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">WEB繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ</div>
+              <div class="staff-name">譚ｾ豬ｦ莠ｮ莉・/div>
+            </div>
+
+            <!-- 繧ｹ繧ｿ繝・ヵ繧ｫ繝ｼ繝・7 -->
+            <div class="staff-card" onclick="showStaffDialog(7)" style="cursor: pointer;">
+              <img src="https://placehold.jp/9C27B0/ffffff/200x200.png?text=SNS繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ" alt="SNS繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">SNS繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ</div>
+              <div class="staff-name">SNS諡・ｽ・/div>
+            </div>
+          </div>
+
+          <!-- 繧ｹ繧ｿ繝・ヵ繝繧､繧｢繝ｭ繧ｰ -->
+          <div id="staff-dialog" class="staff-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+            <div class="staff-dialog-content" style="background-color: #1a2b49; color: white; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;">
+              <span class="close-button" onclick="closeStaffDialog()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white;">ﾃ・/span>
+              <div id="staff-dialog-content" style="display: flex; flex-direction: column; align-items: center;">
+                <!-- 繝繧､繧｢繝ｭ繧ｰ蜀・ｮｹ縺ｯJavaScript縺ｧ逕滓・ -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 蜊碑ｳ帙・蜊泌鴨 -->
+          <div class="sponsors-section">
+            <h2>蜊碑ｳ帙・蜊泌鴨</h2>
+            <div class="sponsor-group">
+              <h3>貂玖ｰｷ諢帙ン繧ｸ繝ｧ繝ｳ</h3>
+              <p class="sponsor-description">諠・ｱ謠蝉ｾ帙・蛻ｶ菴懷鵠蜉・/p>
+              <p class="sponsor-description">貂玖ｰｷ縺ｮ陦励ｒ蠖ｩ繧句､ｧ蝙九ン繧ｸ繝ｧ繝ｳ縺ｧ逡ｪ邨・ュ蝣ｱ繧呈叛譏</p>
+              <div class="sponsor-logo" style="background-color: transparent; display: inline-block; box-shadow: none;">
+                <a href="https://www.saivision.jp/top.php" target="_blank">
+                  <img src="img/logo_w.png" alt="貂玖ｰｷ諢帙ン繧ｸ繝ｧ繝ｳ" style="max-width: 250px; height: auto; box-shadow: none;">
+                </a>
+              </div>
+            </div>
+            <div class="sponsor-group">
+              <h3>繧ｹ繝昴Φ繧ｵ繝ｼ</h3>
+              <p class="sponsor-description">逡ｪ邨・Γ繧､繝ｳ繧ｹ繝昴Φ繧ｵ繝ｼ</p>
+              <div class="sponsor-logo" style="background-color: white; padding: 20px; border-radius: 5px; display: inline-block;">
+                <a href="https://efit.co.jp/" target="_blank">
+                  <img src="img/efit.png" alt="efit" style="max-width: 200px; height: auto;">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 繝輔ャ繧ｿ繝ｼ -->
+  <footer>
+    <div class="wrap">
+      <div id="social-links">
+        <ul>
+          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="蠢崎・ワ繝　貂玖ｰｷ諢・" class="x-logo">撫</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">繝帙・繝</a>
+        <a href="about.html">縺ｯ縺倥ａ縺ｫ</a>
+        <a href="story.html">縺ゅｉ縺吶§</a>
+        <a href="chart.html">逶ｸ髢｢蝗ｳ</a>
+        <a href="news.html">縺顔衍繧峨○</a>
+        <a href="caststaff.html">繧ｭ繝｣繧ｹ繝茨ｼ・TAFF</a>
+        <a href="delivery.html">驟堺ｿ｡</a>
+      </div>
+      <div class="copy">
+        <small>Copyright &copy; 2025 efit繝励Ξ繧ｼ繝ｳ繝・・繧ｦ繧｣繝ｼ繧ｯ繝ｪ繝ｼ繝ｻ繝舌・繧ｹ繝・・繝ｻ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ, All Rights Reserved.</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/header.js"></script>
+  <script>
+    // 繧ｹ繧ｿ繝・ヵ諠・ｱ縺ｮ驟榊・
+    const staffData = [
+      {
+        id: 1,
+        name: "闃ｳ雉豁｣蜈・,
+        role: "莨∫判讒区・",
+        birthday: "2譛・6譌･",
+        image: "img/cast/staff1-2.jpg",
+        message: "隱慕函譌･繧偵♀逾昴＞縺励◆縺・ｺｺ縺悟ｱ・ｋ縲りｪ慕函譌･繧偵♀逾昴＞縺励※縺上ｌ繧倶ｺｺ縺悟ｱ・ｋ縲ゅ→縺ｦ繧ょｹｸ縺帙↑縺薙→縺ｧ縺吶らｧ√・窶ｦ縲∬ｪ慕函譌･縺ｫ逕｣繧薙〒縺上ｌ縺ｦ縺ゅｊ縺後→縺・∬ご縺ｦ縺ｦ縺上ｌ縺ｦ縺ゅｊ縺後→縺・→縺・≧諠ｳ縺・ｒ霎ｼ繧√※荳｡隕ｪ縺ｫ繝励Ξ繧ｼ繝ｳ繝医ｒ貂｡縺励※縺・∪縺吶ゅ◎縺ｮ譎ゅ↓蜃ｺ莨壹∴繧区怙鬮倥・隨鷹｡斐′螟ｧ螂ｽ縺阪↑繧薙〒縺吶ゅ％縺ｮ逡ｪ邨・ｒ騾壹§隱慕函譌･繧偵♀逾昴＞縺吶ｋ縺薙→縺後→縺ｦ繧らｴ謨ｵ縺ｪ譎る俣縺ｧ縺ゅｋ縺薙→繧定ｦ狗峩縺励※谺ｲ縺励＞縺ｨ鬘倥▲縺ｦ縺・∪縺吶・
+      },
+      {
+        id: 2,
+        name: "譴・悽貅",
+        role: "繝励Ο繝・Η繝ｼ繧ｵ繝ｼ",
+        birthday: "",
+        image: "img/cast/staff2.jpg",
+        message: "險闡峨↓縺吶ｋ繧医ｊ縲∵枚遶繧・焔邏吶↓縺励◆譁ｹ縺後√◎縺ｮ莠ｺ縺ｸ縺ｮ諠ｳ縺・′繧医ｊ豺ｱ縺丈ｼ昴ｏ繧九％縺ｨ縺後≠繧翫∪縺吶ゅ瑚ｪ慕函譌･縺翫ａ縺ｧ縺ｨ縺・阪→閧牙｣ｰ縺ｧ險繧上ｌ繧九・繧ゅ＞縺・￠縺ｩ縲√Γ繝・そ繝ｼ繧ｸ縺ｧ繧ゅｉ縺｣縺溘ｉ繧ゅ▲縺ｨ縺・ｌ縺励＞縲・n縲取ｸ玖ｰｷ諢帙ン繧ｸ繝ｧ繝ｳ縲上・縺昴ｓ縺ｪ諢溷虚繧偵ｂ縺溘ｉ縺励※縺上ｌ繧玖｡鈴ｭ繝薙ず繝ｧ繝ｳ縺ｧ縺吶ゅ∪縺溘Λ繧ｸ繧ｪ繧よ焔邏吶ｄ繝｡繝・そ繝ｼ繧ｸ縺ｨ縺ｨ縺ｦ繧ら嶌諤ｧ縺ｮ縺・＞繝｡繝・ぅ繧｢縺ｧ縺吶・n\n縺昴・2縺､縺後さ繝ｩ繝懊＠縺ｦ縲―"蜿ｲ荳頑怙蠑ｷ縺ｮ繝舌・繧ｹ繝・ぅ繝｡繝・そ繝ｼ繧ｸ\"繧堤嚀縺輔ｓ縺ｫ縺雁ｱ翫￠縺吶ｋ縺薙→縺ｫ縺ｪ繧翫∪縺励◆縲ゅ↑繧薙→繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ縺ｫ縺励※逋ｺ陦ｨ縺吶ｋ縺ｨ縺・≧諱舌ｋ縺ｹ縺咲分邨・〒縺吶・n繝｡繝・そ繝ｼ繧ｸ縺ｫ諢溷虚縺励↑縺後ｉ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ縺ｫ繝上Λ繝上Λ繝峨く繝峨く縺吶ｋ縲∝燕莉｣譛ｪ閨槭・隱慕函譌･逡ｪ邨・′隱慕函縺励∪縺励◆!\n4譛・譌･縺後◎縺ｮ縲後ヰ繧ｹ繝ｩ繝ｳ縲阪・繝舌・繧ｹ繝・ぅ縺ｧ縺吶・
+      },
+      {
+        id: 3,
+        name: "驥取搗貅",
+        role: "邱丞粋貍泌・",
+        birthday: "",
+        image: "img/cast/staff3.jpg",
+        message: "繝ｩ繧ｸ繧ｪ荳遲具ｼ溷香蟷ｴ・∵怙霑代・縲√・繧D縺ｨ蜻ｼ縺ｰ繧後※縺ｾ縺吶・n縺薙ｌ縺ｾ縺ｧ縺・ｍ縺・ｍ縺ｪ逡ｪ邨・↓謳ｺ繧上▲縺ｦ縺阪∪縺励◆縺後∬ｪ慕函譌･縺翫ａ縺ｧ縺ｨ縺・ｒ2譎る俣蜊翫ｄ繧狗分邨・↑繧薙※蛻昴ａ縺ｦ縺ｧ縺吶・n隱ｰ繧ゅ′謖√▲縺ｦ繧玖ｪ慕函譌･縲∫･昴ｏ繧後※繧ゅ∫･昴▲縺ｦ繧ょｹｸ縺帙↑豌玲戟縺｡縺ｫ縺ｪ繧後ｋ隱慕函譌･縲・n逧・＆繧薙・繧・＆縺励＞豌玲戟縺｡繧剃ｼ昴∴繧峨ｌ繧狗分邨・↓縺ｪ繧九ｈ縺・ｰｽ蜉幄・縺励∪縺呻ｼ・
+      },
+      {
+        id: 4,
+        name: "逾槫叙鄒惹ｽｳ",
+        role: "繝溘く繧ｵ繝ｼ繝ｻ蛻ｶ菴・,
+        birthday: "9譛・8譌･",
+        image: "img/cast/staff4-2.jpg",
+        message: "・｢隱慕函譌･・｣繧偵ユ繝ｼ繝槭↓諢帙ｒ莨昴∴繧狗分邨・↓髢｢繧上ｋ縺薙→縺後〒縺阪※遘∬・霄ｫ縺ｨ縺ｦ繧ゅΡ繧ｯ繝ｯ繧ｯ縺励※縺翫ｊ縺ｾ縺呻ｼ―n譌･鬆・・諱･縺壹°縺励￥縺ｦ莨昴∴繧峨ｌ縺ｪ縺・ｺｺ繧ゅ％縺ｮ逡ｪ邨・ｒ騾壹＠縺ｦ螟ｧ蛻・↑莠ｺ縺ｫ莨昴∴縺溘￥縺ｪ繧九∽ｸ也阜縺鯉ｽ｢縺翫ａ縺ｧ縺ｨ縺・ｽ｣・｢縺ゅｊ縺後→縺・ｽ｣縺ｧ貅｢繧後ｋ縲√◎繧薙↑逡ｪ邨・↓縺ｪ繧九ｈ縺・↓邊ｾ荳譚ｯ縺後ｓ縺ｰ繧翫∪縺吶・
+      },
+      {
+        id: 5,
+        name: "Konomi",
+        role: "AP",
+        birthday: "5譛・5譌･",
+        image: "img/cast/staff5.png",
+        message: "隱慕函譌･縺｣縺ｦ閾ｪ蛻・↓縺ｨ縺｣縺ｦ繧ら音蛻･縺ｪ譌･縺縺代←縲∬ｪｰ縺九・隱慕函譌･縺ｨ閨槭￥縺ｨ縲∬ｨ闡峨′騾壹§縺ｪ縺上※繧ゅ∽ｸ紋ｻ｣縺碁＆縺｣縺ｦ繧ゑｽ｢縺翫ａ縺ｧ縺ｨ縺・ｽ｣縺ｨ莨昴∴縺溘￥縺ｪ繧九ワ繝・ヴ繝ｼ縺ｪ譌･縺ｧ縺吶ｈ縺ｭ縲・n縲御ｻ頑律縺ｯ笳ｯ笳ｯ縺輔ｓ縺ｮ隱慕函譌･縺ｪ繧薙□繧医ら衍縺｣縺ｦ縺滂ｼ溘阪→閾ｪ蛻・・縺薙→縺ｮ繧医≧縺ｫ隧ｱ鬘後↓縺励※縺励∪縺・∽ｸ肴晁ｭｰ縺ｪ譌･縺ｧ繧ゅ≠繧翫∪縺吶・n隱ｰ縺ｫ縺ｨ縺｣縺ｦ繧ょｹｳ遲峨↓蟄伜惠縺吶ｋ縲∫音蛻･縺ｪ荳譌･縲・n縲後♀繧√〒縺ｨ縺・ｽ｣縺梧ｺ｢繧後※蠢・′縺ゅ◆縺溘°縺上↑繧区凾髢薙ｒ繝舌せ繝ｩ繝ｳ縺ｧ邏｡縺偵◆繧峨＞縺・↑縺ｨ鬘倥▲縺ｦ縺・∪縺吶・
+      },
+      {
+        id: 6,
+        name: "譚ｾ豬ｦ莠ｮ莉・,
+        role: "WEB繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ",
+        birthday: "",
+        image: "https://placehold.jp/00BCD4/ffffff/150x200.png?text=譚ｾ豬ｦ",
+        message: "繧ｦ繧ｧ繝悶し繧､繝医・莨∫判繝ｻ蛻ｶ菴懊ｒ諡・ｽ薙＠縺ｦ縺・∪縺吶りｦ冶・閠・・逧・＆繧薙↓菴ｿ縺・ｄ縺吶￥縲∵ュ蝣ｱ縺悟・螳溘＠縺溘え繧ｧ繝悶し繧､繝医ｒ謠蝉ｾ帙〒縺阪ｋ繧医≧蠢・′縺代※縺・∪縺吶・
+      },
+      {
+        id: 7,
+        name: "SNS諡・ｽ・,
+        role: "SNS繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ",
+        birthday: "",
+        image: "https://placehold.jp/9C27B0/ffffff/150x200.png?text=SNS繝・ぅ繝ｬ繧ｯ繧ｿ繝ｼ",
+        message: "SNS縺ｧ縺ｮ諠・ｱ逋ｺ菫｡繧・ｦ冶・閠・→縺ｮ繧ｳ繝溘Η繝九こ繝ｼ繧ｷ繝ｧ繝ｳ繧呈球蠖薙＠縺ｦ縺・∪縺吶ら分邨・・鬲・鴨繧担NS縺ｧ繧ょｭ伜・縺ｫ縺贋ｼ昴∴縺ｧ縺阪ｋ繧医≧縲∵律縲・眠縺励＞繧ｳ繝ｳ繝・Φ繝・ｒ逋ｺ菫｡縺励※縺・∪縺吶・
+      },
+      {
+        id: 8,
+        name: "蠕瑚陸闍ｱ讓ｹ",
+        role: "蛻ｶ菴・,
+        birthday: "6譛・9譌･",
+        image: "img/cast/staff6-2.jpg",
+        message: "窶晄─諠・′蜍輔￥迸ｬ髢薙ｒ菴懊ｋ窶昴ｒ繝｢繝・ヨ繝ｼ縺ｫ譌･縲・分邨・ｒ蛻ｶ菴懊＠縺ｦ縺・∪縺吶ゆｸ莠ｺ縺ｲ縺ｨ繧翫・・｢縺翫ａ縺ｧ縺ｨ縺・ｽ｣繧帝壹＠縺ｦ縲∵─隰昴→諢帙・縺ゅ・繧後ｋ逡ｪ邨・↓縺ｪ繧九ｈ縺・ｲｾ荳譚ｯ鬆大ｼｵ繧翫∪縺呻ｼ・
+      }
+    ];
+
+    // 繝代・繧ｽ繝翫Μ繝・ぅ諠・ｱ縺ｮ驟榊・
+    const personalityData = [
+      {
+        id: 1,
+        name: "譚ｾ逕ｰ蜥御ｽｳ",
+        role: "隨ｬ・鷹ｱ",
+        birthday: "5譛・9譌･",
+        image: "img/cast/cast1.jpg",
+        message: "繝輔Μ繝ｼ繧｢繝翫え繝ｳ繧ｵ繝ｼ縺ｨ縺励※豢ｻ霄堺ｸｭ縲よ・繧九￥隕ｪ縺励∩繧・☆縺・ヨ繝ｼ繧ｯ縺ｧ縲√ご繧ｹ繝医・鬲・鴨繧貞ｼ輔″蜃ｺ縺励∪縺吶・
+      },
+      {
+        id: 2,
+        name: "繧・≧縺ｫ繧・ｓ",
+        role: "隨ｬ・帝ｱ",
+        birthday: "2譛・2譌･",
+        image: "img/cast/cast2.jpg",
+        message: "繧､繝ｳ繝輔Ν繧ｨ繝ｳ繧ｵ繝ｼ縺ｨ縺励※豢ｻ霄堺ｸｭ縲４NS縺ｧ縺ｮ逋ｺ菫｡蜉帙ｒ豢ｻ縺九＠縺滓眠縺励＞隕也せ縺ｧ縺ｮ繝医・繧ｯ縺碁ｭ・鴨縺ｧ縺吶・
+      },
+      {
+        id: 3,
+        name: "逾櫁ｰｷ譏朱㊦",
+        role: "隨ｬ3騾ｱ",
+        birthday: "4譛・9譌･",
+        image: "img/cast/cast3.jpg",
+        message: "譚ｱ莠ｬ螟ｧ蟄ｦ螟ｧ蟄ｦ髯｢逕溘ら衍逧・〒豢槫ｯ溷鴨縺ｮ縺ゅｋ隕也せ縺九ｉ縺ｮ繝医・繧ｯ縺ｧ縲∫分邨・↓豺ｱ縺ｿ繧剃ｸ弱∴縺ｦ縺・∪縺吶・
+      },
+      {
+        id: 4,
+        name: "螳ｮ蟠守ｾ守ｩ・,
+        role: "隨ｬ4騾ｱ",
+        birthday: "7譛・0譌･",
+        image: "img/cast/cast4.jpg",
+        message: "蜈アKB48繝ｻ繝槭Ν繝√ち繝ｬ繝ｳ繝医ゅい繧､繝峨Ν縺ｨ縺励※縺ｮ邨碁ｨ薙ｒ豢ｻ縺九＠縺溯ｦｪ縺励∩繧・☆縺・ヨ繝ｼ繧ｯ縺檎音蠕ｴ縺ｧ縺吶・
+      },
+      {
+        id: 5,
+        name: "ChumuNote",
+        role: "隨ｬ5騾ｱ",
+        birthday: "5譛・9譌･",
+        image: "img/cast/cast5.jpg",
+        message: "VTuber縺ｨ縺励※豢ｻ霄堺ｸｭ縲ゅョ繧ｸ繧ｿ繝ｫ縺ｨ繝ｪ繧｢繝ｫ繧堤ｹ九＄譁ｰ縺励＞隕也せ縺ｧ縺ｮ逡ｪ邨・ｲ陦後′鬲・鴨縺ｧ縺吶・
+      },
+      {
+        id: 6,
+        name: "蟾晄搗繧ｱ繝ｳ繧ｹ繧ｱ",
+        role: "繧ｹ繝ｼ繝代・繝舌う繧ｶ繝ｼ",
+        birthday: "5譛・譌･",
+        image: "img/cast/cast6.jpg",
+        message: "縺薙ｌ縺ｾ縺ｧMV繧・00譛ｬ莉･荳奇ｼ郁・蛻・ｪｿ縺ｹ縺ｧ譖匁乂縺ｧ縺呻ｼ臥屮逹｣縺励※縺阪◆譏蜒上ョ繧｣繝ｬ繧ｯ繧ｿ繝ｼ縺ｨ縺励※縲√％縺ｮ逡ｪ邨・〒縺ｮ遘√・蠖ｹ蜑ｲ縺ｯ窶ｦ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ・台ｽ阪・縺九◆縺ｫ縲√ｏ縺溘＠縺碁∈譖ｲ縺励◆・第峇繧偵・繝ｬ繧ｼ繝ｳ繝医☆繧九％縺ｨ縺ｧ縺吶りｨ縺｣縺ｦ縺ｿ繧後・窶ｦ・台ｽ阪↓縺ｪ縺｣縺溘◎縺ｮ莠ｺ繧剃ｸｻ蠖ｹ縺ｫ謐ｮ縺医※MV繧呈聴繧翫◆縺・ｼ・ｼ・V縺ｮ謌舌ｊ遶九■縺ｨ縺ｯ逵滄・〒縺吶′・峨→縺・▲縺溽匱諠ｳ縺縺｣縺溘ｊ縺吶ｋ縺九ｂ縺励ｌ縺ｾ縺帙ｓ縺ｭ縲よ怙鬮倥・縲∝・蜉帙・縲・∈譖ｲ縺ｧ縲√ヰ繝ｼ繧ｹ繝・・繝ｻ繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ繧帝｣ｾ繧翫◆縺・→諤昴＞縺ｾ縺吶・
+      },
+      {
+        id: 7,
+        name: "鬚ｨ隹ｷ蜊怜暑",
+        role: "迚ｹ蛻･蜃ｺ貍・,
+        birthday: "3譛・1譌･",
+        image: "img/cast/cast7.jpg",
+        message: "螂ｳ蜆ｪ繝ｻ諢幢ｼ倥∝享雋縺ｮ蟋ｫ蜷帙よｼ疲橿蜉帙ｒ豢ｻ縺九＠縺溯｡ｨ迴ｾ蜉幄ｱ翫°縺ｪ繝医・繧ｯ縺ｧ逡ｪ邨・ｒ逶帙ｊ荳翫￡縺ｾ縺吶・
+      }
+    ];
+
+    // 繧ｹ繧ｿ繝・ヵ繝繧､繧｢繝ｭ繧ｰ繧定｡ｨ遉ｺ縺吶ｋ髢｢謨ｰ
+    function showStaffDialog(staffId) {
+      const staff = staffData.find(s => s.id === staffId);
+      if (!staff) return;
+
+      const dialogContent = document.getElementById('staff-dialog-content');
+      let birthdayHtml = staff.birthday ? `<div style="font-size: 16px; margin-bottom: 15px; color: #ccc;">${staff.birthday}</div>` : '';
+      
+      dialogContent.innerHTML = `
+        <div style="display: flex; width: 100%;">
+          <div style="flex: 0 0 40%;">
+            <img src="${staff.image}" alt="${staff.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+          </div>
+          <div style="flex: 0 0 60%; padding-left: 30px;">
+            <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white;">${staff.name}</h2>
+            <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${staff.role}</div>
+            ${birthdayHtml}
+            <div style="line-height: 1.8; color: white;">
+              ${staff.message}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const dialog = document.getElementById('staff-dialog');
+      dialog.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // 繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ髦ｲ豁｢
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 1;
+      dialogContentElement.style.transform = 'scale(1)';
+    }
+
+    // 繧ｹ繧ｿ繝・ヵ繝繧､繧｢繝ｭ繧ｰ繧帝哩縺倥ｋ髢｢謨ｰ
+    function closeStaffDialog() {
+      const dialog = document.getElementById('staff-dialog');
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 0;
+      dialogContentElement.style.transform = 'scale(0.9)';
+      
+      setTimeout(() => {
+        dialog.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ蜀埼幕
+      }, 300);
+    }
+
+    // 繝代・繧ｽ繝翫Μ繝・ぅ繝繧､繧｢繝ｭ繧ｰ繧定｡ｨ遉ｺ縺吶ｋ髢｢謨ｰ
+    function showPersonalityDialog(personalityId) {
+      const personality = personalityData.find(p => p.id === personalityId);
+      if (!personality) return;
+
+      const dialogContent = document.getElementById('personality-dialog-content');
+      let birthdayHtml = personality.birthday ? `<div style="font-size: 16px; margin-bottom: 15px; color: #ccc;">${personality.birthday}</div>` : '';
+      
+      // u30c0u30a4u30a2u30edu30b0u7528u306eu753bu50cfu30d1u30b9u3092u751fu6210
+      let dialogImagePath = '';
+      switch(personalityId) {
+        case 1:
+          dialogImagePath = 'img/cast/cast1-2.jpg';
+          break;
+        case 2:
+          dialogImagePath = 'img/cast/cast2-2.jpg';
+          break;
+        case 3:
+          dialogImagePath = 'img/cast/cast3-2.jpg';
+          break;
+        case 4:
+          dialogImagePath = 'img/cast/cast4-2.jpg';
+          break;
+        case 5:
+          dialogImagePath = 'img/cast/cast5-2.jpg';
+          break;
+        case 6:
+          dialogImagePath = 'img/cast/cast6-2.jpg';
+          break;
+        case 7:
+          dialogImagePath = 'img/cast/cast7-2.jpg';
+          break;
+        default:
+          dialogImagePath = personality.image;
+      }
+      
+      dialogContent.innerHTML = `
+        <div style="display: flex; width: 100%;">
+          <div style="flex: 0 0 40%;">
+            <img src="${dialogImagePath}" alt="${personality.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+          </div>
+          <div style="flex: 0 0 60%; padding-left: 30px;">
+            <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white;">${personality.name}</h2>
+            <div style="font-size: 18px; color: #9fb0d0; margin-bottom: 10px;">${personality.role}</div>
+            ${birthdayHtml}
+            <div style="line-height: 1.8; color: white;">
+              ${personality.message}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const dialog = document.getElementById('personality-dialog');
+      dialog.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // 繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ髦ｲ豁｢
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 1;
+      dialogContentElement.style.transform = 'scale(1)';
+    }
+
+    // 繝代・繧ｽ繝翫Μ繝・ぅ繝繧､繧｢繝ｭ繧ｰ繧帝哩縺倥ｋ髢｢謨ｰ
+    function closePersonalityDialog() {
+      const dialog = document.getElementById('personality-dialog');
+      const dialogContentElement = dialog.querySelector('.staff-dialog-content');
+      dialogContentElement.style.opacity = 0;
+      dialogContentElement.style.transform = 'scale(0.9)';
+      
+      setTimeout(() => {
+        dialog.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ蜀埼幕
+      }, 300);
+    }
+
+    // ESC繧ｭ繝ｼ縺ｧ繝繧､繧｢繝ｭ繧ｰ繧帝哩縺倥ｋ
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeStaffDialog();
+        closePersonalityDialog();
+      }
+    });
+
+    // 繝繧､繧｢繝ｭ繧ｰ縺ｮ螟門・繧偵け繝ｪ繝・け縺励◆繧蛾哩縺倥ｋ
+    document.getElementById('staff-dialog').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeStaffDialog();
+      }
+    });
+    document.getElementById('personality-dialog').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closePersonalityDialog();
+      }
+    });
+
+    // 繝舌ヶ繝ｫ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ逕ｨ縺ｮ髢｢謨ｰ
+    function initBubbles() {
+      const canvas = document.getElementById('bubble-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // 繧ｭ繝｣繝ｳ繝舌せ繧ｵ繧､繧ｺ繧偵え繧｣繝ｳ繝峨え繧ｵ繧､繧ｺ縺ｫ蜷医ｏ縺帙ｋ
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // 繝舌ヶ繝ｫ縺ｮ險ｭ螳・      const bubbles = [];
+      // 繝舌ヶ繝ｫ縺ｮ謨ｰ繧貞｢励ｄ縺・      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.04); // 逕ｻ髱｢繧ｵ繧､繧ｺ縺ｫ蠢懊§縺ｦ繝舌ヶ繝ｫ縺ｮ謨ｰ繧定ｪｿ謨ｴ
+      
+      // 繝舌ヶ繝ｫ繧堤函謌・      for (let i = 0; i < bubbleCount; i++) {
+        const size = Math.random() < 0.5 ? 
+                    Math.random() * 30 + 10 : // 蟆上＆縺・ヰ繝悶Ν (50%)
+                    Math.random() < 0.6 ? 
+                      Math.random() * 50 + 40 : // 荳ｭ縺上ｉ縺・・繝舌ヶ繝ｫ (30%)
+                      Math.random() * 80 + 90; // 螟ｧ縺阪＞繝舌ヶ繝ｫ (20%)
+        
+        bubbles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: size / 2,
+          // 繝舌ヶ繝ｫ縺ｮ濶ｲ繧貞､画峩
+          color: `rgba(255, 255, 255, ${0.1 + Math.random() * 0.15})`, // 荳埼乗・蠎ｦ繧貞､画峩
+          angle: Math.random() * Math.PI * 2, // 遘ｻ蜍墓婿蜷・          speed: 0.1 + Math.random() * 0.5,   // 遘ｻ蜍暮溷ｺｦ
+          rotationSpeed: (Math.random() - 0.5) * 0.01, // 蝗櫁ｻ｢騾溷ｺｦ
+          opacity: 0.2 + Math.random() * 0.3  // 荳埼乗・蠎ｦ繧貞､画峩
+        });
+      }
+      
+      // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝・      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 閭梧勹縺ｮ繧ｰ繝ｩ繝・・繧ｷ繝ｧ繝ｳ繧呈緒逕ｻ・医が繝励す繝ｧ繝ｳ・・        // const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        // gradient.addColorStop(0, '#0a1525');
+        // gradient.addColorStop(1, '#0a1525');
+        // ctx.fillStyle = gradient;
+        // ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // 蜷・ヰ繝悶Ν繧呈緒逕ｻ繝ｻ譖ｴ譁ｰ
+        bubbles.forEach(bubble => {
+          // 繝舌ヶ繝ｫ繧呈緒逕ｻ・郁ｼｪ驛ｭ繧偵⊂縺九☆・・          ctx.beginPath();
+          ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+          
+          // 縺ｼ縺九＠蜉ｹ譫懊ｒ霑ｽ蜉
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+          ctx.shadowBlur = bubble.radius * 0.5;
+          
+          ctx.fillStyle = bubble.color;
+          ctx.globalAlpha = bubble.opacity;
+          ctx.fill();
+          
+          // 繝舌ヶ繝ｫ縺ｮ菴咲ｽｮ繧呈峩譁ｰ
+          bubble.x += Math.cos(bubble.angle) * bubble.speed;
+          bubble.y += Math.sin(bubble.angle) * bubble.speed;
+          
+          // 繝舌ヶ繝ｫ縺ｮ隗貞ｺｦ繧偵ｏ縺壹°縺ｫ螟牙喧縺輔○繧具ｼ医ｈ繧願・辟ｶ縺ｪ蜍輔″・・          bubble.angle += bubble.rotationSpeed;
+          
+          // 逕ｻ髱｢螟悶↓蜃ｺ縺溘ヰ繝悶Ν繧貞渚蟇ｾ蛛ｴ縺九ｉ蜀咲匳蝣ｴ縺輔○繧・          if (bubble.x - bubble.radius > canvas.width) {
+            bubble.x = -bubble.radius;
+          } else if (bubble.x + bubble.radius < 0) {
+            bubble.x = canvas.width + bubble.radius;
+          }
+          
+          if (bubble.y - bubble.radius > canvas.height) {
+            bubble.y = -bubble.radius;
+          } else if (bubble.y + bubble.radius < 0) {
+            bubble.y = canvas.height + bubble.radius;
+          }
+        });
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+    }
+    
+    // 繝壹・繧ｸ隱ｭ縺ｿ霎ｼ縺ｿ譎ゅ↓繝舌ヶ繝ｫ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ繧貞・譛溷喧
+    document.addEventListener('DOMContentLoaded', function() {
+      initBubbles();
+      
+      // 繝倥ャ繝繝ｼ繧定ｪｭ縺ｿ霎ｼ繧
+      $(function() {
+        // 繝倥ャ繝繝ｼ繧定ｪｭ縺ｿ霎ｼ繧
+        $("#header-placeholder").load("includes/header.html", function() {
+          // 繝倥ャ繝繝ｼ縺瑚ｪｭ縺ｿ霎ｼ縺ｾ繧後◆蠕後・蜃ｦ逅・          const currentPage = 'caststaff';
+          const navLinks = document.querySelectorAll('#header nav ul li a');
+          
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.includes(currentPage)) {
+              link.classList.add('current');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

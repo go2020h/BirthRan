@@ -3,9 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>efitプレゼンツ☆ウィークリー・バースデー・ランキング</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>バスラン</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/calendar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <!-- Supabaseクライアントライブラリ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.38.4/dist/umd/supabase.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     /* バブルキャンバス */
     #bubble-canvas {
@@ -15,13 +22,17 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1;
+      z-index: 3; /* z-indexを上げて前面に表示 */
+      display: block;
     }
     
     /* メニューセクション */
     .menu_outer {
       position: relative;
       z-index: 10;
+      float: none;
+      margin-top: 0; /* マージンを削除 */
+      background-color: #0066cc; /* 背景色を変更 */
     }
     
     /* ヒーローセクション */
@@ -29,9 +40,16 @@
       position: relative;
       z-index: 0;
       margin-top: 0;
+      margin-bottom: 0; /* 下のマージンを削除 */
       padding: 0;
       text-align: center;
       background-color: #16152e;
+      overflow: hidden;
+      height: auto; /* 明示的な高さを設定 */
+      min-height: 200px;
+      font-size: 0; /* テキストのサイズを0に設定 */
+      line-height: 0; /* 行間を0に設定 */
+      display: block;
     }
     
     /* ヒーローセクションの画像 */
@@ -42,29 +60,57 @@
       display: block;
       margin: 0 auto;
       opacity: 1;
+      position: relative;
+      z-index: 2; /* 画像のz-indexはそのまま */
+      object-fit: contain; /* 画像を画面内に収める */
+      vertical-align: middle; /* 画像を中央に配置 */
+    }
+    
+    #hero-section img {
+      display: block;
+      margin-bottom: 0;
     }
     
     /* コンテンツセクション */
     #con-wrap {
       position: relative;
       z-index: 5;
+      overflow: hidden;
     }
     
     /* キャッチコピー */
-    .catchcopy-section {
-      padding: 40px 20px;
-      text-align: center;
+    .catchcopy-wrapper {
       background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
-      border-radius: 10px;
-      margin: 30px 0;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      padding: 40px 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      text-align: center;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    
+    .catchcopy-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+      background: none;
+      border: none;
+      box-shadow: none;
     }
     
     .catchcopy-content {
       position: relative;
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
     }
     
-    .catchcopy-content h2 {
+    .catchcopy-wrapper h2 {
       color: #d4af37;
       font-size: 28px;
       margin: 15px 0;
@@ -73,7 +119,7 @@
       font-weight: bold;
     }
     
-    .catchcopy-content h3 {
+    .catchcopy-wrapper h3 {
       color: #ffffff;
       font-size: 22px;
       margin: 20px 0;
@@ -91,13 +137,13 @@
     
     @keyframes float {
       0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0);
       }
       50% {
-        transform: translateY(-20px) rotate(180deg);
+        transform: translateY(-20px);
       }
       100% {
-        transform: translateY(0) rotate(360deg);
+        transform: translateY(0);
       }
     }
     
@@ -108,6 +154,8 @@
       border-radius: 10px;
       margin-bottom: 30px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      float: none;
+      clear: both;
     }
     
     .program-info h2 {
@@ -392,74 +440,480 @@
       color: #fff;
     }
     
-    /* 出演者のリアルバイタルデータ */
-    .vital-data-section {
-      margin: 60px 0;
-      padding: 40px 0;
-      background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+    /* カレンダー */
+    .calendar-wrapper {
+      background: linear-gradient(to bottom, #e0f7fa 0%, #b2ebf2 100%);
+      padding: 60px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      position: relative;
+      overflow: hidden;
     }
     
-    .vital-data-section .container {
+    .calendar-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 70% 30%, rgba(77, 208, 225, 0.3) 0%, rgba(224, 247, 250, 0) 70%);
+      pointer-events: none;
+    }
+    
+    .calendar-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .calendar-content {
+      background: linear-gradient(to bottom, #f5f7fa 0%, #e2e7ed 100%);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    
+    .calendar-content h2 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 32px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      letter-spacing: 1px;
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
+    
+    .calendar-header h3 {
+      color: #2c3e50;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .calendar-nav-btn {
+      background: rgba(52, 152, 219, 0.2);
+      color: #2c3e50;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .calendar-nav-btn:hover {
+      background: rgba(52, 152, 219, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+    
+    .weekdays div:first-child {
+      color: #e74c3c; /* 日曜日色 */
+    }
+    
+    .weekdays div:last-child {
+      color: #3498db; /* 土曜日色 */
+    }
+    
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+    
+    .calendar-day {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.7);
+      color: #34495e;
+    }
+    
+    .calendar-day:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .calendar-day.empty {
+      background: none;
+      cursor: default;
+    }
+    
+    .calendar-day.today {
+      background-color: #3498db;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.5);
+    }
+    
+    .calendar-day.broadcast-day {
+      background-color: #2ecc71;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(46, 204, 113, 0.5);
+    }
+    
+    .calendar-day.message-day {
+      background-color: #9b59b6;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(155, 89, 182, 0.5);
+    }
+    
+    .calendar-day.selected {
+      background-color: #9b59b6;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(155, 89, 182, 0.5);
+      transform: scale(1.1);
+    }
+    
+    .calendar-legend {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 20px;
+      display: none;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .broadcast-day {
+      background-color: #2ecc71;
+    }
+    
+    .message-day {
+      background-color: #9b59b6;
+    }
+    
+    .legend-text {
+      font-size: 16px;
+      color: #34495e;
+    }
+    
+    /* YouTube-LIVE */
+    .youtube-wrapper {
+      background: linear-gradient(to bottom, #0f2342 0%, #1e3c72 100%);
+      padding: 60px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .youtube-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 50%, rgba(25, 55, 109, 0.4) 0%, rgba(15, 35, 66, 0) 70%);
+      pointer-events: none;
+    }
+    
+    .youtube-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+      color: rgba(255, 255, 255, 0.9);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .youtube-section h2 {
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 32px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+    
+    .youtube-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .youtube-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+    
+    .youtube-description {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* 番組概要 */
+    .program-overview {
+      margin-bottom: 40px;
+      background-color: #e8f4fd;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* 番組情報 */
+    .program-info {
+      margin-bottom: 40px;
+      background-color: #e0f7fa;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      float: none;
+    }
+    
+    /* 週間のハイライト */
+    .weekly-highlight {
+      margin-bottom: 40px;
+      background-color: #fff8e1;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* プレゼント */
+    .present-section {
+      margin-bottom: 40px;
+      background-color: #f9fbe7;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* 出演者のリアルバイタルデータ */
+    .vital-data-section {
+      margin: 40px 0;
+      background-color: #fce4ec;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* 全体 */
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f0f2f5;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .wrap {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
     }
     
-    .vital-data-section h2 {
+    /* セクション共通スタイル */
+    .section-wrapper {
+      width: 100vw;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      box-sizing: border-box;
+    }
+    
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* キャッチコピースタイル */
+    .catchcopy-wrapper {
+      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
+      padding: 40px 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
       text-align: center;
-      margin-bottom: 40px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    
+    .catchcopy-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    /* カレンダースタイル */
+    .calendar-wrapper {
+      background-color: #f8f9fa;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    
+    .calendar-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    /* YouTube-LIVEスタイル */
+    .youtube-wrapper {
+      background-color: #1a3a6c;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    
+    .youtube-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+      color: #ffffff;
+    }
+    
+    .youtube-section h2 {
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: bold;
       font-size: 28px;
-      color: #333;
-      font-weight: bold;
     }
     
-    .vital-data-content {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-      padding: 30px;
-      margin-bottom: 30px;
+    .youtube-container {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     
-    .vital-data-content h3 {
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #0066cc;
-      font-weight: bold;
+    /* 番組概要スタイル */
+    .program-overview-wrapper {
+      background-color: #e8f4fd;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
     }
     
-    .vital-data-content p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 20px;
+    .program-overview {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
     }
     
-    .vital-data-placeholder {
-      background-color: #f8f8f8;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 20px;
+    /* 番組情報スタイル */
+    .program-info-wrapper {
+      background-color: #e0f7fa;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
     }
     
-    .vital-data-placeholder div {
-      text-align: center;
+    .program-info {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
     }
     
-    .vital-data-placeholder p {
-      color: #666;
-      font-size: 16px;
+    /* 週間のハイライトスタイル */
+    .weekly-highlight-wrapper {
+      background-color: #fff8e1;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
     }
     
-    .vital-data-content a {
-      display: inline-block;
-      background-color: #0066cc;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background-color 0.3s;
+    .weekly-highlight {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    /* プレゼントスタイル */
+    .present-wrapper {
+      background-color: #f9fbe7;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    
+    .present-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    /* 出演者のリアルバイタルデータスタイル */
+    .vital-data-wrapper {
+      background-color: #fce4ec;
+      padding: 40px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    
+    .vital-data-section {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
     }
   </style>
 </head>
@@ -479,7 +933,7 @@
       <li><a href="chart.html"><span>相関図</span></a></li>
       <li><a href="news.html"><span>お知らせ</span></a></li>
       <li><a href="caststaff.html"><span>キャスト＆STAFF</span></a></li>
-      <li><a href="delivery.html"><span>配信</span></a></li>
+      <li><a href="#youtube-section"><span>配信</span></a></li>
     </ul>
   </div>
 
@@ -487,88 +941,172 @@
     <div id="con-body">
       <div class="wrap">
         <!-- キャッチコピー -->
-        <div class="catchcopy-section">
-          <div class="catchcopy-content">
-            <h2>毎日が誰かの誕生日☆彡</h2>
-            <h3>最もバースデーメッセージが贈られたのは誰なのか♡</h3>
-            <h2>『ウィークリー・バースデー・ランキング』</h2>
+        <div class="catchcopy-wrapper">
+          <h2>毎日が誰かの誕生日☆彡</h2>
+          <h3>最もバースデーメッセージが贈られたのは誰なのか♡</h3>
+          <h2>『ウィークリー・バースデー・ランキング』</h2>
+        </div>
+
+        <!-- カレンダー -->
+        <div class="calendar-wrapper">
+          <div class="calendar-section">
+            <div class="calendar-content">
+              <h2>バスランカレンダー</h2>
+              <div class="week-view">
+                <h3 class="week-view-title">週間のバスラン</h3>
+                <div class="week-days" id="week-days">
+                  <!-- JavaScriptで動的に生成 -->
+                </div>
+              </div>
+              <button class="view-calendar-btn" id="view-calendar-btn">
+                <i class="fas fa-calendar-alt"></i> カレンダーを表示
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- 番組概要 -->
-        <div class="program-overview">
-          <h2>番組概要</h2>
-          <div class="overview-content">
-            <p>大好きな人、大切なひとへ、「おめでとう」や「ありがとう」愛を伝えるメッセ―ジボードとして誕生した『渋谷愛ビジョン』と『ラジオ日本』がコラボしてお届けする愛溢れるラジオ番組。</p>
-            <p>幸せを呼ぶ魔法の言葉「おめでとう」「ありがとう」そして、「おかえりなさい」「またね」<br>というメッセージが世界中に溢れることを願って、毎週木曜日の夜、生放送でお届けします。</p>
-            <p>番組では、渋谷愛ビジョンとラジオ日本に寄せられるたくさんのバースデー愛メッセージを日ごとに集計しベスト３を発表していきます。</p>
-            <p>リスナーの皆さんからいただいた愛あるメッセージをあなたの大切なひとにお届けします。素敵な笑顔を一緒に紡いでいきましょう♡</p>
+        <!-- カレンダーポップアップ -->
+        <div class="calendar-popup-overlay" id="calendar-popup-overlay">
+          <div class="calendar-popup">
+            <button class="calendar-popup-close" id="calendar-popup-close">
+              <i class="fas fa-times"></i>
+            </button>
+            <h2>バスランカレンダー</h2>
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                <h3 id="current-month">2025年4月</h3>
+                <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+              </div>
+              <div class="weekdays">
+                <div>日</div>
+                <div>月</div>
+                <div>火</div>
+                <div>水</div>
+                <div>木</div>
+                <div>金</div>
+                <div>土</div>
+              </div>
+              <div id="calendar-days" class="calendar-days">
+                <!-- カレンダーの日付はJavaScriptで動的に生成 -->
+              </div>
+              <div class="calendar-legend" style="display: none;">
+                <div class="legend-item">
+                  <span class="legend-color broadcast-day"></span>
+                  <span class="legend-text">放送日（毎週木曜日）</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color message-day"></span>
+                  <span class="legend-text">愛メッセージあり</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YouTube-LIVE -->
+        <div id="youtube-section" class="youtube-wrapper" style="transition: none !important; transform: none !important;">
+          <div class="youtube-section" style="transition: none !important; transform: none !important;">
+            <h2>YouTube-LIVE</h2>
+            <div class="youtube-container" style="transition: none !important; transform: none !important;">
+              <div class="youtube-video" style="transition: none !important; transform: none !important;">
+                <p style="text-align: center; margin-bottom: 5px; font-weight: bold;">渋谷愛ビジョン</p>
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/six6fVA6Gxo?modestbranding=1&showinfo=0&rel=0" title="【LIVE】渋谷愛ビジョン・宮益坂交差点ライブカメラ／『SHIBUYA AI Vision』Miyamasuzaka-Shibuya" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <div class="youtube-video" style="transition: none !important; transform: none !important;">
+                <p style="text-align: center; margin-bottom: 5px; font-weight: bold;">渋谷愛ビジョンの眼</p>
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/frp2DX9D3tc?modestbranding=1&showinfo=0&rel=0" title="【LIVE】渋谷愛ビジョン・宮益坂交差点ライブカメラ／SHIBUYA AI Vision" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- 番組情報 -->
-        <div class="program-info">
-          <h2>番組情報</h2>
-          <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-            <div style="flex: 1; min-width: 300px;">
-              <h3 style="font-size: 18px; margin-bottom: 15px;">放送情報</h3>
-              <p><strong>放送日時:</strong>2025年3月16日（日）</p>
-              <p><strong>放送時間:</strong>18:00～20:30</p>
-              <p><strong>放送局:</strong>ラジコ</p>
-              <p><strong>司会:</strong>ラジコ本社（生放送）</p>
-            </div>
-            <div style="flex: 1; min-width: 300px;">
-              <h3 style="font-size: 18px; margin-bottom: 15px;">生配信情報</h3>
-              <p><strong>19:00～19:20:</strong>生配信前番組</p>
-              <p><strong>20:00～20:20:</strong>バスランゲストに4人同時生配信</p>
-              <p><strong>放送終了後:</strong>音声を除いた分割配信（20分～60分）</p>
-              <p><a href="delivery.html" style="color: #0066cc; text-decoration: none; font-weight: bold;">→ 生配信を視聴する</a></p>
+        <div class="program-info-wrapper">
+          <div class="program-info">
+            <h2 class="section-title">番組情報</h2>
+            <div class="info-container">
+              <div class="info-card">
+                <div class="info-icon">
+                  <img src="img/icons/broadcast.png" alt="放送情報" class="icon-image">
+                </div>
+                <h3>放送情報</h3>
+                <ul class="info-list">
+                  <li><span class="info-label">放送日時:</span> 2025年3月16日（日）</li>
+                  <li><span class="info-label">放送時間:</span> 18:00～20:30</li>
+                  <li><span class="info-label">放送局:</span> ラジコ</li>
+                  <li><span class="info-label">司会:</span> ラジコ本社（生放送）</li>
+                </ul>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <img src="img/icons/video.png" alt="生配信情報" class="icon-image">
+                </div>
+                <h3>生配信情報</h3>
+                <ul class="info-list">
+                  <li><span class="info-label">19:00～19:20:</span> 生配信前番組</li>
+                  <li><span class="info-label">20:00～20:20:</span> バスランゲストに4人同時生配信</li>
+                  <li><span class="info-label">放送終了後:</span> 音声を除いた分割配信（20分～60分）</li>
+                </ul>
+                <a href="delivery.html" class="btn-primary">生配信を視聴する <i class="fas fa-arrow-right"></i></a>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 週間のハイライト -->
-        <div class="weekly-highlight">
-          <h2>週間のハイライト</h2>
-          <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-            <!-- ゲスト -->
-            <div class="guest">
-              <h3>ゲスト</h3>
-              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0;">
-                  <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=ゲスト" alt="ゲスト" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="weekly-highlight-wrapper">
+          <div class="weekly-highlight">
+            <h2 class="section-title">週間のハイライト</h2>
+            <div class="highlight-container">
+              <!-- ゲスト -->
+              <div class="highlight-card guest-card">
+                <h3 class="card-title">
+                  <img src="img/icons/guest.png" alt="ゲスト" class="card-title-icon"> ゲスト
+                </h3>
+                <div class="guest-profile">
+                  <div class="guest-avatar">
+                    <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=ゲスト" alt="ゲスト">
+                  </div>
+                  <div class="guest-info">
+                    <h4>山田太郎</h4>
+                    <p class="guest-birthday">4月17日生まれのA型</p>
+                    <p class="guest-appearance">出演日：3月17日</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 style="margin: 0 0 5px 0; font-size: 20px;">山田太郎</h4>
-                  <p style="margin: 0; font-size: 14px; color: #666;">4月17日生まれのA型</p>
-                  <p style="margin: 5px 0 0 0;">出演日：3月17日</p>
-                </div>
+                <p class="guest-description">4月17日生まれのA型の山田太郎さんを迎えて、生配信でお祝いします。詳細は生配信ページをチェックしてください。</p>
+                <a href="#" class="btn-secondary">出演情報を確認する</a>
               </div>
-              <p>4月17日生まれのA型の山田太郎さんを迎えて、生配信でお祝いします。詳細は生配信ページをチェックしてください。</p>
-              <div style="margin-top: 15px;">
-                <a href="#" style="display: inline-block; background-color: #0066cc; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 14px;">出演情報を確認する</a>
-              </div>
-            </div>
-            
-            <!-- ランキング -->
-            <div class="ranking">
-              <h3>ランキング</h3>
-              <ol style="padding-left: 25px; margin-bottom: 20px;">
-                <li style="margin-bottom: 10px;">
-                  <strong>1位</strong> - 3月15日更新
-                  <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">私は11歳でデビューしました。</p>
-                </li>
-                <li style="margin-bottom: 10px;">
-                  <strong>2位</strong> - 3月16日更新
-                  <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">私は大好きな食べ物はピザです。</p>
-                </li>
-                <li style="margin-bottom: 10px;">
-                  <strong>3位</strong> - 3月18日更新
-                  <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">私は好きなスポーツはサッカーです。</p>
-                </li>
-              </ol>
-              <div style="margin-top: 15px;">
-                <a href="#" style="display: inline-block; background-color: #0066cc; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 14px;">ランキングを確認する</a>
+              
+              <!-- ランキング -->
+              <div class="highlight-card ranking-card">
+                <h3 class="card-title">
+                  <img src="img/icons/trophy.png" alt="ランキング" class="card-title-icon"> ランキング
+                </h3>
+                <ol class="ranking-list">
+                  <li class="ranking-item">
+                    <div class="ranking-position">1</div>
+                    <div class="ranking-content">
+                      <div class="ranking-date">3月15日更新</div>
+                      <p class="ranking-text">私は11歳でデビューしました。</p>
+                    </div>
+                  </li>
+                  <li class="ranking-item">
+                    <div class="ranking-position">2</div>
+                    <div class="ranking-content">
+                      <div class="ranking-date">3月16日更新</div>
+                      <p class="ranking-text">私は大好きな食べ物はピザです。</p>
+                    </div>
+                  </li>
+                  <li class="ranking-item">
+                    <div class="ranking-position">3</div>
+                    <div class="ranking-content">
+                      <div class="ranking-date">3月18日更新</div>
+                      <p class="ranking-text">私は好きなスポーツはサッカーです。</p>
+                    </div>
+                  </li>
+                </ol>
+                <a href="#" class="btn-secondary">ランキングを確認する</a>
               </div>
             </div>
           </div>
@@ -576,53 +1114,87 @@
 
         <!-- 愛あるゲスト -->
         <div class="love-guest-section">
-          <h2>愛あるゲスト</h2>
+          <h2 class="section-title">愛あるゲスト</h2>
           <div class="love-guest-content">
-            <h3>『誕生日が近い！ゲスト募集中！！』</h3>
-            <p>番組では、誕生日が近いゲストを大募集しています。</p>
-            <p>条件は…、</p>
-            <ol>
+            <div class="section-header">
+              <h3 class="section-subtitle">『誕生日が近い！ゲスト募集中！！』</h3>
+              <div class="section-decoration"></div>
+            </div>
+            <p class="section-intro">番組では、誕生日が近いゲストを大募集しています。</p>
+            <p class="condition-heading">条件は…、</p>
+            <ol class="condition-list">
               <li>出演日から３週間以内に誕生日を迎える方</li>
               <li>バスランでベスト３に入ると自負している方</li>
             </ol>
-            <p>ゲスト出演していただいた方には、誕生日プレゼントとして</p>
-            <ol>
-              <li>渋谷愛ビジョンの放映枠／20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供させていただきます。<br>ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。</li>
-              <li>2年間充電無しでバイタルデータを蓄積することができるMOTHER　Braceletで健康チェック。</li>
-              <li>今月のバースデープレゼント<br>毎月どんな商品をセレクトするのか！？お楽しみに～。</li>
-            </ol>
-            <p>以上、愛が詰まった３つのサービス＆商品をプレゼントさせていただきます。</p>
+            <div class="present-intro">
+              <p>ゲスト出演していただいた方には、誕生日プレゼントとして</p>
+            </div>
+            <div class="present-list-container">
+              <ol class="present-list">
+                <li>
+                  <div class="present-icon">
+                    <img src="img/icons/tv.png" alt="渋谷愛ビジョンの放映枠" class="icon-image">
+                  </div>
+                  <div class="present-content">
+                    渋谷愛ビジョンの放映枠／20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供させていただきます。<br>ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。
+                  </div>
+                </li>
+                <li>
+                  <div class="present-icon">
+                    <img src="img/icons/heartbeat.png" alt="MOTHER Bracelet" class="icon-image">
+                  </div>
+                  <div class="present-content">
+                    2年間充電無しでバイタルデータを蓄積することができるMOTHER　Braceletで健康チェック。
+                  </div>
+                </li>
+                <li>
+                  <div class="present-icon">
+                    <img src="img/icons/gift.png" alt="今月のバースデープレゼント" class="icon-image">
+                  </div>
+                  <div class="present-content">
+                    今月のバースデープレゼント<br>毎月どんな商品をセレクトするのか！？お楽しみに～。
+                  </div>
+                </li>
+              </ol>
+            </div>
+            <p class="present-conclusion">以上、愛が詰まった３つのサービス＆商品をプレゼントさせていただきます。</p>
           </div>
         </div>
 
         <!-- プレゼント -->
-        <div class="present-section">
-          <h2>プレゼント</h2>
-          <div class="present-content">
-            <h3>『今月のバースデープレゼント』</h3>
-            <p>番組に出演してくれたゲストの皆様に誕生日プレゼントとしてご用意した商品を紹介するコーナーです。バスランSTAFFが本気愛で探してきた『おめあり愛』が詰まったGIFTにご期待ください。</p>
+        <div class="present-wrapper">
+          <div class="present-section">
+            <h2 class="section-title">プレゼント</h2>
+            <div class="present-content">
+              <div class="present-header">
+                <img src="img/icons/gift-large.png" alt="今月のバースデープレゼント" class="present-icon-large">
+                <h3 class="present-title">『今月のバースデープレゼント』</h3>
+              </div>
+              <p class="present-description">番組では、誕生日が近いゲストを大募集しています。</p>
+              <div class="present-image-container">
+                <div class="present-image"></div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- 出演者のリアルバイタルデータ -->
-        <div class="vital-data-section">
-          <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px; font-size: 28px; color: #333; font-weight: bold;">出演者のリアルバイタルデータ</h2>
-            <div class="row">
-              <div class="col-md-8 offset-md-2">
-                <div class="vital-data-content" style="background-color: white; border-radius: 10px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); padding: 30px; margin-bottom: 30px;">
-                  <h3 style="font-size: 22px; margin-bottom: 20px; color: #0066cc; font-weight: bold;">『MOTHER Braceletで見る健康状態』</h3>
-                  <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">番組に出演するパーソナリティとゲストの皆さんのリアルタイムバイタルデータをご覧いただけます。心拍数、睡眠の質、ストレスレベルなど、2年間充電なしで計測可能なMOTHER Braceletによる健康データを公開中！</p>
-                  <div class="vital-data-placeholder" style="background-color: #f8f8f8; border-radius: 10px; padding: 20px; margin-top: 20px;">
-                    <!-- ここにバイタルデータの表示エリアが入ります -->
-                    <div style="text-align: center;">
-                      <p style="color: #666; font-size: 16px;">バイタルデータ表示エリア</p>
-                    </div>
-                  </div>
-                  <div style="margin-top: 25px; text-align: center;">
-                    <a href="#" style="display: inline-block; background-color: #0066cc; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px; font-weight: bold; transition: background-color 0.3s;">詳細を見る</a>
+        <div class="vital-data-wrapper">
+          <div class="vital-data-section">
+            <h2 class="section-title">出演者のリアルバイタルデータ</h2>
+            <div class="vital-data-container">
+              <div class="vital-data-content">
+                <div class="vital-data-header">
+                  <img src="img/icons/heartbeat.png" alt="MOTHER Braceletで見る健康状態" class="vital-icon">
+                  <h3 class="vital-title">『MOTHER Braceletで見る健康状態』</h3>
+                </div>
+                <p class="vital-description">番組に出演するパーソナリティとゲストの皆さんのリアルタイムバイタルデータをご覧いただけます。心拍数、睡眠の質、ストレスレベルなど、2年間充電なしで計測可能なMOTHER Braceletによる健康データを公開中！</p>
+                <div class="vital-data-display">
+                  <div class="vital-data-chart">
+                    <div class="chart-placeholder">バイタルデータ表示エリア</div>
                   </div>
                 </div>
+                <a href="#" class="btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
               </div>
             </div>
           </div>
@@ -630,10 +1202,15 @@
 
         <!-- メッセージボタン -->
         <div class="message-button-section">
-          <div class="message-text">
-            <p>大好きな人、大切なひとへ、おめでとう、ありがとうのメッセージを贈ろう</p>
+          <div class="message-content">
+            <div class="message-icon">
+              <img src="img/icons/heart.png" alt="メッセージ" class="icon-image">
+            </div>
+            <div class="message-text">
+              <p>大好きな人、大切なひとへ、おめでとう、ありがとうのメッセージを贈ろう</p>
+            </div>
+            <a href="https://ec.saivision.jp/" target="_blank" class="btn-message">メッセージを送る <i class="fas fa-paper-plane"></i></a>
           </div>
-          <a href="https://ec.saivision.jp/" target="_blank" class="message-button">メッセージを送る</a>
         </div>
 
       </div>
@@ -645,7 +1222,7 @@
     <div class="wrap">
       <div id="social-links">
         <ul>
-          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="u5fcdu8005u30cfu30c1@u6e0bu8c37u611b8" class="x-logo">𝕏</a></li>
+          <li><a href="https://x.com/NinjaHachi_" target="_blank" title="Twitter@NinjaHachi_" class="x-logo">𝕏</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -655,7 +1232,7 @@
         <a href="chart.html">相関図</a>
         <a href="news.html">お知らせ</a>
         <a href="caststaff.html">キャスト＆STAFF</a>
-        <a href="delivery.html">配信</a>
+        <a href="#youtube-section">配信</a>
       </div>
       <div class="copy">
         <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
@@ -663,46 +1240,58 @@
     </div>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    // バブルアニメーション用の関数
+    // 現在の日付を取得
+    const today = new Date();
+    let currentYear = today.getFullYear();
+    let currentMonth = today.getMonth();
+    let selectedDate = today;
+    
+    // バブルアニメーションの初期化関数
     function initBubbles() {
       const canvas = document.getElementById('bubble-canvas');
-      const ctx = canvas.getContext('2d');
-      const heroSection = document.getElementById('hero-section');
+      if (!canvas) return; // キャンバスが存在しない場合は処理を終了
       
-      // キャンバスのサイズをヒーローセクションのサイズに合わせる
+      const ctx = canvas.getContext('2d');
+      
+      // キャンバスサイズをウィンドウサイズに合わせる
       function resizeCanvas() {
-        canvas.width = heroSection.offsetWidth;
-        canvas.height = heroSection.offsetHeight;
+        const heroSection = document.getElementById('hero-section');
+        if (heroSection) {
+          canvas.width = heroSection.offsetWidth;
+          canvas.height = heroSection.offsetHeight;
+          console.log('Canvas resized to:', canvas.width, 'x', canvas.height);
+        }
       }
       
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
       
-      // バブルの数を設定
+      // バブルの設定
       const bubbles = [];
-      // バブルの数を設定
-      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.04); // 画面サイズに応じてバブルの数を調整
+      // バブルの数を画面サイズに応じて調整
+      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.02); // バブルの数を減らす
+      
+      console.log('Creating', bubbleCount, 'bubbles');
       
       // バブルを生成
       for (let i = 0; i < bubbleCount; i++) {
-        const size = Math.random() < 0.5 ? 
-                    Math.random() * 30 + 10 : // 小さいバブル (50%)
-                    Math.random() < 0.6 ? 
-                      Math.random() * 50 + 40 : // 中くらいのバブル (30%)
-                      Math.random() * 80 + 90; // 大きいバブル (20%)
+        const size = Math.random() < 0.4 ? 
+                  Math.random() * 40 + 20 : // 小さいバブル (40%)
+                  Math.random() < 0.7 ? 
+                    Math.random() * 60 + 50 : // 中くらいのバブル (42%)
+                    Math.random() * 100 + 100; // 大きいバブル (18%)
         
         bubbles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: size / 2,
-          // バブルの色をランダムに設定
-          color: `rgba(255, 255, 255, ${0.1 + Math.random() * 0.15})`, // 不透明度をランダムに設定
-          angle: Math.random() * Math.PI * 2, // 移動角度
-          speed: 0.1 + Math.random() * 0.5,   // 移動速度
-          rotationSpeed: (Math.random() - 0.5) * 0.01, // 回転速度
-          opacity: 0.2 + Math.random() * 0.3  // 不透明度をランダムに設定
+          // バブルの色を変更
+          color: `rgba(255, 255, 255, ${0.2 + Math.random() * 0.3})`, // 不透明度を変更
+          angle: Math.random() * Math.PI * 2, // 移動方向
+          speed: 0.2 + Math.random() * 0.6,   // 移動速度を増やす
+          rotationSpeed: (Math.random() - 0.5) * 0.02, // 回転速度を増やす
+          opacity: 0.3 + Math.random() * 0.4  // 不透明度を変更
         });
       }
       
@@ -712,13 +1301,13 @@
         
         // 各バブルを描画・更新
         bubbles.forEach(bubble => {
-          // バブルを描画
+          // バブルを描画（輪郭をぼかす）
           ctx.beginPath();
           ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
           
-          // 影を付ける
-          ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
-          ctx.shadowBlur = bubble.radius * 0.5;
+          // ぼかし効果を追加
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+          ctx.shadowBlur = bubble.radius * 0.8;
           
           ctx.fillStyle = bubble.color;
           ctx.globalAlpha = bubble.opacity;
@@ -728,10 +1317,10 @@
           bubble.x += Math.cos(bubble.angle) * bubble.speed;
           bubble.y += Math.sin(bubble.angle) * bubble.speed;
           
-          // バブルの角度を更新
+          // バブルの角度をわずかに変化させる（より自然な動き）
           bubble.angle += bubble.rotationSpeed;
           
-          // 画面外に出たバブルを反対側に移動
+          // 画面外に出たバブルを反対側から再登場させる
           if (bubble.x - bubble.radius > canvas.width) {
             bubble.x = -bubble.radius;
           } else if (bubble.x + bubble.radius < 0) {
@@ -751,10 +1340,390 @@
       animate();
     }
     
-    // ページ読み込み完了時の処理
+    // 日付をYYYY-MM-DD形式にフォーマットする関数
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    
+    // 日付をYYYY-MM-DD形式にフォーマットする関数
+    function formatDisplayDate(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
+      return `${year}年${month}月${day}日(${dayOfWeek})`;
+    }
+    
+    // カレンダーを初期化する関数
+    async function initCalendar() {
+      console.log('initCalendar called');
+      try {
+        // u9031u9593u30d3u30e5u30fcu3092u5148u306bu8868u793au3057u3066u304bu3089u30abu30ecu30f3u30c0u30fcu3092u30ecu30f3u30c0u30eau30f3u30b0
+        await renderWeekView();
+        await renderCalendar(currentYear, currentMonth);
+        setupPopupEvents();
+        console.log('Calendar initialization completed');
+      } catch (err) {
+        console.error('Error initializing calendar:', err);
+      }
+    }
+    
+    // 月を変更する関数
+    function changeMonth(delta) {
+      currentMonth += delta;
+      
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      
+      renderCalendar(currentYear, currentMonth);
+    }
+    
+    // 週間のバスランを表示する関数
+    async function renderWeekView() {
+      console.log('renderWeekView called');
+      const weekDays = $("#week-days");
+      weekDays.empty();
+      
+      // u672cu65e5u3092u4e00u756au4e0bu306bu3057u3066u904eu53bb6u65e5u3092u8868u793a
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - 6); // u672cu65e5u304bu3089u30556u65e5u524d
+      
+      console.log('Week start date:', startOfWeek);
+      
+      // Supabaseu304bu3089u30c7u30fcu30bfu3092u53d6u5f97
+      const SUPABASE_URL = 'https://cdpthzwwczpwlypadhbz.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkcHRoend3Y3pwd2x5cGFkaGJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI3ODc2NzYsImV4cCI6MjA1ODM2MzY3Nn0.woIzlcCR94Niz-WelVqmweSPFqUlTmONrqxTrXl4_z0';
+      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      
+      const weekStart = formatDate(startOfWeek);
+      const weekEnd = formatDate(today); // u672cu65e5u307eu3067
+      
+      console.log('Week date range:', weekStart, 'to', weekEnd);
+      
+      try {
+        const { data: weekMessages, error } = await supabase
+          .from('calendar_comments')
+          .select('comment_date, author_name, comment_text')
+          .gte('comment_date', weekStart)
+          .lte('comment_date', weekEnd)
+          .order('created_at', { ascending: false });
+        
+        if (error) {
+          console.error('Error fetching week messages:', error);
+          return;
+        }
+        
+        console.log('Week messages:', weekMessages);
+        
+        // u30c7u30fcu30bfu3092u65e5u4ed8u3054u3068u306bu6574u7406
+        const messagesByDate = {};
+        if (weekMessages && Array.isArray(weekMessages)) {
+          weekMessages.forEach(message => {
+            const date = message.comment_date.split('T')[0];
+            if (!messagesByDate[date]) {
+              messagesByDate[date] = [];
+            }
+            messagesByDate[date].push(message);
+          });
+        }
+        
+        console.log('Messages by date:', messagesByDate);
+        
+        // u9031u9593u306eu30d0u30b9u30e9u30f3u3092u8868u793a
+        const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+        
+        for (let i = 0; i <= 6; i++) {
+          const currentDate = new Date(startOfWeek);
+          currentDate.setDate(startOfWeek.getDate() + i);
+          const formattedDate = formatDate(currentDate);
+          const dayOfWeek = dayNames[currentDate.getDay()];
+          const dayNumber = currentDate.getDate();
+          const dayOfWeekIndex = currentDate.getDay(); // u66fcu65e5u306eu30a4u30f3u30c7u30c3u30afu30b9 (0-6)
+          
+          console.log('Creating day element:', formattedDate, dayOfWeek, dayNumber);
+          
+          // u30d0u30d6u30ebu306eu8272u3092u5909u66f4
+          let dayClass = "week-day";
+          if (currentDate.getFullYear() === today.getFullYear() && 
+              currentDate.getMonth() === today.getMonth() && 
+              currentDate.getDate() === today.getDate()) {
+            dayClass += " today";
+          }
+          
+          // u6728u66dcu65e5u306fu653eu9001u65e5
+          // if (currentDate.getDay() === 4) { // u6728u66dc u65e5
+          //   dayClass += " broadcast";
+          // }
+          
+          // u30d0u30d6u30ebu306eu8272u3092u5909u66f4
+          if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+            dayClass += " has-message";
+          }
+          
+          // u30e1u30c3u30bbu30fcu30b8u3092u53d6u5f97
+          let messageText = '';
+          let authorName = '';
+          if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+            messageText = messagesByDate[formattedDate][0].comment_text;
+            authorName = messagesByDate[formattedDate][0].author_name;
+          }
+          
+          // u30d0u30d6u30ebu3092u63cfu753b
+          const weekDayElement = $(`
+            <div class="${dayClass}" data-date="${formattedDate}" data-day="${dayOfWeekIndex}">
+              <div class="week-day-number">${dayNumber}</div>
+              <div class="week-day-name">${dayOfWeek}</div>
+              <div class="week-day-message">${authorName ? `<span class="author-name">${authorName}:</span><span class="comment-text">${messageText}</span>` : ''}</div>
+            </div>
+          `);
+          
+          weekDays.append(weekDayElement);
+        }
+        
+        // バブルをクリックしたときのイベント
+        $(".week-day").click(function() {
+          const dateStr = $(this).data("date");
+          const dateParts = dateStr.split("-");
+          selectedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+          
+          // カレンダーポップアップを表示
+          $("#calendar-popup-overlay").css("display", "flex").hide().fadeIn(300);
+          
+          // カレンダーを更新
+          currentYear = selectedDate.getFullYear();
+          currentMonth = selectedDate.getMonth();
+          renderCalendar(currentYear, currentMonth);
+        });
+      } catch (err) {
+        console.error('Error in renderWeekView:', err);
+      }
+    }
+    
+    // カレンダーポップアップのイベントを設定
+    function setupPopupEvents() {
+      console.log('Setting up popup events');
+      
+      // カレンダーポップアップを表示
+      $("#view-calendar-btn").click(function() {
+        console.log('Calendar button clicked');
+        $("#calendar-popup-overlay").css("display", "flex").hide().fadeIn(300);
+      });
+      
+      // カレンダーポップアップを閉じる
+      $("#calendar-popup-close").click(function() {
+        console.log('Close button clicked');
+        $("#calendar-popup-overlay").fadeOut(300);
+      });
+      
+      // カレンダーポップアップの背景をクリックしたとき
+      $("#calendar-popup-overlay").click(function(e) {
+        if (e.target === this) {
+          console.log('Overlay background clicked');
+          $(this).fadeOut(300);
+        }
+      });
+    }
+    
+    // カレンダーを描画する関数
+    async function renderCalendar(year, month) {
+      console.log(`Rendering calendar for ${year}/${month+1}`);
+      const monthNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+      $("#current-month").text(year + "年" + monthNames[month]);
+      
+      const calendarDays = $("#calendar-days");
+      calendarDays.empty();
+      
+      // 月の初日を取得
+      const firstDay = new Date(year, month, 1).getDay();
+      
+      // 月の日数を取得
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      
+      // Supabaseu304bu3089u30c7u30fcu30bfu3092u53d6u5f97
+      try {
+        const SUPABASE_URL = 'https://cdpthzwwczpwlypadhbz.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkcHRoend3Y3pwd2x5cGFkaGJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI3ODc2NzYsImV4cCI6MjA1ODM2MzY3Nn0.woIzlcCR94Niz-WelVqmweSPFqUlTmONrqxTrXl4_z0';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        const monthStart = formatDate(new Date(year, month, 1));
+        const monthEnd = formatDate(new Date(year, month + 1, 0));
+        
+        console.log(`Fetching calendar data from ${monthStart} to ${monthEnd}`);
+        
+        const { data: monthMessages, error } = await supabase
+          .from('calendar_comments')
+          .select('comment_date, author_name, comment_text')
+          .gte('comment_date', monthStart)
+          .lte('comment_date', monthEnd)
+          .order('created_at', { ascending: false });
+          
+        if (error) {
+          console.error('Error fetching month messages:', error);
+        } else {
+          console.log('Month messages:', monthMessages);
+          
+          // u30c7u30fcu30bfu3092u65e5u4ed8u3054u3068u306bu6574u7406
+          const messagesByDate = {};
+          if (monthMessages && Array.isArray(monthMessages)) {
+            monthMessages.forEach(message => {
+              const date = message.comment_date.split('T')[0];
+              if (!messagesByDate[date]) {
+                messagesByDate[date] = [];
+              }
+              messagesByDate[date].push(message);
+            });
+          }
+          
+          console.log('Messages by date:', messagesByDate);
+          
+          // 前月の日数を表示
+          for (let i = 0; i < firstDay; i++) {
+            calendarDays.append('<div class="calendar-day empty"></div>');
+          }
+          
+          // 当月の日数を表示
+          for (let i = 1; i <= daysInMonth; i++) {
+            const currentDate = new Date(year, month, i);
+            const formattedDate = formatDate(currentDate);
+            
+            let dayClass = "calendar-day";
+            if (currentDate.getFullYear() === today.getFullYear() && 
+                currentDate.getMonth() === today.getMonth() && 
+                currentDate.getDate() === today.getDate()) {
+              dayClass += " today";
+            }
+            
+            // u6728u66dcu65e5u306fu653eu9001u65e5u306eu30afu30e9u30b9u3092u524au9664
+            // if (currentDate.getDay() === 4) { // u6728u66dc u65e5
+            //   dayClass += " broadcast-day";
+            // }
+            
+            // u30e1u30c3u30bbu30fcu30b8u304cu308bu5834u5408u306eu30afu30e9u30b9u3092u524au9664
+            // if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+            //   dayClass += " message-day";
+            // }
+            
+            const dayElement = $(`
+              <div class="${dayClass}" data-date="${formattedDate}" style="border-radius: 0 !important;">
+                <div class="day-number">${i}</div>
+                ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? 
+                  `<div class="love-message" style="border-radius: 0 !important;"><span class="author-name">${messagesByDate[formattedDate][0].author_name}:</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span></div>` : ''}
+              </div>
+            `);
+            
+            dayElement.click(function() {
+              selectedDate = new Date(year, month, i);
+              $(".calendar-day").removeClass("selected");
+              $(this).addClass("selected");
+              
+              // カレンダーを更新
+              renderCalendar(year, month);
+            });
+            
+            calendarDays.append(dayElement);
+          }
+          
+          // 空白を埋める
+          const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+          for (let i = firstDay + daysInMonth; i < totalCells; i++) {
+            calendarDays.append('<div class="calendar-day empty"></div>');
+          }
+        }
+      } catch (err) {
+        console.error('Error rendering calendar:', err);
+      }
+    }
+    
+    // ドキュメントが読み込まれたとき
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOMContentLoaded event fired');
+      initBubbles();
+      
+      // u9031u9593u30d0u30b9u30e9u30f3u304cu8868u793au3055u308cu306au3044u554fu984cu3092u76f4u63a5u751fu6210
+      const weekDays = document.getElementById('week-days');
+      if (weekDays) {
+        console.log('week-days element found, creating default week view');
+        // u73feu5728u306eu65e5u4ed8u3092u53d6u5f97
+        const today = new Date();
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - today.getDay()); // u9031u9593u306eu521du65e5u3092u53d6u5f97
+        
+        // u9031u9593u306eu30d0u30b9u30e9u30f3u3092u8868u793a
+        const dayNames = ['u65e5', 'u6708', 'u706b', 'u6c34', 'u6728', 'u91d1', 'u571f'];
+        
+        for (let i = 0; i < 7; i++) {
+          const currentDate = new Date(startOfWeek);
+          currentDate.setDate(startOfWeek.getDate() + i);
+          const formattedDate = formatDate(currentDate);
+          const dayOfWeek = dayNames[currentDate.getDay()];
+          const dayNumber = currentDate.getDate();
+          
+          console.log('Creating day element:', formattedDate, dayOfWeek, dayNumber);
+          
+          // u30d0u30d6u30ebu306eu8272u3092u5909u66f4
+          let dayClass = "week-day";
+          if (currentDate.getFullYear() === today.getFullYear() && 
+              currentDate.getMonth() === today.getMonth() && 
+              currentDate.getDate() === today.getDate()) {
+            dayClass += " today";
+          }
+          
+          // u6728u66dcu65e5u306fu653eu9001u65e5u306eu30afu30e9u30b9u3092u524au9664
+          // if (currentDate.getDay() === 4) { // u6728u66dc u65e5
+          //   dayClass += " broadcast";
+          // }
+          
+          // u30d0u30d6u30ebu306eu8272u3092u5909u66f4
+          if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+            dayClass += " has-message";
+          }
+          
+          // u30e1u30c3u30bbu30fcu30b8u3092u53d6u5f97
+          let messageText = '';
+          if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+            messageText = messagesByDate[formattedDate][0].comment_text;
+          }
+          
+          // u30d0u30d6u30ebu3092u63cfu753b
+          const weekDayElement = $(`
+            <div class="${dayClass}" data-date="${formattedDate}">
+              <div class="week-day-number">${dayNumber}</div>
+              <div class="week-day-name">${dayOfWeek}</div>
+              <div class="week-day-message"><span class="author-name">${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? messagesByDate[formattedDate][0].author_name : ''}:</span><span class="comment-text">${messageText}</span></div>
+            </div>
+          `);
+          
+          weekDays.append(weekDayElement);
+        }
+      } else {
+        console.error('week-days element not found!');
+      }
+    });
+    
     $(document).ready(function() {
       // バブルアニメーションを初期化
       initBubbles();
+      
+      // カレンダーを初期化
+      initCalendar();
+      
+      // 前月ボタンをクリックしたとき
+      $("#prev-month").click(function() {
+        changeMonth(-1);
+      });
+      
+      // 次月ボタンをクリックしたとき
+      $("#next-month").click(function() {
+        changeMonth(1);
+      });
     });
   </script>
   <script src="js/script.js"></script>

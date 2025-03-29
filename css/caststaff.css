@@ -1,0 +1,312 @@
+/* 「キャスト＆STAFF」ページ用スタイル */
+
+.caststaff-header {
+  background: linear-gradient(135deg, #AC92EC 0%, #967ADC 100%);
+  padding: 60px 0;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 50px;
+  border-radius: 10px;
+}
+
+.caststaff-header h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.caststaff-header p {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.caststaff-content {
+  max-width: 1200px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.caststaff-section {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.caststaff-section h2 {
+  color: #967ADC;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.caststaff-section h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #967ADC;
+}
+
+/* キャスト一覧 */
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.cast-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cast-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.cast-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.cast-info {
+  padding: 20px;
+}
+
+.cast-info h3 {
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.cast-role {
+  font-size: 14px;
+  color: #967ADC;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.cast-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.cast-social {
+  display: flex;
+  gap: 10px;
+}
+
+.cast-social a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.cast-social a:hover {
+  background-color: #967ADC;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* スタッフ一覧 */
+.staff-list {
+  margin-top: 30px;
+}
+
+.staff-category {
+  margin-bottom: 40px;
+}
+
+.staff-category h3 {
+  color: #967ADC;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 20px;
+}
+
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.staff-item {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.staff-item:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.staff-name {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.staff-role {
+  font-size: 12px;
+  color: #888;
+}
+
+/* インタビューセクション */
+.interview-section {
+  margin-top: 50px;
+}
+
+.interview-item {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.interview-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.interview-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.interview-person h3 {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.interview-role {
+  font-size: 14px;
+  color: #967ADC;
+}
+
+.interview-content {
+  line-height: 1.8;
+  color: #333;
+}
+
+.interview-content p {
+  margin-bottom: 15px;
+}
+
+.interview-content blockquote {
+  background-color: #fff;
+  padding: 20px;
+  border-left: 4px solid #967ADC;
+  margin: 20px 0;
+  font-style: italic;
+  color: #555;
+}
+
+/* ギャラリーセクション */
+.gallery-section {
+  margin-top: 50px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.gallery-item {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* モーダル */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-content {
+  max-width: 80%;
+  max-height: 80vh;
+  position: relative;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+.modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+}
+
+.modal-caption {
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}

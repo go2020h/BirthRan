@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {href: 'chart.html', text: '相関図'},
         {href: 'news.html', text: 'お知らせ'},
         {href: 'caststaff.html', text: 'キャスト＆STAFF'},
-        {href: 'delivery.html', text: '配信'}
+        {href: 'index.html#youtube-section', text: '配信'}
       ];
       
       // アクティブメニューアイテムを決定
@@ -43,9 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
           break;
         case 'caststaff':
           activeMenuIndex = 5;
-          break;
-        case 'delivery':
-          activeMenuIndex = 6;
           break;
       }
       
