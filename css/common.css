@@ -127,7 +127,273 @@ html, body {
   background-color: #e0e0e0;
 }
 
-/* u30d8u30c3u30c0u30fc（u975eu8868u793a） */
-.header, .tbs-v9-gheader {
+/* u30b9u30deu30dbu7528u30d8u30c3u30c0u30fcu306fu30c7u30b9u30afu30c8u30c3u30d7u3067u306fu975eu8868u793a */
+.sp-header {
   display: none;
+}
+
+/* u30d8u30c3u30c0u30fcu3068u30b0u30edu30fcu30d0u30ebu30d8u30c3u30c0u30fcu306eu8868u793au8a2du5b9a */
+.header, .tbs-v9-gheader {
+  display: block;
+}
+
+/* u30b9u30deu30dbu8868u793au6642u306eu8abfu6574 */
+@media screen and (max-width: 767px) {
+  /* u30b9u30deu30dbu7528u30d8u30c3u30c0u30fc */
+  .sp-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 9999; /* u6700u524du9762u306bu8868u793a */
+    background-color: #0a1525;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* u30d8u30c3u30c0u30fcu30d7u30ecu30fcu30b9u30dbu30ebu30c0u30fc */
+  #header-placeholder {
+    position: relative;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    height: 50px; /* u30d8u30c3u30c0u30fcu3068u540cu3058u9ad8u3055 */
+  }
+  
+  /* u30dau30fcu30b8u30b3u30f3u30c6u30f3u30c4u306eu8abfu6574 */
+  body {
+    padding-top: 0; /* u30d8u30c3u30c0u30fcu306eu9ad8u3055u5206u306eu4f59u767du3092u524au9664 */
+    margin: 0;
+  }
+  
+  /* u30d2u30fcu30edu30fcu30bbu30afu30b7u30e7u30f3u306eu8abfu6574 */
+  #hero-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0;
+    line-height: 0;
+    position: relative;
+    top: 0;
+  }
+  
+  /* u30d2u30fcu30edu30fcu753bu50cfu306eu8abfu6574 */
+  .hero-image {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* u30b3u30f3u30c6u30f3u30c4u30e9u30c3u30d1u30fc */
+  #con-wrap {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* u30adu30e3u30c3u30c1u30b3u30d4u30fc */
+  .catchcopy-wrapper {
+    margin-top: 0;
+    padding-top: 20px;
+  }
+}
+
+/* PCu8868u793au6642u306eu8abfu6574 */
+@media screen and (min-width: 768px) {
+  /* u30d2u30fcu30edu30fcu30bbu30afu30b7u30e7u30f3u306eu8abfu6574 */
+  #hero-section {
+    margin-top: 0 !important; /* PCu8868u793au6642u306fu4e0bu3052u306au3044 */
+    padding-top: 0;
+  }
+  
+  body {
+    padding-top: 0; /* PCu8868u793au6642u306fu30dau30c7u30a3u30f3u30b0u3092u8ffdu52a0u3057u306au3044 */
+  }
+}
+
+/* 週間ランキングセクション */
+.weekly-ranking-wrapper {
+  padding: 60px 0;
+  background-color: var(--light-bg);
+}
+
+.weekly-ranking-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.weekly-ranking-section .section-title {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+}
+
+.weekly-ranking-section .section-description {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.day-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.day-tab {
+  padding: 10px 20px;
+  margin: 0 5px 10px;
+  background-color: var(--white);
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.day-tab:hover {
+  background-color: var(--primary-color-light);
+}
+
+.day-tab.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.ranking-content {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ranking-day-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--light-bg);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.ranking-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ranking-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.ranking-info {
+  flex: 1;
+}
+
+.ranking-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.ranking-message {
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.ranking-date {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .weekly-ranking-section .section-title {
+    font-size: 2rem;
+  }
+  
+  .weekly-ranking-section .section-description {
+    font-size: 1rem;
+  }
+  
+  .day-tab {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .ranking-day-title {
+    font-size: 1.5rem;
+  }
+  
+  .ranking-item {
+    padding: 12px;
+  }
+  
+  .ranking-number {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekly-ranking-section .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .day-tab {
+    padding: 6px 12px;
+    margin: 0 3px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .ranking-day-title {
+    font-size: 1.3rem;
+  }
+  
+  .ranking-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .ranking-author {
+    font-size: 0.9rem;
+  }
+  
+  .ranking-message {
+    font-size: 0.9rem;
+  }
+  
+  .ranking-date {
+    font-size: 0.8rem;
+  }
 }

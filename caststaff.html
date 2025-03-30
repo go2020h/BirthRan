@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="css/caststaff.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="stylesheet" href="css/footer.css">
   <style>
     /* キャスト＆STAFF用スタイル */
     #caststaff {
@@ -17,13 +16,15 @@
       position: relative;
       overflow-x: hidden;
       color: white;
+      margin-bottom: 0; /* 余白を削除 */
+      padding-bottom: 0; /* 余白を削除 */
     }
 
+    /* コンテンツラッパー */
     .wrap {
-      background-color: #0a1525;
-      padding: 20px;
-      position: relative;
-      z-index: 5;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
     /* バブルアニメーション */
@@ -32,15 +33,10 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh; /* 100vhに変更、画面の高さに合わせる */
       pointer-events: none;
       z-index: 1;
-    }
-
-    /* メニューカバー */
-    .menu_outer {
-      position: relative;
-      z-index: 10;
+      bottom: auto; /* 下端を自動に設定しない */
     }
 
     /* ヒーローセクション */
@@ -342,22 +338,10 @@
     <canvas id="bubble-canvas"></canvas>
   </div>
   
-  <!-- ヘッダー -->
-  <div id="header-placeholder" style="position: relative; z-index: 10;"></div>
+  <!-- ヘッダープレースホルダー -->
+  <div id="header-placeholder"></div>
 
-  <div class="menu_outer">
-    <ul class="menu">
-      <li><a href="index.html"><span>ホーム</span></a></li>
-      <li><a href="about.html"><span>はじめに</span></a></li>
-      <li><a href="story.html"><span>あらすじ</span></a></li>
-      <li><a href="chart.html"><span>相関図</span></a></li>
-      <li><a href="news.html"><span>お知らせ</span></a></li>
-      <li class="active"><a href="caststaff.html"><span>キャスト＆STAFF</span></a></li>
-      <li><a href="index.html#youtube-section"><span>配信</span></a></li>
-    </ul>
-  </div>
-
-  <div class="wrap" style="position: relative; z-index: 5;">
+  <div id="con-wrap" class="wrap">
     <!-- キャスト紹介セクション -->
     <div class="staff-section cast-section">
       <h2>愛あるパーソナリティ</h2>
@@ -533,9 +517,10 @@
     </div>
 
   </div>
+  <!-- wrapの終わり -->
 
   <!-- フッタープレースホルダー -->
-  <div id="footer-placeholder"></div>
+  <div id="footer-placeholder" style="position: relative; z-index: 10; clear: both; margin-top: 20px;"></div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/script.js"></script>
@@ -549,7 +534,7 @@
         name: "芳賀正光",
         role: "企画構成",
         birthday: "2月16日",
-        image: "img/cast/staff1.jpg",
+        image: "img/cast/staff1-2.jpg",
         message: "誕生日をお祝いしたい人が居る。誕生日をお祝いしてくれる人が居る。とても幸せなことです。私は…、誕生日に産んでくれてありがとう、育ててくれてありがとうという想いを込めて両親にプレゼントを渡しています。その時に出会える最高の笑顔が大好きなんです。この番組を通じ誕生日をお祝いすることがとても素敵な時間であることを見直して欲しいと願っています。"
       },
       {
@@ -599,7 +584,7 @@
         role: "WEBディレクター",
         birthday: "11月11日",
         image: "img/cast/staff7-2.jpg",
-        message: "11月11日生まれです。1が並ぶからか、わりと覚えてもらえてることが多くて、毎年「今日だったよね？」と声をかけてもらえるのがちょっと嬉しいです。\nしかもポッキー＆プリッツの日でもあるので、軽いプレゼントとしてポッキーをもらうことも。気負わず祝ってもらえる、その“ちょうどよさ”が気に入っています。\n\n誕生日って、誰にとっても一年に一度の大切な日ですが、「おめでとう」の一言だけで笑顔が生まれる、不思議な力があると思っています。この番組の“バースデーランキング”も、そんな笑顔のきっかけになればうれしいです。僕も、自分の誕生日にちょっと得した気分になった経験を胸に、番組づくりで誰かの特別な1日をほんの少し明るくできたらと思っています。\n\nしかもポッキー＆プリッツの日でもあるので、軽いプレゼントとしてポッキーをもらうことも。気負わず祝ってもらえる、その“ちょうどよさ”が気に入っています。\n\n誕生日って、誰にとっても一年に一度の大切な日ですが、「おめでとう」の一言だけで笑顔が生まれる、不思議な力があると思っています。\n\nこの番組の“バースデーランキング”も、そんな笑顔のきっかけになればうれしいです。僕も、自分の誕生日にちょっと得した気分になった経験を胸に、番組づくりで誰かの特別な1日をほんの少し明るくできたらと思っています。"
+        message: "11月11日生まれです。1が並ぶからか、わたりやすい誕生日です。\nしかもポッキー＆プリッツの日でもあるので、軽いプレゼントとしてポッキーをもらうことも。気負わず祝ってもらえる、その“ちょうどよさ”が気に入っています。\n\n誕生日って、誰にとっても一年に一度の大切な日ですが、「おめでとう」の一言だけで笑顔が生まれる、不思議な力があると思っています。この番組の“バースデーランキング”も、そんな笑顔のきっかけになればうれしいです。僕も、自分の誕生日にちょっと得した気分になった経験を胸に、番組づくりで誰かの特別な1日をほんの少し明るくできたらと思っています。\n\nしかもポッキー＆プリッツの日でもあるので、軽いプレゼントとしてポッキーをもらうことも。気負わず祝ってもらえる、その“ちょうどよさ”が気に入っています。\n\n誕生日って、誰にとっても一年に一度の大切な日ですが、「おめでとう」の一言だけで笑顔が生まれる、不思議な力があると思っています。\n\nこの番組の“バースデーランキング”も、そんな笑顔のきっかけになればうれしいです。僕も、自分の誕生日にちょっと得した気分になった経験を胸に、番組づくりで誰かの特別な1日をほんの少し明るくできたらと思っています。"
 
       }
     ];
@@ -672,11 +657,48 @@
       const dialogContent = document.getElementById('staff-dialog-content');
       let birthdayHtml = staff.birthday ? `<span style="font-size: 16px; color: #ccc; margin-left: 15px;">${staff.birthday}</span>` : '';
       
+      // スマホ表示かどうかを判定
+      const isMobile = window.innerWidth <= 767;
+      
+      // 画像パスを設定（スマホ表示時は一覧と同じ画像を使用）
+      let imagePath;
+      if (isMobile) {
+        // スマホ表示時は一覧と同じ画像を使用
+        switch(staffId) {
+          case 1:
+            imagePath = "img/cast/staff1.jpg";
+            break;
+          case 2:
+            imagePath = "img/cast/staff2.jpg";
+            break;
+          case 3:
+            imagePath = "img/cast/staff3.jpg";
+            break;
+          case 4:
+            imagePath = "img/cast/staff4.jpg";
+            break;
+          case 5:
+            imagePath = "img/cast/staff5.jpg";
+            break;
+          case 6:
+            imagePath = "img/cast/staff6.jpg";
+            break;
+          case 7:
+            imagePath = "img/cast/staff7.jpg";
+            break;
+          default:
+            imagePath = staff.image;
+        }
+      } else {
+        // PC表示時はスタッフデータの画像を使用
+        imagePath = staff.image;
+      }
+      
       dialogContent.innerHTML = `
         <div style="display: flex; width: 100%; flex-direction: column; max-width: 100%;">
           <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
             <div style="flex: 0 0 40%; min-width: 250px; margin-bottom: 20px;">
-              <img src="${staff.image}" alt="${staff.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+              <img src="${imagePath}" alt="${staff.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
             </div>
             <div style="flex: 1; padding-left: 30px; padding-right: 20px;">
               <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white; display: flex; align-items: center;">${staff.name}${birthdayHtml}</h2>
@@ -720,39 +742,24 @@ ${staff.message}
       const dialogContent = document.getElementById('personality-dialog-content');
       let birthdayHtml = personality.birthday ? `<span style="font-size: 16px; color: #ccc; margin-left: 15px;">${personality.birthday}</span>` : '';
       
-      // ダイアログ用の画像パスを生成
-      let dialogImagePath = '';
-      switch(personalityId) {
-        case 1:
-          dialogImagePath = 'img/cast/cast1-2.jpg';
-          break;
-        case 2:
-          dialogImagePath = 'img/cast/cast2-2.jpg';
-          break;
-        case 3:
-          dialogImagePath = 'img/cast/cast3-2.jpg';
-          break;
-        case 4:
-          dialogImagePath = 'img/cast/cast4-2.jpg';
-          break;
-        case 5:
-          dialogImagePath = 'img/cast/cast5-2.jpg';
-          break;
-        case 6:
-          dialogImagePath = 'img/cast/cast6-2.jpg';
-          break;
-        case 7:
-          dialogImagePath = 'img/cast/cast7-2.jpg';
-          break;
-        default:
-          dialogImagePath = personality.image;
+      // スマホ表示かどうかを判定
+      const isMobile = window.innerWidth <= 767;
+      
+      // 画像パスを設定（スマホ表示時は一覧と同じ画像を使用）
+      let imagePath;
+      if (isMobile) {
+        // スマホ表示時は一覧と同じ画像を使用
+        imagePath = personality.image;
+      } else {
+        // PC表示時はパーソナリティデータの画像を使用
+        imagePath = getDialogImagePath(personalityId);
       }
       
       dialogContent.innerHTML = `
         <div style="display: flex; width: 100%; flex-direction: column; max-width: 100%;">
           <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
             <div style="flex: 0 0 40%; min-width: 250px; margin-bottom: 20px;">
-              <img src="${dialogImagePath}" alt="${personality.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+              <img src="${imagePath}" alt="${personality.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
             </div>
             <div style="flex: 1; padding-left: 30px; padding-right: 20px;">
               <h2 style="font-size: 24px; margin-bottom: 5px; border-bottom: 1px solid #4a5b79; padding-bottom: 10px; color: white; display: flex; align-items: center;">${personality.name}${birthdayHtml}</h2>
@@ -772,6 +779,28 @@ ${personality.message}
       const dialogContentElement = dialog.querySelector('.personality-dialog-content');
       dialogContentElement.style.opacity = 1;
       dialogContentElement.style.transform = 'scale(1)';
+    }
+    
+    // ダイアログ用の画像パスを取得する関数
+    function getDialogImagePath(personalityId) {
+      switch(personalityId) {
+        case 1:
+          return 'img/cast/cast1-2.jpg';
+        case 2:
+          return 'img/cast/cast2-2.jpg';
+        case 3:
+          return 'img/cast/cast3-2.jpg';
+        case 4:
+          return 'img/cast/cast4-2.jpg';
+        case 5:
+          return 'img/cast/cast5-2.jpg';
+        case 6:
+          return 'img/cast/cast6-2.jpg';
+        case 7:
+          return 'img/cast/cast7-2.jpg';
+        default:
+          return personalityData.find(p => p.id === personalityId)?.image || '';
+      }
     }
 
     // パーソナリティダイアログを閉じる関数
@@ -808,64 +837,77 @@ ${personality.message}
       }
     });
 
-    // バブルアニメーション用の関数
+    // u30e1u30cbu30e5u30fcu306eu30a2u30afu30c6u30a3u30d6u9805u76eeu3092u8a2du5b9a
+    $(document).ready(function() {
+      // u30a2u30afu30c6u30a3u30d6u306au30e1u30cbu30e5u30fcu9805u76eeu3092u30deu30fcu30afu3059u308b
+      const currentPage = 'caststaff';
+      const navLinks = document.querySelectorAll('.menu li a');
+      
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.includes(currentPage)) {
+          link.parentElement.classList.add('active');
+        }
+      });
+      
+      // u30d0u30d6u30ebu30adu30e3u30f3u30d0u30b9u306eu521du671f
+      initBubbles();
+    });
+    
+    // u30d0u30d6u30ebu30a2u30cbu30e1u30fcu30b7u30e7u30f3
     function initBubbles() {
       const canvas = document.getElementById('bubble-canvas');
+      if (!canvas) return; // canvasが存在しない場合は処理を終了
+      
       const ctx = canvas.getContext('2d');
       
-      // キャンバスサイズをウィンドウサイズに合わせる
+      // u30d0u30d6u30ebu306eu6574u3092u8a2du5b9a
       function resizeCanvas() {
+        // canvasu306eu30b5u30a4u30b9u3092u8a2du5b9a
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        const footerTop = footerPlaceholder ? footerPlaceholder.getBoundingClientRect().top : window.innerHeight;
+        
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.height = Math.min(window.innerHeight, footerTop);
+        console.log('Canvas resized to:', canvas.width, 'x', canvas.height);
       }
       
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
       
-      // バブルの設定
+      // u30d0u30d6u30ebu306eu6574u3092u8a2du5b9a
       const bubbles = [];
-      // バブルの数を増やす
-      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.04); // 画面サイズに応じてバブルの数を調整
+      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.04); // u30d0u30d6u30ebu306eu6574u3092u8a2du5b9a
       
-      // バブルを生成
+      // u30d0u30d6u30ebu3092u751fu3059
       for (let i = 0; i < bubbleCount; i++) {
         const size = Math.random() < 0.5 ? 
-                    Math.random() * 30 + 10 : // 小さいバブル (50%)
+                    Math.random() * 30 + 10 : // u5c0u5c4u306eu30d0u30d6u30eb (50%)
                     Math.random() < 0.6 ? 
-                      Math.random() * 50 + 40 : // 中くらいのバブル (30%)
-                      Math.random() * 80 + 90; // 大きいバブル (20%)
+                      Math.random() * 50 + 40 : // u4e2du4e0au30d0u30d6u30eb (30%)
+                      Math.random() * 80 + 90; // u5927u3044u30d0u30d6u30eb (20%)
         
         bubbles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: size / 2,
-          // バブルの色を変更
-          color: `rgba(255, 255, 255, ${0.1 + Math.random() * 0.15})`, // 不透明度を変更
-          angle: Math.random() * Math.PI * 2, // 移動方向
-          speed: 0.1 + Math.random() * 0.5,   // 移動速度
-          rotationSpeed: (Math.random() - 0.5) * 0.01, // 回転速度
-          opacity: 0.2 + Math.random() * 0.3  // 不透明度を変更
+          color: `rgba(255, 255, 255, ${0.1 + Math.random() * 0.15})`, // u30d0u30d6u30ebu306eu8272u3092u8a2du5b9a
+          angle: Math.random() * Math.PI * 2, // u30d0u30d6u30ebu306eu89d2u3092u8a2du5b9a
+          speed: 0.1 + Math.random() * 0.5,   // u30d0u30d6u30ebu306eu901fu3092u8a2du5b9a
+          rotationSpeed: (Math.random() - 0.5) * 0.01, // u30d0u30d6u30ebu306eu6e6fu3092u8a2du5b9a
+          opacity: 0.2 + Math.random() * 0.3  // u30d0u30d6u30ebu306eu30d2u30d1u30b9u3092u8a2du5b9a
         });
       }
       
-      // アニメーションループ
+      // u30a2u30cbu30e1u30fcu30b7u30e7u30f3u3092u5f00u59cb
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // 背景のグラデーションを描画（オプション）
-        // const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        // gradient.addColorStop(0, '#0a1525');
-        // gradient.addColorStop(1, '#0a1525');
-        // ctx.fillStyle = gradient;
-        // ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // 各バブルを描画・更新
+        // u30d0u30d6u30ebu3092u751fu3059
         bubbles.forEach(bubble => {
-          // バブルを描画（輪郭をぼかす）
           ctx.beginPath();
           ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
           
-          // ぼかし効果を追加
           ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
           ctx.shadowBlur = bubble.radius * 0.5;
           
@@ -873,14 +915,14 @@ ${personality.message}
           ctx.globalAlpha = bubble.opacity;
           ctx.fill();
           
-          // バブルの位置を更新
+          // u30d0u30d6u30ebu306eu4f4du7f6eu3092u66f4u65b0
           bubble.x += Math.cos(bubble.angle) * bubble.speed;
           bubble.y += Math.sin(bubble.angle) * bubble.speed;
           
-          // バブルの角度をわずかに変化させる（より自然な動き）
+          // u30d0u30d6u30ebu306eu89d2u3092u66f4u65b0
           bubble.angle += bubble.rotationSpeed;
           
-          // 画面外に出たバブルを反対側から再登場させる
+          // u30d0u30d6u30ebu304cu30b9u30fcu30e0u3067u306fu3068u308bu308bu3067u304du3063u3044u3066u306fu3068u308bu308bu3067u304du3063u3044
           if (bubble.x - bubble.radius > canvas.width) {
             bubble.x = -bubble.radius;
           } else if (bubble.x + bubble.radius < 0) {
@@ -900,26 +942,9 @@ ${personality.message}
       animate();
     }
     
-    // ページ読み込み時にバブルアニメーションを初期化
+    // u30a2u30cbu30e1u30fcu30b7u30e7u30f3u3092u5f00u59cb
     document.addEventListener('DOMContentLoaded', function() {
       initBubbles();
-    });
-    
-    // ヘッダーを読み込む
-    $(document).ready(function() {
-      // ヘッダーを読み込む
-      $("#header-placeholder").load("includes/header.html", function() {
-        // ヘッダーが読み込まれた後の処理
-        const currentPage = 'caststaff';
-        const navLinks = document.querySelectorAll('.menu li a');
-        
-        navLinks.forEach(link => {
-          const href = link.getAttribute('href');
-          if (href && href.includes(currentPage)) {
-            link.parentElement.classList.add('active');
-          }
-        });
-      });
     });
   </script>
 </body>

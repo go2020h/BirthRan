@@ -1,116 +1,105 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // デバッグ用のログを追加
-  console.log('DOM読み込み完了');
+  // u30c7u30d0u30c3u30b0u7528u306eu30edu30b0u3092u8ffdu52a0
+  console.log('DOMu8aadu307fu8fbcu307fu5b8cu4e86');
   
-  // ヘッダーとフッターを読み込む関数
+  // u30d8u30c3u30c0u30fcu3068u30d5u30c3u30bfu30fcu3092u8aadu307fu8fbcu3080u95a2u6570
   function loadCommonElements() {
-    console.log('共通要素の読み込み開始');
+    console.log('u5171u901au8981u7d20u306eu8aadu307fu8fbcu307fu958bu59cb');
     
-    // ヘッダーを読み込む
-    fetch('includes/header.html')
-      .then(response => {
-        console.log('ヘッダーのレスポンス:', response);
-        return response.text();
-      })
-      .then(data => {
-        console.log('ヘッダーのデータ取得成功:', data.substring(0, 50) + '...');
-        document.getElementById('header-placeholder').innerHTML = data;
-        
-        // ページタイトルを設定
-        setPageTitle();
-        
-        // 現在のページをメニューでハイライト
-        highlightCurrentPage();
-      })
-      .catch(error => {
-        console.error('ヘッダーの読み込みエラー:', error);
-      });
+    // u30d8u30c3u30c0u30fcJSu3092u8aadu307fu8fbcu3080
+    const headerScript = document.createElement('script');
+    headerScript.src = 'js/header.js';
+    headerScript.onload = function() {
+      console.log('u30d8u30c3u30c0u30fcJSu304cu6b63u5e38u306bu8aadu307fu8fbcu307eu308cu307eu3057u305f');
+      // u30dau30fcu30b8u30bfu30a4u30c8u30ebu3092u8a2du5b9a
+      setPageTitle();
+      
+      // u73feu5728u306eu30dau30fcu30b8u3092u30e1u30cbu30e5u30fcu3067u30deu30a4u30e9u30a4u30c8
+      highlightCurrentPage();
+    };
+    document.head.appendChild(headerScript);
     
-    // フッターを読み込む
-    fetch('includes/footer.html')
-      .then(response => {
-        console.log('フッターのレスポンス:', response);
-        return response.text();
-      })
-      .then(data => {
-        console.log('フッターのデータ取得成功:', data.substring(0, 50) + '...');
-        document.getElementById('footer-placeholder').innerHTML = data;
-      })
-      .catch(error => {
-        console.error('フッターの読み込みエラー:', error);
-      });
+    // u30d5u30c3u30bfu30fcJSu3092u8aadu307fu8fbcu3080
+    const footerScript = document.createElement('script');
+    footerScript.src = 'js/footer.js';
+    footerScript.onload = function() {
+      console.log('u30d5u30c3u30bfu30fcJSu304cu6b63u5e38u306bu8aadu307fu8fbcu307eu308cu307eu3057u305f');
+    };
+    document.head.appendChild(footerScript);
   }
   
-  // ページタイトルを設定する関数
+  // u30dau30fcu30b8u30bfu30a4u30c8u30ebu3092u8a2du5b9au3059u308bu95a2u6570
   function setPageTitle() {
-    console.log('ページタイトル設定開始');
+    console.log('u30dau30fcu30b8u30bfu30a4u30c8u30ebu8a2du5b9au958bu59cb');
     const pageId = document.body.id;
-    console.log('現在のページID:', pageId);
+    console.log('u73feu5728u306eu30dau30fcu30b8ID:', pageId);
     const titleElement = document.getElementById('page-title');
     
     if (!titleElement) {
-      console.warn('page-title要素が見つかりません');
+      console.log('u30dau30fcu30b8u30bfu30a4u30c8u30ebu8981u7d20u304cu898bu3064u304bu308au307eu305bu3093');
       return;
     }
     
-    let title = '';
-    let subtitle = '';
+    let pageTitle = 'u30a6u30a3u30fcu30afu30eau30fcu30fbu30d0u30fcu30b9u30c7u30fcu30fbu30e9u30f3u30adu30f3u30b0';
     
     switch(pageId) {
       case 'home':
-        title = 'BirthRan';
-        subtitle = 'ウィークリー・バースデー・ランキング';
+        pageTitle = 'u30dbu30fcu30e0 | ' + pageTitle;
         break;
       case 'about':
-        title = 'はじめに';
-        subtitle = '番組について';
+        pageTitle = 'u306fu3058u3081u306b | ' + pageTitle;
         break;
       case 'story':
-        title = 'あらすじ';
-        subtitle = '番組の楽しみ方';
+        pageTitle = 'u3042u3089u3059u3058 | ' + pageTitle;
         break;
       case 'chart':
-        title = '相関図';
-        subtitle = 'クロスメディア展開';
+        pageTitle = 'u76f8u95a2u56f3 | ' + pageTitle;
         break;
       case 'news':
-        title = 'お知らせ';
-        subtitle = 'ゲストへのプレゼント情報';
+        pageTitle = 'u304au77e5u3089u305b | ' + pageTitle;
         break;
       case 'caststaff':
-        title = 'キャスト＆STAFF';
-        subtitle = 'スタッフ情報';
+        pageTitle = 'u30adu30e3u30b9u30c8u357eu30b9u30bfu30c3u30d5 | ' + pageTitle;
         break;
       case 'delivery':
-        title = '配信';
-        subtitle = 'TBS配信サービス';
+        pageTitle = 'u914du4fe1 | ' + pageTitle;
         break;
       default:
-        title = 'BirthRan';
-        subtitle = 'ウィークリー・バースデー・ランキング';
+        pageTitle = pageTitle;
     }
     
-    console.log('設定するタイトル:', title, subtitle);
-    titleElement.innerHTML = title + '<br><span class="subtitle">' + subtitle + '</span>';
+    titleElement.textContent = pageTitle;
+    document.title = pageTitle;
+    console.log('u30dau30fcu30b8u30bfu30a4u30c8u30ebu3092u8a2du5b9a:', pageTitle);
   }
   
-  // 現在のページをメニューでハイライトする関数
+  // u73feu5728u306eu30dau30fcu30b8u3092u30e1u30cbu30e5u30fcu3067u30deu30a4u30e9u30a4u30c8u3059u308bu95a2u6570
   function highlightCurrentPage() {
-    console.log('メニューハイライト処理開始');
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    console.log('現在のページパス:', currentPage);
-    const menuLinks = document.querySelectorAll('.menu a');
+    console.log('u73feu5728u30dau30fcu30b8u306eu30deu30a4u30e9u30a4u30c8u958bu59cb');
+    const pageId = document.body.id;
+    console.log('u73feu5728u306eu30dau30fcu30b8ID:', pageId);
     
-    menuLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      console.log('メニューリンク:', href);
-      if (href === currentPage) {
-        console.log('アクティブなメニュー項目:', href);
-        link.parentElement.classList.add('active');
+    // u30e1u30cbu30e5u30fcu30eau30f3u30afu3092u53d6u5f97
+    const navLinks = document.querySelectorAll('.menu li a');
+    console.log('u30e1u30cbu30e5u30fcu30eau30f3u30afu6570:', navLinks.length);
+    
+    if (navLinks.length === 0) {
+      console.log('u30e1u30cbu30e5u30fcu30eau30f3u30afu304cu898bu3064u304bu308au307eu305bu3093');
+      return;
+    }
+    
+    // u5404u30eau30f3u30afu3092u78bau8a8d
+    navLinks.forEach(link => {
+      console.log('u30eau30f3u30afu78bau8a8d:', link.href);
+      
+      // u73feu5728u306eu30dau30fcu30b8u306bu5bfeu5fdcu3059u308bu30eau30f3u30afu3092u30deu30a4u30e9u30a4u30c8
+      if (link.href.includes(pageId + '.html')) {
+        console.log('u73feu5728u30dau30fcu30b8u306eu30eau30f3u30afu3092u30deu30a4u30e9u30a4u30c8:', link.href);
+        link.classList.add('active');
       }
     });
   }
   
-  // 共通要素を読み込む
+  // u5171u901au8981u7d20u3092u8aadu307fu8fbcu3080
   loadCommonElements();
 });

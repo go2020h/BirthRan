@@ -551,3 +551,53 @@
 .wrap > div + div {
   margin-top: 0;
 }
+
+/* u30b9u30deu30dbu8868u793au6642u306eu8abfu6574 */
+@media screen and (max-width: 767px) {
+  /* u30d2u30fcu30edu30fcu30bbu30afu30b7u30e7u30f3u3092u30d8u30c3u30c0u30fcu306eu4e0bu306bu914du7f6e */
+  #hero-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* u30d2u30fcu30edu30fcu753bu50cfu3092u4e0bu3052u308b */
+  .hero-image {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* u30d8u30c3u30c0u30fcu306eu8a2du5b9a */
+  .sp-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 50px;
+  }
+  
+  /* u30d8u30c3u30c0u30fcu30d7u30ecu30fcu30b9u30dbu30ebu30c0u30fc */
+  #header-placeholder {
+    position: relative;
+    z-index: 999;
+  }
+  
+  /* u30b3u30f3u30c6u30f3u30c4u30e9u30c3u30d1u30fc */
+  #con-wrap {
+    margin-top: 0; /* u30d2u30fcu30edu30fcu753bu50cfu304cu3042u308bu306eu3067u4f59u767du3092u8abfu6574 */
+    padding-top: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .catchcopy-wrapper {
+    padding-top: 20px;
+  }
+}

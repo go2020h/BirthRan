@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="css/calendar.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="stylesheet" href="css/footer.css">
   <!-- Supabaseクライアントライブラリ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.38.4/dist/umd/supabase.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -25,15 +24,6 @@
       pointer-events: none;
       z-index: 3; /* z-indexを上げて前面に表示 */
       display: block;
-    }
-    
-    /* メニューセクション */
-    .menu_outer {
-      position: relative;
-      z-index: 10;
-      float: none;
-      margin-top: 0; /* マージンを削除 */
-      background-color: #0066cc; /* 背景色を変更 */
     }
     
     /* ヒーローセクション */
@@ -60,11 +50,6 @@
       height: auto;
       display: block;
       margin: 0 auto;
-      opacity: 1;
-      position: relative;
-      z-index: 2; /* 画像のz-indexはそのまま */
-      object-fit: contain; /* 画像を画面内に収める */
-      vertical-align: middle; /* 画像を中央に配置 */
     }
     
     #hero-section img {
@@ -349,97 +334,11 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     }
     
-    /* フッター */
-    footer {
-      background: linear-gradient(135deg, #0a1525 0%, #1a3a6c 100%);
-      color: #fff;
-      padding: 30px 0;
-      margin-top: 50px;
-      width: 100%;
-      left: 0;
-      right: 0;
-      position: relative;
-    }
+
     
-    footer .wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      width: 100%;
-    }
+
     
-    #social-links {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    
-    #social-links ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    #social-links li {
-      margin: 0 10px;
-    }
-    
-    #social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-size: 20px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    
-    #social-links a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-    }
-    
-    .x-logo {
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      font-size: 24px;
-    }
-    
-    .copy {
-      text-align: center;
-      margin-top: 20px;
-    }
-    
-    .copy small {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-    }
-    
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
-      margin: 0 10px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s ease;
-    }
-    
-    .footer-links a:hover {
-      color: #fff;
-    }
+
     
     /* カレンダー */
     .calendar-wrapper {
@@ -919,25 +818,15 @@
   </style>
 </head>
 <body id="home">
+  <!-- ヘッダープレースホルダー -->
+  <div id="header-placeholder"></div>
+  
   <!-- ヒーローセクション -->
   <div id="hero-section">
     <canvas id="bubble-canvas"></canvas>
     <img src="img/hero.png" alt="ヒーロー画像" class="hero-image">
   </div>
-
-  <!-- メニューセクション -->
-  <div class="menu_outer">
-    <ul class="menu">
-      <li class="active"><a href="index.html"><span>ホーム</span></a></li>
-      <li><a href="about.html"><span>はじめに</span></a></li>
-      <li><a href="story.html"><span>あらすじ</span></a></li>
-      <li><a href="chart.html"><span>相関図</span></a></li>
-      <li><a href="news.html"><span>お知らせ</span></a></li>
-      <li><a href="caststaff.html"><span>キャスト＆STAFF</span></a></li>
-      <li><a href="#youtube-section"><span>配信</span></a></li>
-    </ul>
-  </div>
-
+  
   <div id="con-wrap">
     <div id="con-body">
       <div class="wrap">
@@ -1005,6 +894,131 @@
           </div>
         </div>
 
+               <!-- 週間ランキングセクション -->
+               <div class="weekly-ranking-wrapper">
+                <div class="weekly-ranking-section">
+                  <h2 class="section-title">週間ランキング</h2>
+                  <p class="section-description">先週の木曜から水曜までのメッセージのTop3を表示します</p>
+                  
+                  <!-- 曜日切り替えタブ -->
+                  <div class="day-tabs">
+                    <button class="day-tab" data-day="thu">木</button>
+                    <button class="day-tab" data-day="fri">金</button>
+                    <button class="day-tab" data-day="sat">土</button>
+                    <button class="day-tab" data-day="sun">日</button>
+                    <button class="day-tab" data-day="mon">月</button>
+                    <button class="day-tab" data-day="tue">火</button>
+                    <button class="day-tab" data-day="wed">水</button>
+                  </div>
+                  
+                  <!-- ランキングコンテンツ -->
+                  <div class="ranking-contents">
+                    <!-- 木曜日のランキング -->
+                    <div class="ranking-content" id="ranking-thu">
+                      <h3 class="ranking-day-title">木曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <div class="ranking-item">
+                          <div class="ranking-number">1</div>
+                          <div class="ranking-info">
+                            <div class="ranking-author">松田和佳</div>
+                            <div class="ranking-message">私は小さい頃から歌うのが大好きでした。</div>
+                            <div class="ranking-date">2025/3/21</div>
+                          </div>
+                        </div>
+                        <div class="ranking-item">
+                          <div class="ranking-number">2</div>
+                          <div class="ranking-info">
+                            <div class="ranking-author">神谷明采</div>
+                            <div class="ranking-message">私は大学院で心理学を専攻しています。</div>
+                            <div class="ranking-date">2025/3/21</div>
+                          </div>
+                        </div>
+                        <div class="ranking-item">
+                          <div class="ranking-number">3</div>
+                          <div class="ranking-info">
+                            <div class="ranking-author">宮崎美穂</div>
+                            <div class="ranking-message">私はAKB48で活動していたときが一番楽しかったです。</div>
+                            <div class="ranking-date">2025/3/21</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- 金曜日のランキング -->
+                    <div class="ranking-content" id="ranking-fri" style="display: none;">
+                      <h3 class="ranking-day-title">金曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <div class="ranking-item">
+                          <div class="ranking-number">1</div>
+                          <div class="ranking-info">
+                            <div class="ranking-author">ユウニャン</div>
+                            <div class="ranking-message">私は猫が大好きで、猫カフェによく行きます。</div>
+                            <div class="ranking-date">2025/3/22</div>
+                          </div>
+                        </div>
+                        <div class="ranking-item">
+                          <div class="ranking-number">2</div>
+                          <div class="ranking-info">
+                            <div class="ranking-author">ChumuNote</div>
+                            <div class="ranking-message">私はVTuberとして活動しています。</div>
+                            <div class="ranking-date">2025/3/22</div>
+                          </div>
+                        </div>
+                        <div class="ranking-item">
+                          <div class="ranking-number">3</div>
+                          <div class="ranking-info">
+                            <div class="ranking-author">風谷南友</div>
+                            <div class="ranking-message">私は女優として活動しています。</div>
+                            <div class="ranking-date">2025/3/22</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- 他の曜日のランキングも同様に追加 -->
+                    <!-- 土曜日のランキング -->
+                    <div class="ranking-content" id="ranking-sat" style="display: none;">
+                      <h3 class="ranking-day-title">土曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <!-- ランキングアイテム -->
+                      </div>
+                    </div>
+                    
+                    <!-- 日曜日のランキング -->
+                    <div class="ranking-content" id="ranking-sun" style="display: none;">
+                      <h3 class="ranking-day-title">日曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <!-- ランキングアイテム -->
+                      </div>
+                    </div>
+                    
+                    <!-- 月曜日のランキング -->
+                    <div class="ranking-content" id="ranking-mon" style="display: none;">
+                      <h3 class="ranking-day-title">月曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <!-- ランキングアイテム -->
+                      </div>
+                    </div>
+                    
+                    <!-- 火曜日のランキング -->
+                    <div class="ranking-content" id="ranking-tue" style="display: none;">
+                      <h3 class="ranking-day-title">火曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <!-- ランキングアイテム -->
+                      </div>
+                    </div>
+                    
+                    <!-- 水曜日のランキング -->
+                    <div class="ranking-content" id="ranking-wed" style="display: none;">
+                      <h3 class="ranking-day-title">水曜日のランキング</h3>
+                      <div class="ranking-list">
+                        <!-- ランキングアイテム -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
         <!-- YouTube-LIVE -->
         <div id="youtube-section" class="youtube-wrapper" style="transition: none !important; transform: none !important;">
           <div class="youtube-section" style="transition: none !important; transform: none !important;">
@@ -1067,16 +1081,16 @@
                 </h3>
                 <div class="guest-profile">
                   <div class="guest-avatar">
-                    <img src="https://placehold.jp/FF5722/ffffff/200x200.png?text=ゲスト" alt="ゲスト">
+                    <img src="img/cast/cast3.jpg" alt="神谷明采">
                   </div>
                   <div class="guest-info">
-                    <h4>山田太郎</h4>
-                    <p class="guest-birthday">4月17日生まれのA型</p>
-                    <p class="guest-appearance">出演日：3月17日</p>
+                    <h4>神谷明采</h4>
+                    <p class="guest-birthday">4月19日生まれのA型</p>
+                    <p class="guest-appearance">出演日：3月19日</p>
                   </div>
                 </div>
-                <p class="guest-description">4月17日生まれのA型の山田太郎さんを迎えて、生配信でお祝いします。詳細は生配信ページをチェックしてください。</p>
-                <a href="#" class="btn-secondary">出演情報を確認する</a>
+                <p class="guest-description">東京大学大学院生。知的で洞察力のある視点からのトーク、番組に深みを与えています。</p>
+                <a href="caststaff.html" class="btn-secondary">出演情報を確認する</a>
               </div>
               
               <!-- ランキング -->
@@ -1112,6 +1126,8 @@
             </div>
           </div>
         </div>
+
+ 
 
         <!-- 愛あるゲスト -->
         <div class="love-guest-section">
@@ -1342,7 +1358,7 @@
     async function initCalendar() {
       console.log('initCalendar called');
       try {
-        // u9031u9593u30d5u30e5u30fcu3092u5148u306bu623bu3057u3001u30d0u30b9u30e9u30f3u3092u8868u793a
+        // u9031u9593u30d5u30fcu30bfu3092u5148u306bu623bu3057u3001u30d0u30b9u30e9u30f3u3092u8868u793a
         await renderWeekView();
         await renderCalendar(currentYear, currentMonth);
         setupPopupEvents();
@@ -1439,30 +1455,21 @@
             dayClass += " today";
           }
           
-          // u6728u66dcu65e5u306fu653eu9001u65e5
+          // u6728u66dcu65e5u306fu653eu9001u65e5u306eu30afu30e9u30b9u3092u524au9664
           // if (currentDate.getDay() === 4) { // u6728u66dc u65e5
           //   dayClass += " broadcast";
           // }
           
-          // u30d0u30d6u30ebu306eu8272u3092u5909u66f4
-          if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
-            dayClass += " has-message";
-          }
+          // u30e1u30c3u30bbu30fcu30b8u304cu308bu5834u5408u306eu30afu30e9u30b9u3092u524au9664
+          // if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+          //   dayClass += " message-day";
+          // }
           
-          // u30e1u30c3u30bbu30fcu30b8u3092u53d6u5f97
-          let messageText = '';
-          let authorName = '';
-          if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
-            messageText = messagesByDate[formattedDate][0].comment_text;
-            authorName = messagesByDate[formattedDate][0].author_name;
-          }
-          
-          // u30d0u30d6u30ebu3092u63cfu753b
           const weekDayElement = $(`
             <div class="${dayClass}" data-date="${formattedDate}" data-day="${dayOfWeekIndex}">
               <div class="week-day-number">${dayNumber}</div>
               <div class="week-day-name">${dayOfWeek}</div>
-              <div class="week-day-message">${authorName ? `<span class="author-name">${authorName}:</span><span class="comment-text">${messageText}</span>` : ''}</div>
+              <div class="week-day-message">${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<span class="author-name">${messagesByDate[formattedDate][0].author_name}:</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span>` : ''}</div>
             </div>
           `);
           
@@ -1584,7 +1591,7 @@
             
             // u6728u66dcu65e5u306fu653eu9001u65e5u306eu30afu30e9u30b9u3092u524au9664
             // if (currentDate.getDay() === 4) { // u6728u66dc u65e5
-            //   dayClass += " broadcast-day";
+            //   dayClass += " broadcast";
             // }
             
             // u30e1u30c3u30bbu30fcu30b8u304cu308bu5834u5408u306eu30afu30e9u30b9u3092u524au9664
@@ -1705,10 +1712,55 @@
       $("#next-month").click(function() {
         changeMonth(1);
       });
+      
+      // カレンダーポップアップの表示・非表示
+      $('#view-calendar-btn').click(function() {
+        $('#calendar-popup-overlay').fadeIn(300);
+      });
+      
+      $('#calendar-popup-close').click(function() {
+        $('#calendar-popup-overlay').fadeOut(300);
+      });
+      
+      // 週間ランキングのタブ切り替え
+      $('.day-tab').click(function() {
+        const day = $(this).data('day');
+        
+        // タブのアクティブ状態を切り替え
+        $('.day-tab').removeClass('active');
+        $(this).addClass('active');
+        
+        // コンテンツの表示を切り替え
+        $('.ranking-content').hide();
+        $(`#ranking-${day}`).show();
+      });
+      
+      // 現在の曜日に対応するタブをアクティブにする
+      function setDefaultActiveTab() {
+        const today = new Date();
+        const dayOfWeek = today.getDay(); // 0: 日曜日, 1: 月曜日, ..., 6: 土曜日
+        
+        // 曜日に対応するタブのdata-day値
+        const dayMap = {
+          0: 'sun', // 日曜日
+          1: 'mon', // 月曜日
+          2: 'tue', // 火曜日
+          3: 'wed', // 水曜日
+          4: 'thu', // 木曜日
+          5: 'fri', // 金曜日
+          6: 'sat'  // 土曜日
+        };
+        
+        const defaultDay = dayMap[dayOfWeek];
+        $(`.day-tab[data-day="${defaultDay}"]`).click();
+      }
+      
+      // ページ読み込み時に実行
+      setDefaultActiveTab();
     });
   </script>
-  <script src="js/script.js"></script>
   <script src="js/header.js"></script>
+  <script src="js/script.js"></script>
   <script src="js/footer.js"></script>
 </body>
 </html>
