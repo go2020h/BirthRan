@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
               </li>
               <li>
                 <a href="https://x.com/birth_ran_" target="_blank" title="バスラン公式X" class="x-logo">&#x1D54F;</a>
-                <span class="account-label">バスラン公式</span>
+                <span class="account-label">バスラン</span>
               </li>
             </ul>
           </div>
