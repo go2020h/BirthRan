@@ -62,16 +62,19 @@ html, body {
   font-weight: bold;
   padding: 5px 0;
   display: block;
+  text-decoration: none;
 }
 
 .menu li a:hover {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 5px 10px;
   margin: 0 -10px;
+  text-decoration: none;
 }
 
 .menu li.active a {
   background-color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
 }
 
 /* u5171u901au30b3u30f3u30ddu30fcu30cdu30f3u30c8 */
@@ -85,14 +88,7 @@ html, body {
 }
 
 .section-title:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background-color: #0066cc;
+  content: none;
 }
 
 .btn-primary {

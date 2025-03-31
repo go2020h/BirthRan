@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     #social-links li {
       margin: 0 10px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
     }
 
     #social-links a {
@@ -59,12 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
       font-size: 20px !important;
       transition: all 0.3s ease !important;
       text-decoration: none !important;
+      margin-bottom: 5px !important;
     }
 
     #social-links a:hover {
       background-color: rgba(255, 255, 255, 0.2) !important;
       transform: translateY(-3px) !important;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    #social-links .account-label {
+      font-size: 12px !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      margin-top: 5px !important;
     }
 
     .x-logo {
@@ -104,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
       font-size: 14px !important;
       opacity: 0.8 !important;
       transition: opacity 0.3s ease !important;
+      text-decoration: none !important;
     }
 
     .footer-links a:hover {
@@ -141,7 +152,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="wrap">
           <div id="social-links">
             <ul>
-              <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">&#x1D54F;</a></li>
+              <li>
+                <a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">&#x1D54F;</a>
+                <span class="account-label">忍者ハチ</span>
+              </li>
+              <li>
+                <a href="https://x.com/birth_ran_" target="_blank" title="バスラン公式X" class="x-logo">&#x1D54F;</a>
+                <span class="account-label">バスラン公式</span>
+              </li>
             </ul>
           </div>
           <div class="footer-links">

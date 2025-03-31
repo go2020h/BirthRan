@@ -39,15 +39,7 @@
 }
 
 .section-title:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(to right, #d4af37, #f5e7a3); /* ゴールドグラデーション */
-  border-radius: 2px;
+  content: none;
 }
 
 .caststaff-header {
@@ -229,6 +221,44 @@
   color: #888;
 }
 
+/* スタッフメッセージ */
+.staff-message-section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.staff-message-title {
+  font-size: 24px;
+  color: #1a3a6c;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.staff-message-title:after {
+  content: none;
+  display: none;
+}
+
+.staff-message-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.staff-message-signature {
+  font-style: italic;
+  text-align: right;
+  color: #666;
+  margin-top: 30px;
+}
+
 /* インタビューセクション */
 .interview-section {
   margin-top: 50px;
@@ -315,6 +345,62 @@
   object-fit: cover;
 }
 
+/* スポンサー */
+.sponsors-section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+  width: 100%;
+}
+
+.sponsors-section h2 {
+  color: #d4af37;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.sponsors-section h2:after {
+  content: none;
+}
+
+.sponsor-group {
+  margin-bottom: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+.sponsor-group h3 {
+  color: #d4af37;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.sponsor-description {
+  margin-bottom: 5px;
+  color: #ccc;
+}
+
+.sponsor-logo {
+  margin: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.sponsor-logo a {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.sponsor-logo img {
+  margin: 0 auto;
+  display: block;
+  max-width: 80% !important;
+}
+
 /* モーダル */
 .modal {
   display: none;
@@ -383,6 +469,23 @@
   
   .staff-message-content {
     font-size: 14px;
+  }
+  
+  .sponsors-section {
+    text-align: center;
+    padding: 0 15px;
+  }
+  
+  .sponsor-group {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .sponsor-logo {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
   }
 }
 

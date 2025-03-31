@@ -39,15 +39,7 @@
 }
 
 .section-title:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(to right, #d4af37, #f5e7a3); /* u30b4u30fcu30ebu30c9u30b0u30e9u30c7u30fcu30b7u30e7u30f3 */
-  border-radius: 2px;
+  content: none;
 }
 
 /* u304au77e5u3089u305bu30bbu30afu30b7u30e7u30f3 */
