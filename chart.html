@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>相関図 | efitプレゼンツ☆ウィークリー・バースデー・ランキング</title>
+  <title>バスラン</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/chart.css">
+  <link rel="stylesheet" href="css/tabs.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <!-- footer.cssu306eu53c2u7167u3092u524au9664 -->
   <style>
     /* チャートページ用スタイル */
     .chart-section {
@@ -199,6 +200,229 @@
       font-size: 0.9rem;
       color: #555;
     }
+    
+    /* タブ切り替えスタイル */
+    .tab-container {
+      margin-top: 20px;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    
+    .tab-button {
+      background-color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .tab-button.active {
+      background-color: #5e0f8b;
+      color: #fff;
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* スマートフォン用スタイル */
+    @media screen and (max-width: 767px) {
+      /* ハンバーガーメニュー */
+      .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+      
+      .hamburger-menu span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: #fff;
+        transition: all 0.3s ease;
+      }
+      
+      .hamburger-menu.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      
+      .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger-menu.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+      
+      /* メニュー */
+      .menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: rgba(10, 21, 37, 0.95);
+        z-index: 1000;
+        transition: right 0.3s ease;
+        padding-top: 60px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+      }
+      
+      .menu.active {
+        right: 0;
+      }
+      
+      .menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .menu li {
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .menu li a {
+        display: block;
+        padding: 15px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .menu li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+    
+    /* スマートフォン用スタイル */
+    @media screen and (max-width: 767px) {
+      /* 画像をクリックで拡大 */
+      .section-bg .wrap {
+        max-width: 100%;
+        padding: 0;
+      }
+      
+      .crossmedia-section {
+        padding: 0 5px;
+      }
+      
+      .overview-image {
+        margin: 0;
+        width: 100%;
+        max-width: none;
+        cursor: pointer;
+      }
+      
+      /* タブスタイル */
+      .tab-container {
+        margin: 20px 0;
+      }
+      
+      .tab-buttons {
+        flex-wrap: wrap;
+      }
+      
+      .tab-button {
+        flex: 1 1 auto;
+        margin: 0 2px 5px;
+        padding: 8px 5px;
+        font-size: 14px;
+      }
+      
+      /* モーダルスタイル */
+      .modal {
+        display: none !important;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .modal.show {
+        display: flex !important;
+      }
+      
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 95%;
+        max-width: 1000px;
+        max-height: 90vh;
+        object-fit: contain;
+      }
+      
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        z-index: 2001;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      /* コンテンツの調整 */
+      .digital-features, .conclusion-content {
+        margin: 20px 0;
+        padding: 15px 10px;
+      }
+      
+      .feature-list li {
+        margin-bottom: 12px;
+      }
+      
+      /* スマートフォン用スタイル */
+      .section-bg {
+        padding: 0;
+      }
+      
+      .section-bg .wrap {
+        max-width: 100%;
+        padding: 0;
+      }
+      
+      .crossmedia-section {
+        padding: 0 5px;
+      }
+    }
   </style>
 </head>
 <body id="chart" class="chart cmn">
@@ -206,324 +430,138 @@
   <div id="header-placeholder"></div>
 
   <div id="con-wrap">
-    <div id="con-body">
+    <!-- タイトルセクション -->
+    <div class="title-section-wrapper">
       <div class="wrap">
         <section id="contents">
-          <div class="chart-header">
-            <h1>クロスメディア展開</h1>
-            <p>「BirthRan」は、ラジオと渋谷愛ビジョンを繋ぐクロスメディア型の視聴者参加型番組です。<br>様々なメディアが連動して展開される相関図をご紹介します。</p>
-          </div>
-          
           <h2 class="section-title">クロスメディア展開</h2>
-          
-          <div class="chart-intro">
-            <div class="intro-container">
-              <div class="intro-image">
-                <img src="img/chart/crossmedia.jpg" alt="クロスメディア展開">
-              </div>
-              <div class="intro-content">
-                <h3 class="intro-title">メディア横断の視聴者参加型番組</h3>
-                <p class="intro-text">
-                  「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、ラジオと渋谷愛ビジョンを繋ぐクロスメディア型の視聴者参加型番組です。
-                  ラジオ放送、渋谷愛ビジョン、SNS、イベントなど様々なメディアが連動して展開されています。
-                </p>
-                <div class="intro-goals">
-                  <h4>番組の目標</h4>
-                  <ul class="goal-list">
-                    <li><i class="fas fa-trophy"></i> ラジオ日本局内で『聴取率』『SNS（X）』のフォロワー数でNo.1を目指す</li>
-                    <li><i class="fas fa-tv"></i> 渋谷愛ビジョンと連動するクロスメディア展開</li>
-                    <li><i class="fas fa-globe"></i> 魅力的なWEB＆SNS展開</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- メディア連携図 -->
-          <div class="media-connection-diagram">
-            <h3 class="section-subtitle">メディア連携図</h3>
-            <div class="diagram-container">
-              <div class="diagram-center">
-                <div class="diagram-main-node">
-                  <i class="fas fa-birthday-cake"></i>
-                  <h4>ウィークリー・バースデー・ランキング</h4>
-                  <p>毎週木曜日 18:00～20:30</p>
-                </div>
-              </div>
-              <div class="diagram-connections">
-                <div class="diagram-node radio">
-                  <div class="node-icon"><i class="fas fa-broadcast-tower"></i></div>
-                  <div class="node-content">
-                    <h5>ラジオ放送</h5>
-                    <p>ラジオ日本神谷町スタジオから生放送</p>
-                  </div>
-                </div>
-                <div class="diagram-node vision">
-                  <div class="node-icon"><i class="fas fa-video"></i></div>
-                  <div class="node-content">
-                    <h5>渋谷愛ビジョン</h5>
-                    <p>連動放送・誕生日プレゼント放映</p>
-                  </div>
-                </div>
-                <div class="diagram-node sns">
-                  <div class="node-icon"><i class="fas fa-hashtag"></i></div>
-                  <div class="node-content">
-                    <h5>SNS展開</h5>
-                    <p>X・Instagram・TikTokでの情報発信</p>
-                  </div>
-                </div>
-                <div class="diagram-node calendar">
-                  <div class="node-icon"><i class="fas fa-calendar-alt"></i></div>
-                  <div class="node-content">
-                    <h5>バスランカレンダー</h5>
-                    <p>毎週の1位の愛メッセージを収録</p>
-                  </div>
-                </div>
-                <div class="diagram-node present">
-                  <div class="node-icon"><i class="fas fa-gift"></i></div>
-                  <div class="node-content">
-                    <h5>誕生日プレゼント</h5>
-                    <p>motherの提供・渋谷愛ビジョン放映枠</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="chart-section">
-            <h3><i class="fas fa-broadcast-tower"></i> ラジオ番組</h3>
-            <div class="chart-content">
-              <div class="chart-item">
-                <div class="chart-item-image">
-                  <img src="img/chart/radio.jpg" alt="ラジオ番組">
-                </div>
-                <div class="chart-item-text">
-                  <h4>efitプレゼンツ☆ウィークリー・バースデー・ランキング</h4>
-                  <p>ラジオ日本で毎週木曜日18:00～20:30に放送中の番組です。視聴者から寄せられた投票結果をもとに、毎週の誕生日有名人ランキングを発表。週替わりの5人のレギュラーMCとゲストを招いてのトーク、サプライズ企画も満載！</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="chart-section">
-            <h3><i class="fas fa-video"></i> 渋谷愛ビジョン連動</h3>
-            <div class="chart-content">
-              <div class="chart-item">
-                <div class="chart-item-image">
-                  <img src="img/chart/vision.jpg" alt="渋谷愛ビジョン">
-                </div>
-                <div class="chart-item-text">
-                  <h4>渋谷愛ビジョン連動企画</h4>
-                  <p>放送中の19:00～19:20には渋谷愛メッセージ誕生祭の再放送を、20:00～20:20には番組ゲストに4分30秒の放映枠を誕生日プレゼントとして提供します。また、ラジオ放送終了後には音楽を除いた部分の再放送を渋谷愛ビジョン・YouTube-LIVEで20分～60分で配信します。</p>
-                </div>
-              </div>
-              <div class="chart-item">
-                <div class="chart-item-image">
-                  <img src="img/chart/supporter.jpg" alt="渋谷愛ビジョンサポーター">
-                </div>
-                <div class="chart-item-text">
-                  <h4>渋谷愛ビジョンサポーター</h4>
-                  <p>川村ケンスケと風谷南友が渋谷愛ビジョンサポーターとして毎週出演。渋谷からのリポートやトレンド情報、街頭インタビューなどを担当します。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="chart-section">
-            <h3><i class="fab fa-twitter"></i> SNS展開</h3>
-            <div class="chart-content">
-              <div class="chart-item">
-                <div class="chart-item-image">
-                  <img src="img/chart/sns.jpg" alt="SNS">
-                </div>
-                <div class="chart-item-text">
-                  <h4>公式SNSアカウント</h4>
-                  <p>X（旧Twitter）、Instagram、TikTokなど各種SNSで番組情報を発信。ハッシュタグ「#バスラン」を使った投稿で番組に参加できます。ラジオ日本公式Xのフォロワー数4.2万人を超えることを目標にしています。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="chart-section">
-            <h3><i class="fas fa-calendar-alt"></i> バスランカレンダー</h3>
-            <div class="chart-content">
-              <div class="chart-item">
-                <div class="chart-item-image">
-                  <img src="img/chart/calendar.jpg" alt="バスランカレンダー">
-                </div>
-                <div class="chart-item-text">
-                  <h4>バスランカレンダー</h4>
-                  <p>番組の特別企画として「バスランカレンダー」を制作。放送後、カレンダーの1日のマス目内に1位になった方の40文字の愛メッセージを埋めていきます。完成したカレンダーは後日販売も予定しています。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="chart-section">
-            <h3><i class="fas fa-gift"></i> 誕生日プレゼント</h3>
-            <div class="chart-content">
-              <div class="chart-item">
-                <div class="chart-item-image">
-                  <img src="img/present.jpg" alt="誕生日プレゼント">
-                </div>
-                <div class="chart-item-text">
-                  <h4>mother（誕生日プレゼント）</h4>
-                  <p>誕生日を迎えたゲストには健康であり続けてほしいという願いを込めて、誕生日プレゼントとして「mother」を提供します。このプレゼントを提供してくださる企業（おめあり社）も募集しています。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 番組構成図 -->
-          <div class="chart-diagram" style="margin-top: 50px;">
-            <h3 class="section-subtitle">番組構成図</h3>
-            <div class="diagram-container" style="background-color: rgba(94, 15, 139, 0.03); padding: 30px; border-radius: 15px; margin-bottom: 30px;">
-              <div style="max-width: 800px; margin: 0 auto;">
-                <div style="display: flex; justify-content: center; margin-bottom: 30px;">
-                  <div style="text-align: center; background: linear-gradient(135deg, #5e0f8b 0%, #9c27b0 100%); color: white; padding: 15px; border-radius: 8px; width: 300px; box-shadow: 0 10px 30px rgba(94, 15, 139, 0.3);">
-                    <h4 style="margin: 0;">ウィークリー・バースデー・ランキング</h4>
-                    <p style="margin: 5px 0 0;">毎週木曜日 18:00～20:30</p>
-                  </div>
-                </div>
-                
-                <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
-                  <div style="flex: 1; text-align: center; margin: 0 10px;">
-                    <div style="background-color: #2196F3; color: white; padding: 10px; border-radius: 8px; box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3); transition: all 0.3s ease;">
-                      <h4 style="margin: 0;">ラジオ放送</h4>
-                      <p style="margin: 5px 0 0;">ラジオ日本</p>
-                    </div>
-                  </div>
-                  <div style="flex: 1; text-align: center; margin: 0 10px;">
-                    <div style="background-color: #FF5722; color: white; padding: 10px; border-radius: 8px; box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3); transition: all 0.3s ease;">
-                      <h4 style="margin: 0;">渋谷愛ビジョン</h4>
-                      <p style="margin: 5px 0 0;">連動放送</p>
-                    </div>
-                  </div>
-                  <div style="flex: 1; text-align: center; margin: 0 10px;">
-                    <div style="background-color: #1DA1F2; color: white; padding: 10px; border-radius: 8px; box-shadow: 0 5px 15px rgba(29, 161, 242, 0.3); transition: all 0.3s ease;">
-                      <h4 style="margin: 0;">SNS展開</h4>
-                      <p style="margin: 5px 0 0;">X・Instagram</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div style="display: flex; justify-content: space-between;">
-                  <div style="flex: 1; text-align: center; margin: 0 10px;">
-                    <div style="background-color: #607D8B; color: white; padding: 10px; border-radius: 8px; box-shadow: 0 5px 15px rgba(96, 125, 139, 0.3); transition: all 0.3s ease;">
-                      <h4 style="margin: 0;">視聴者参加</h4>
-                      <p style="margin: 5px 0 0;">投票・メッセージ</p>
-                    </div>
-                  </div>
-                  <div style="flex: 1; text-align: center; margin: 0 10px;">
-                    <div style="background-color: #4CAF50; color: white; padding: 10px; border-radius: 8px; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3); transition: all 0.3s ease;">
-                      <h4 style="margin: 0;">バスランカレンダー</h4>
-                      <p style="margin: 5px 0 0;">愛メッセージ収録</p>
-                    </div>
-                  </div>
-                  <div style="flex: 1; text-align: center; margin: 0 10px;">
-                    <div style="background-color: #9C27B0; color: white; padding: 10px; border-radius: 8px; box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3); transition: all 0.3s ease;">
-                      <h4 style="margin: 0;">誕生日プレゼント</h4>
-                      <p style="margin: 5px 0 0;">mother提供</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 各メディアの詳細セクション -->
-          <div class="media-details-section">
-            <h3 class="section-subtitle">各メディアの詳細</h3>
-            
-            <!-- SNS展開 -->
-            <div class="media-card">
-              <div class="media-card-header sns">
-                <i class="fab fa-twitter"></i>
-                <h4>SNS展開</h4>
-              </div>
-              <div class="media-card-body">
-                <div class="media-card-image">
-                  <img src="img/chart/sns.jpg" alt="SNS">
-                </div>
-                <div class="media-card-content">
-                  <h5>公式SNSアカウント</h5>
-                  <p>X（旧Twitter）、Instagram、TikTokなど各種SNSで番組情報を発信。ハッシュタグ「#バスラン」を使った投稿で番組に参加できます。ラジオ日本公式Xのフォロワー数No.1を目指しています。</p>
-                  <div class="social-links">
-                    <a href="#" class="social-link twitter"><i class="fab fa-twitter"></i> X（旧Twitter）</a>
-                    <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="#" class="social-link tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- バスランカレンダー -->
-            <div class="media-card">
-              <div class="media-card-header calendar">
-                <i class="fas fa-calendar-alt"></i>
-                <h4>バスランカレンダー</h4>
-              </div>
-              <div class="media-card-body">
-                <div class="media-card-image">
-                  <img src="img/chart/calendar.jpg" alt="バスランカレンダー">
-                </div>
-                <div class="media-card-content">
-                  <h5>バスランカレンダー</h5>
-                  <p>番組の特別企画として「バスランカレンダー」を制作。放送後、カレンダーの1日のマス目内に1位になった方の40文字の愛メッセージを埋めていきます。完成したカレンダーは後日販売も予定しています。</p>
-                  <div class="calendar-features">
-                    <div class="calendar-feature">
-                      <div class="feature-icon"><i class="fas fa-heart"></i></div>
-                      <div class="feature-text">毎週の1位の愛メッセージを収録</div>
-                    </div>
-                    <div class="calendar-feature">
-                      <div class="feature-icon"><i class="fas fa-shopping-cart"></i></div>
-                      <div class="feature-text">完成版は後日販売予定</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- 誕生日プレゼント -->
-            <div class="media-card">
-              <div class="media-card-header present">
-                <i class="fas fa-gift"></i>
-                <h4>誕生日プレゼント</h4>
-              </div>
-              <div class="media-card-body">
-                <div class="media-card-image">
-                  <img src="img/present.jpg" alt="誕生日プレゼント">
-                </div>
-                <div class="media-card-content">
-                  <h5>mother（誕生日プレゼント）</h5>
-                  <p>誕生日を迎えたゲストには健康であり続けてほしいという願いを込めて、誕生日プレゼントとして「mother」を提供します。このプレゼントを提供してくださる企業（おめあり社）も募集しています。</p>
-                  <div class="present-features">
-                    <div class="present-feature">
-                      <div class="feature-icon"><i class="fas fa-tv"></i></div>
-                      <div class="feature-text">渋谷愛ビジョン放映枠（4分30秒）</div>
-                    </div>
-                    <div class="present-feature">
-                      <div class="feature-icon"><i class="fas fa-handshake"></i></div>
-                      <div class="feature-text">プレゼント提供企業も募集中</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </section>
+      </div>
+    </div>
 
-        
+    <div id="con-body-content">
+      <div class="wrap">
+
+        <!-- クロスメディア展開の全体像 -->
+        <div class="section-bg section-bg-1">
+          <div class="wrap">
+            <section class="crossmedia-section">
+              <h3 class="section-subtitle"> クロスメディア展開の全体像</h3>
+              <div class="crossmedia-overview">
+                <div class="overview-image" onclick="openModal()">
+                  <img src="img/crossmedia.png" alt="クロスメディア展開の全体像" class="full-width-image" id="crossmediaImage">
+                </div>
+                <div class="overview-text">
+                  
+                  <!-- タブ切り替え機能 -->
+                  <div class="tab-container">
+                    <div class="tab-buttons">
+                      <button class="tab-button active" data-tab="media-tab"><i class="fas fa-link"></i> メディア間の連携</button>
+                      <button class="tab-button" data-tab="content-tab"><i class="fas fa-sync-alt"></i> コンテンツの展開</button>
+                      <button class="tab-button" data-tab="collab-tab"><i class="fas fa-users"></i> コラボレーション</button>
+                    </div>
+                    
+                    <!-- メディア間の連携タブ -->
+                    <div id="media-tab" class="tab-content active">
+                      <div class="digital-features">
+                        <ul class="feature-list">
+                          <li><strong>ラジオ番組を核にした連携：</strong>ラジオ日本の「ウィークリー・バースデー・ランキング」を中心に、公式WEBサイト、渋谷愛ビジョン（街頭ビジョン）、YouTube Live、SNS（X/Twitter）が相互に連携しています。</li>
+                          <li><strong>メッセージの循環：</strong>投稿者からの誕生日メッセージがWEBサイトやラジオ番組に届き、それがさらに渋谷の街頭ビジョンで放映される流れを作り出しています。</li>
+                          <li><strong>バイタルデータ連携：</strong>MOTHERブレスレットと連携し、出演者のリアルタイムバイタルデータを表示します。</li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <!-- コンテンツの展開タブ -->
+                    <div id="content-tab" class="tab-content">
+                      <div class="digital-features">
+                        <ul class="feature-list">
+                          <li><strong>マルチプラットフォーム展開：</strong>ラジオでの放送内容がYouTubeでアーカイブ配信され、SNSで拡散される仕組みを整えています。</li>
+                          <li><strong>街中からデジタルへ：</strong>渋谷愛ビジョンでのゲスト映像放映が街中で視聴され、その様子がSNSで共有される循環を生み出しています。</li>
+                          <li><strong>ランキング情報の更新：</strong>ランキング情報がWEBサイトで更新され、次回放送の期待感を高める仕組みを取り入れています。</li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <!-- コラボレーションタブ -->
+                    <div id="collab-tab" class="tab-content">
+                      <div class="digital-features">
+                        <ul class="feature-list">
+                          <li><strong>メッセージからコンテンツへ：</strong>投稿者からのメッセージが番組コンテンツになり、それが様々なメディアで展開されます。</li>
+                          <li><strong>SNSフィードバック：</strong>SNSでの反応がラジオ番組にフィードバックされ、コンテンツに反映される双方向のコミュニケーションを実現しています。</li>
+                          <li><strong>新規視聴者の獲得：</strong>YouTube視聴者からの再拡散でさらに新しい視聴者を獲得する好循環を生み出しています。</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                 
+                  
+                  <!-- まとめ文章 -->
+                  <div class="conclusion-content">
+                    <h4><i class="fas fa-check-circle"></i> クロスメディア戦略のまとめ</h4>
+                    <p>このクロスメディア戦略により、単なるラジオ番組を超えて、リスナー・視聴者との双方向コミュニケーションを実現し、複数のメディアにまたがる一貫した「誕生日を祝う」体験を創出します。各メディアの特性を活かしながら相互に補完し合うことで、「おめでとう」「ありがとう」というポジティブなメッセージを広く伝播させる仕組みを構築しています。</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- フッター -->
+  <!-- フッタープレースホルダー -->
   <div id="footer-placeholder"></div>
+
+  <!-- モーダル -->
+  <div id="imageModal" class="modal" style="display: none;">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/header.js"></script>
   <script src="js/footer.js"></script>
+  
+  <!-- タブ切り替え用のJavaScript -->
+  <script>
+    $(document).ready(function() {
+      // タブ切り替え機能
+      $('.tab-button').click(function() {
+        var tabId = $(this).data('tab');
+        
+        // アクティブクラスの切り替え
+        $('.tab-button').removeClass('active');
+        $(this).addClass('active');
+        
+        // コンテンツの切り替え
+        $('.tab-content').removeClass('active');
+        $('#' + tabId).addClass('active');
+      });
+    });
+    
+    // モーダル表示
+    function openModal() {
+      var modal = document.getElementById('imageModal');
+      modal.classList.add('show');
+      document.getElementById('modalImage').src = document.getElementById('crossmediaImage').src;
+    }
+    
+    // モーダル非表示
+    function closeModal() {
+      var modal = document.getElementById('imageModal');
+      modal.classList.remove('show');
+    }
+    
+    // モーダル外をクリックで非表示
+    window.onclick = function(event) {
+      var modal = document.getElementById('imageModal');
+      if (event.target == modal) {
+        modal.classList.remove('show');
+      }
+    }
+  </script>
 </body>
 </html>

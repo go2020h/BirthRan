@@ -2,19 +2,20 @@
 
 /* カレンダーラッパー */
 .calendar-wrapper {
-  background: linear-gradient(135deg, #FF9A8B 0%, #FF6B88 55%, #FF99AC 100%);
+  background: #e6f2ff; /* 背景色 */
   padding-top: 40px; /* 上の余白を40pxに変更 */
   padding-bottom: 40px; /* 下の余白を40pxに変更 */
   margin-top: 0; /* 上の余白を減らす */
   margin-bottom: 30px; /* 下の余白も減らす */
   border-radius: 0 !important; /* 角を丸くしない */
-  box-shadow: 0 5px 15px rgba(255, 107, 136, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-section {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
+  background-color: transparent; /* 背景色を透明に変更 */
 }
 
 .calendar-content {

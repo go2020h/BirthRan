@@ -1,17 +1,19 @@
 /* u30c8u30c3u30d7u30dau30fcu30b8u7528u30b9u30bfu30a4u30eb */
 
 /* u30d2u30fcu30edu30fcu30bbu30afu30b7u30e7u30f3 */
-.hero-section {
+#hero-section {
   position: relative;
   height: auto;
   width: 100%;
   background-color: #16152e;
-  background-image: url('../img/hero.png');
-  background-size: contain;
-  background-position: center top;
-  background-repeat: no-repeat;
   margin-top: 0;
-  padding-top: 33.33%; /* u753bu50cfu306eu30a2u30b9u30dau30afu30c8u6bd4u306bu5408u308fu305bu3066u8abfu6574 */
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
 
 /* u30d0u30d6u30ebu30adu30e3u30f3u30d0u30b9 */
@@ -142,7 +144,7 @@
 }
 
 .program-info {
-  background-color: #e0f7fa;
+  background-color: #e6f2ff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -214,6 +216,114 @@
   margin-right: 5px;
 }
 
+/* u756au7d44u7d39u4ecbu30bbu30afu30b7u30e7u30f3 */
+.program-introduction {
+  margin-bottom: 0; /* u4e0bu90e8u306eu30deu30fcu30b8u30f3u30920u306bu8a2du5b9a */
+}
+
+.intro-section-wrapper {
+  background: transparent; /* u80ccu666fu8272u3092u900fu660eu306bu8a2du5b9a */
+  padding: 60px 0 40px; /* u4e0bu90e8u306eu30d1u30c7u30a3u30f3u30b0u3092u8abfu6574 */
+  color: #000; /* u9ed2 */
+  border-bottom: 1px solid rgba(26, 58, 108, 0.1); /* u9752u3044u30dcu30fcu30c0u30fc */
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: row; /* u6a2au4e26u3073u306bu5909u66f4 */
+  gap: 30px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(26, 58, 108, 0.1); /* u9752u3044u5f71 */
+  border: 1px solid rgba(26, 58, 108, 0.05); /* u9752u3044u30dcu30fcu30c0u30fc */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* u30a2u30cbu30e1u30fcu30b7u30e7u30f3 */
+  align-items: center; /* u4e2du592eu63c3u3048 */
+}
+
+.intro-container:hover {
+  transform: translateY(-5px); /* u30a2u30cbu30e1u30fcu30b7u30e7u30f3 */
+  box-shadow: 0 15px 40px rgba(26, 58, 108, 0.15); /* u9752u3044u5f71 */
+}
+
+.intro-image {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 3px solid #fff; /* u767du3044u30dcu30fcu30c0u30fc */
+  flex: 1; /* u30d5u30ecu30c3u30afu30b9u30dcu30c3u30afu30b9u306eu6bd4u7387 */
+  max-width: 40%; /* u6700u5927u5e45u3092u8a2du5b9a */
+}
+
+.intro-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease; /* u30a2u30cbu30e1u30fcu30b7u30e7u30f3 */
+}
+
+.intro-image:hover img {
+  transform: scale(1.03); /* u30a2u30cbu30e1u30fcu30b7u30e7u30f3 */
+}
+
+.intro-content {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* u767du3044u80ccu666f */
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(26, 58, 108, 0.05); /* u9752u3044u5f71 */
+  flex: 1.5; /* u30d5u30ecu30c3u30afu30b9u30dcu30c3u30afu30b9u306eu6bd4u7387 */
+}
+
+.intro-title {
+  color: #1a3a6c; /* u9752u3044u6587u5b57 */
+  font-size: 28px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #d4af37; /* u30b4u30fcu30ebu30c9u306eu30dcu30fcu30c0u30fc */
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.intro-text {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: left;
+}
+
+.program-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: rgba(240, 248, 255, 0.5); /* u9752u3044u80ccu666f */
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #1a3a6c; /* u9752u3044u30dcu30fcu30c0u30fc */
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-icon {
+  color: #1a3a6c; /* u9752u3044u6587u5b57 */
+  font-size: 1.2rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(26, 58, 108, 0.1); /* u9752u3044u80ccu666f */
+  border-radius: 50%;
+}
+
+.detail-text {
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+}
+
 /* u9031u9593u306eu30cfu30a4u30e9u30a4u30c8 */
 .weekly-highlight-wrapper {
   margin-bottom: 50px;
@@ -223,7 +333,7 @@
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
 .highlight-container {
@@ -236,10 +346,10 @@
 .highlight-card {
   flex: 1;
   min-width: 300px;
-  background-color: #f8f9fa;
+  background-color: transparent;
   padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .card-title {
@@ -600,4 +710,11 @@
   .catchcopy-wrapper {
     padding-top: 20px;
   }
+}
+
+/* u30b3u30f3u30c6u30cau306eu30b9u30bfu30a4u30eb */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

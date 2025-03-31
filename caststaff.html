@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>キャスト＆STAFF | efitプレゼンツ☆ウィークリー・バースデー・ランキング</title>
+  <title>バスラン</title>
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/caststaff.css">
@@ -27,16 +27,16 @@
       padding: 0 20px;
     }
 
-    /* バブルアニメーション */
+    /* ヒーローセクションとバブルアニメーション */
     #bubble-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh; /* 100vhに変更、画面の高さに合わせる */
+      height: 100vh; /* 100vhに変更 */
       pointer-events: none;
       z-index: 1;
-      bottom: auto; /* 下端を自動に設定しない */
+      bottom: auto; /* 下部に固定しない */
     }
 
     /* ヒーローセクション */
@@ -46,8 +46,17 @@
       margin-top: 0;
       padding: 0;
       text-align: center;
-      background-color: #0a1525;
+      background-color: transparent;
       overflow: hidden;
+      height: auto;
+      min-height: 0;
+    }
+
+    /* スマホ表示時 */
+    @media (max-width: 768px) {
+      #hero-section {
+        display: none;
+      }
     }
 
     .staff-section h2, .cast-section h2 {
@@ -332,190 +341,208 @@
     }
   </style>
 </head>
-<body id="caststaff">
-  <!-- ヒーローセクション -->
-  <div id="hero-section">
-    <canvas id="bubble-canvas"></canvas>
-  </div>
-  
-  <!-- ヘッダープレースホルダー -->
+<body id="caststaff" class="caststaff cmn">
+  <!-- ヘッダー -->
   <div id="header-placeholder"></div>
 
-  <div id="con-wrap" class="wrap">
-    <!-- キャスト紹介セクション -->
-    <div class="staff-section cast-section">
-      <h2>愛あるパーソナリティ</h2>
-      
-      <div class="staff-grid">
-        <!-- 第1週 -->
-        <div class="staff-card" onclick="showPersonalityDialog(1)" style="cursor: pointer;">
-          <img src="img/cast/cast1.jpg" alt="松田和佳" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">第１週</div>
-          <div class="staff-name">松田和佳</div>
-        </div>
-        
-        <!-- 第2週 -->
-        <div class="staff-card" onclick="showPersonalityDialog(2)" style="cursor: pointer;">
-          <img src="img/cast/cast2.jpg" alt="ゆうにゃん" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">第２週</div>
-          <div class="staff-name">ゆうにゃん</div>
-        </div>
-        
-        <!-- 第3週 -->
-        <div class="staff-card" onclick="showPersonalityDialog(3)" style="cursor: pointer;">
-          <img src="img/cast/cast3.jpg" alt="神谷明采" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">第3週</div>
-          <div class="staff-name">神谷明采</div>
-        </div>
-        
-        <!-- 第4週 -->
-        <div class="staff-card" onclick="showPersonalityDialog(4)" style="cursor: pointer;">
-          <img src="img/cast/cast4.jpg" alt="宮崎美穂" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">第4週</div>
-          <div class="staff-name">宮崎美穂</div>
-        </div>
-        
-        <!-- 第5週 -->
-        <div class="staff-card" onclick="showPersonalityDialog(5)" style="cursor: pointer;">
-          <img src="img/cast/cast5.jpg" alt="ChumuNote" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">第5週</div>
-          <div class="staff-name">ChumuNote</div>
-        </div>
-        
-        <!-- スーパーバイザー -->
-        <div class="staff-card" onclick="showPersonalityDialog(6)" style="cursor: pointer;">
-          <img src="img/cast/cast6.jpg" alt="川村ケンスケ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">誕生日総合研究所</div>
-          <div class="staff-name">川村ケンスケ</div>
-        </div>
-        
-        <!-- 風谷南友 -->
-        <div class="staff-card" onclick="showPersonalityDialog(7)" style="cursor: pointer;">
-          <img src="img/cast/cast7.jpg" alt="風谷南友" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">勝負の姫君</div>
-          <div class="staff-name">風谷南友</div>
+  <div id="con-wrap">
+    <!-- タイトルセクション -->
+    <div class="title-section-wrapper" style="background-color: #fff; position: relative; z-index: 2;">
+      <div id="con-body">
+        <div class="wrap">
+          <section id="contents">
+            <h2 class="section-title">
+              <span class="pc-only" style="display: inline;">キャスト＆STAFF</span>
+              <span class="sp-only" style="display: none;">キャスト＆<br>STAFF</span>
+            </h2>
+          </section>
         </div>
       </div>
-      
-      <!-- パーソナリティダイアログ -->
-      <div id="personality-dialog" class="personality-dialog">
-        <div class="personality-dialog-content">
-          <span class="close-button" onclick="closePersonalityDialog()">×</span>
-          <div id="personality-dialog-content">
-            <!-- ダイアログ内容はJavaScriptで生成 -->
+    </div>
+
+    <div id="con-body-content">
+      <div class="wrap">
+        <!-- ヒーローセクション -->
+        <div id="hero-section">
+          <canvas id="bubble-canvas"></canvas>
+        </div>
+        
+        <!-- キャスト紹介セクション -->
+        <div class="staff-section cast-section">
+          <h2>愛あるパーソナリティ</h2>
+          
+          <div class="staff-grid">
+            <!-- 第1週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(1)" style="cursor: pointer;">
+              <img src="img/cast/cast1.jpg" alt="松田和佳" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第１週</div>
+              <div class="staff-name">松田和佳</div>
+            </div>
+            
+            <!-- 第2週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(2)" style="cursor: pointer;">
+              <img src="img/cast/cast2.jpg" alt="ゆうにゃん" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第２週</div>
+              <div class="staff-name">ゆうにゃん</div>
+            </div>
+            
+            <!-- 第3週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(3)" style="cursor: pointer;">
+              <img src="img/cast/cast3.jpg" alt="神谷明采" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第3週</div>
+              <div class="staff-name">神谷明采</div>
+            </div>
+            
+            <!-- 第4週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(4)" style="cursor: pointer;">
+              <img src="img/cast/cast4.jpg" alt="宮崎美穂" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第4週</div>
+              <div class="staff-name">宮崎美穂</div>
+            </div>
+            
+            <!-- 第5週 -->
+            <div class="staff-card" onclick="showPersonalityDialog(5)" style="cursor: pointer;">
+              <img src="img/cast/cast5.jpg" alt="ChumuNote" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">第5週</div>
+              <div class="staff-name">ChumuNote</div>
+            </div>
+            
+            <!-- スーパーバイザー -->
+            <div class="staff-card" onclick="showPersonalityDialog(6)" style="cursor: pointer;">
+              <img src="img/cast/cast6.jpg" alt="川村ケンスケ" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">誕生日総合研究所</div>
+              <div class="staff-name">川村ケンスケ</div>
+            </div>
+            
+            <!-- 風谷南友 -->
+            <div class="staff-card" onclick="showPersonalityDialog(7)" style="cursor: pointer;">
+              <img src="img/cast/cast7.jpg" alt="風谷南友" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">勝負の姫君</div>
+              <div class="staff-name">風谷南友</div>
+            </div>
+          </div>
+          
+          <!-- パーソナリティダイアログ -->
+          <div id="personality-dialog" class="personality-dialog">
+            <div class="personality-dialog-content">
+              <span class="close-button" onclick="closePersonalityDialog()">×</span>
+              <div id="personality-dialog-content">
+                <!-- ダイアログ内容はJavaScriptで生成 -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        
+
+        <!-- 制作STAFF紹介セクション -->
+        <div class="staff-section">
+          <h2>愛あるSTAFF</h2>
+          <div class="staff-grid">
+            <!-- スタッフカード 1 -->
+            <div class="staff-card" onclick="showStaffDialog(1)" style="cursor: pointer;">
+              <img src="img/cast/staff1.jpg" alt="芳賀正光" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">企画構成</div>
+              <div class="staff-name">芳賀正光</div>
+            </div>
+
+            <!-- スタッフカード 2 -->
+            <div class="staff-card" onclick="showStaffDialog(2)" style="cursor: pointer;">
+              <img src="img/cast/staff2.jpg" alt="梅本満" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">プロデューサー</div>
+              <div class="staff-name">梅本満</div>
+            </div>
+
+            <!-- スタッフカード 3 -->
+            <div class="staff-card" onclick="showStaffDialog(3)" style="cursor: pointer;">
+              <img src="img/cast/staff3.jpg" alt="野村満" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">総合演出</div>
+              <div class="staff-name">野村満</div>
+            </div>
+
+            <!-- スタッフカード 4 -->
+            <div class="staff-card" onclick="showStaffDialog(4)" style="cursor: pointer;">
+              <img src="img/cast/staff4.jpg" alt="神取美佳" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">ミキサー・制作</div>
+              <div class="staff-name">神取美佳</div>
+            </div>
+
+            <!-- スタッフカード 5 -->
+            <div class="staff-card" onclick="showStaffDialog(5)" style="cursor: pointer;">
+              <img src="img/cast/staff5.jpg" alt="Konomi" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">AP</div>
+              <div class="staff-name">Konomi</div>
+            </div>
+
+            <!-- スタッフカード 8 -->
+            <div class="staff-card" onclick="showStaffDialog(6)" style="cursor: pointer;">
+              <img src="img/cast/staff6.jpg" alt="後藤英樹" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">制作</div>
+              <div class="staff-name">後藤英樹</div>
+            </div>
+
+            <!-- スタッフカード 6 -->
+            <div class="staff-card" onclick="showStaffDialog(7)" style="cursor: pointer;">
+              <img src="img/cast/staff7.jpg" alt="松浦亮介" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+              <div class="staff-role">WEBディレクター</div>
+              <div class="staff-name">松浦亮介</div>
+            </div>
+
+          <!-- スタッフダイアログ -->
+          <div id="staff-dialog" class="staff-dialog">
+            <div class="staff-dialog-content">
+              <span class="close-button" onclick="closeStaffDialog()">×</span>
+              <div id="staff-dialog-content">
+                <!-- ダイアログ内容はJavaScriptで生成 -->
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <!-- 制作STAFFの意気込みセクション -->
+        <div class="staff-message-section">
+          <h3 class="staff-message-title">制作STAFFからの<br class="sp-br">メッセージ</h3>
+          <p class="staff-message-content">
+            <strong>「efitプレゼンツ☆ウィークリー・バースデー・ランキング」</strong>は、視聴者の皆さまに<strong>「誕生日」</strong>という特別な日を通じて、新しい発見と感動をお届けする番組です。私たち制作チームは、この番組を通じて、視聴者の皆さまに<strong>「誕生日」</strong>という特別な日の魅力を再発見していただきたいと考えています。
+          </p>
+          <p class="staff-message-content">
+            <strong>ラジオ日本</strong>と<strong>渋谷愛ビジョン</strong>を結ぶクロスメディア展開により、視聴者の皆さまにより多角的な楽しみ方を提供できるよう工夫を重ねています。また、SNSを通じた視聴者参加型の企画も充実させ、ラジオ日本局内で<strong>『聴取率』『SNS（X）』</strong>のフォロワー数で<strong>No.1</strong>を目指しています。
+          </p>
+          <p class="staff-message-content">
+            これからも、視聴者の皆さまに<strong>「驚き」</strong>と<strong>「感動」</strong>をお届けできるよう、スタッフ一同、全力で取り組んでまいります。どうぞ、これからも<strong>「efitプレゼンツ☆ウィークリー・バースデー・ランキング」</strong>をよろしくお願いいたします。
+          </p>
+          <p class="staff-message-signature">制作チーム一同</p>
+        </div>
+
+        <!-- 協賛・協力 -->
+        <div class="sponsors-section">
+          <h2>協賛・協力</h2>
+          <div class="sponsor-group">
+            <h3>渋谷愛ビジョン</h3>
+            <p class="sponsor-description">情報提供・制作協力</p>
+            <p class="sponsor-description">渋谷の街を彩る大型ビジョンで番組情報を放映</p>
+            <div class="sponsor-logo" style="background-color: transparent; display: inline-block; box-shadow: none;">
+              <a href="https://www.saivision.jp/top.php" target="_blank">
+                <img src="img/logo_w.png" alt="渋谷愛ビジョン" style="max-width: 250px; height: auto; box-shadow: none;">
+              </a>
+            </div>
+          </div>
+          <div class="sponsor-group">
+            <h3>スポンサー</h3>
+            <p class="sponsor-description">番組メインスポンサー</p>
+            <div class="sponsor-logo" style="background-color: white; padding: 20px; border-radius: 5px; display: inline-block;">
+              <a href="https://efit.co.jp/" target="_blank">
+                <img src="img/efit.png" alt="efit" style="max-width: 200px; height: auto;">
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-    </div>
-
-    
-
-    <!-- 制作STAFF紹介セクション -->
-    <div class="staff-section">
-      <h2>愛あるSTAFF</h2>
-      <div class="staff-grid">
-        <!-- スタッフカード 1 -->
-        <div class="staff-card" onclick="showStaffDialog(1)" style="cursor: pointer;">
-          <img src="img/cast/staff1.jpg" alt="芳賀正光" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">企画構成</div>
-          <div class="staff-name">芳賀正光</div>
-        </div>
-
-        <!-- スタッフカード 2 -->
-        <div class="staff-card" onclick="showStaffDialog(2)" style="cursor: pointer;">
-          <img src="img/cast/staff2.jpg" alt="梅本満" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">プロデューサー</div>
-          <div class="staff-name">梅本満</div>
-        </div>
-
-        <!-- スタッフカード 3 -->
-        <div class="staff-card" onclick="showStaffDialog(3)" style="cursor: pointer;">
-          <img src="img/cast/staff3.jpg" alt="野村満" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">総合演出</div>
-          <div class="staff-name">野村満</div>
-        </div>
-
-        <!-- スタッフカード 4 -->
-        <div class="staff-card" onclick="showStaffDialog(4)" style="cursor: pointer;">
-          <img src="img/cast/staff4.jpg" alt="神取美佳" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">ミキサー・制作</div>
-          <div class="staff-name">神取美佳</div>
-        </div>
-
-        <!-- スタッフカード 5 -->
-        <div class="staff-card" onclick="showStaffDialog(5)" style="cursor: pointer;">
-          <img src="img/cast/staff5.png" alt="Konomi" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">AP</div>
-          <div class="staff-name">Konomi</div>
-        </div>
-
-        <!-- スタッフカード 8 -->
-        <div class="staff-card" onclick="showStaffDialog(6)" style="cursor: pointer;">
-          <img src="img/cast/staff6.jpg" alt="後藤英樹" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">制作</div>
-          <div class="staff-name">後藤英樹</div>
-        </div>
-
-        <!-- スタッフカード 6 -->
-        <div class="staff-card" onclick="showStaffDialog(7)" style="cursor: pointer;">
-          <img src="img/cast/staff7.jpg" alt="松浦亮介" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
-          <div class="staff-role">WEBディレクター</div>
-          <div class="staff-name">松浦亮介</div>
-        </div>
-
-      <!-- スタッフダイアログ -->
-      <div id="staff-dialog" class="staff-dialog">
-        <div class="staff-dialog-content">
-          <span class="close-button" onclick="closeStaffDialog()">×</span>
-          <div id="staff-dialog-content">
-            <!-- ダイアログ内容はJavaScriptで生成 -->
-          </div>
-        </div>
-      </div>
-
-      
-    </div>
-
-    <!-- 制作STAFFの意気込みセクション -->
-    <div class="staff-message-section">
-      <h3 class="staff-message-title">制作STAFFからのメッセージ</h3>
-      <p class="staff-message-content">
-        <strong>「efitプレゼンツ☆ウィークリー・バースデー・ランキング」</strong>は、視聴者の皆さまに<strong>「誕生日」</strong>という特別な日を通じて、新しい発見と感動をお届けする番組です。私たち制作チームは、この番組を通じて、視聴者の皆さまに<strong>「誕生日」</strong>という特別な日の魅力を再発見していただきたいと考えています。
-      </p>
-      <p class="staff-message-content">
-        <strong>ラジオ日本</strong>と<strong>渋谷愛ビジョン</strong>を結ぶクロスメディア展開により、視聴者の皆さまにより多角的な楽しみ方を提供できるよう工夫を重ねています。また、SNSを通じた視聴者参加型の企画も充実させ、ラジオ日本局内で<strong>『聴取率』『SNS（X）』</strong>のフォロワー数で<strong>No.1</strong>を目指しています。
-      </p>
-      <p class="staff-message-content">
-        これからも、視聴者の皆さまに<strong>「驚き」</strong>と<strong>「感動」</strong>をお届けできるよう、スタッフ一同、全力で取り組んでまいります。どうぞ、これからも<strong>「efitプレゼンツ☆ウィークリー・バースデー・ランキング」</strong>をよろしくお願いいたします。
-      </p>
-      <p class="staff-message-signature">制作チーム一同</p>
-    </div>
-
-    <!-- 協賛・協力 -->
-    <div class="sponsors-section">
-      <h2>協賛・協力</h2>
-      <div class="sponsor-group">
-        <h3>渋谷愛ビジョン</h3>
-        <p class="sponsor-description">情報提供・制作協力</p>
-        <p class="sponsor-description">渋谷の街を彩る大型ビジョンで番組情報を放映</p>
-        <div class="sponsor-logo" style="background-color: transparent; display: inline-block; box-shadow: none;">
-          <a href="https://www.saivision.jp/top.php" target="_blank">
-            <img src="img/logo_w.png" alt="渋谷愛ビジョン" style="max-width: 250px; height: auto; box-shadow: none;">
-          </a>
-        </div>
-      </div>
-      <div class="sponsor-group">
-        <h3>スポンサー</h3>
-        <p class="sponsor-description">番組メインスポンサー</p>
-        <div class="sponsor-logo" style="background-color: white; padding: 20px; border-radius: 5px; display: inline-block;">
-          <a href="https://efit.co.jp/" target="_blank">
-            <img src="img/efit.png" alt="efit" style="max-width: 200px; height: auto;">
-          </a>
-        </div>
       </div>
     </div>
-
   </div>
   <!-- wrapの終わり -->
 
@@ -566,7 +593,7 @@
         name: "Konomi",
         role: "AP",
         birthday: "5月25日",
-        image: "img/cast/staff5.png",
+        image: "img/cast/staff5-2.jpg",
         message: "誕生日って自分にとっても特別な日だけど、誰かの誕生日と聞くと、言葉が通じなくても、世代が違っても｢おめでとう｣と伝えたくなるハッピーな日ですよね。\n「今日は◯◯さんの誕生日なんだよ。知ってた？」と自分のことのように話題にしてしまう、不思議な日でもあります。\n誰にとっても平等に存在する、特別な一日。\n「おめでとう｣が溢れて心があたたかくなる時間をバスランで紡げたらいいなと願っています。"
       },
       
@@ -837,9 +864,9 @@ ${personality.message}
       }
     });
 
-    // u30e1u30cbu30e5u30fcu306eu30a2u30afu30c6u30a3u30d6u9805u76eeu3092u8a2du5b9a
+    // u30e1u30nbu30e5u30fcu306eu30a2u30afu30c6u30a3u30d6u9805u76eeu3092u8a2du5b9a
     $(document).ready(function() {
-      // u30a2u30afu30c6u30a3u30d6u306au30e1u30cbu30e5u30fcu9805u76eeu3092u30deu30fcu30afu3059u308b
+      // u30a2u30afu30c6u30a3u30d6u306au30e1u30nbu30e5u30fcu9805u76eeu3092u30deu30fcu30afu3059u308b
       const currentPage = 'caststaff';
       const navLinks = document.querySelectorAll('.menu li a');
       
@@ -850,11 +877,11 @@ ${personality.message}
         }
       });
       
-      // u30d0u30d6u30ebu30adu30e3u30f3u30d0u30b9u306eu521du671f
+      // u30d0u30d6u30ebu30adu30e3u30f3u30d0u30b7u30e7u30f3u3092u5143u306bu623bu3057u3001u30b9u30deu30dbu8868u793au6642u306bu30d0u30d6u30ebu30a2u30cbu30e1u30fcu30b7u30e7u30f3u304cu8868u793au3055u308cu308bu30c6u30adu30b9u30c8u3068PCu8868u793au6642u306eu307fu8868u793au3055u308cu308bu30c6u30adu30b9u30c8u3092u5206u3051u307eu3059u3002
       initBubbles();
     });
     
-    // u30d0u30d6u30ebu30a2u30cbu30e1u30fcu30b7u30e7u30f3
+    // u30a2u30cbu30e1u30fcu30b7u30e7u30f3
     function initBubbles() {
       const canvas = document.getElementById('bubble-canvas');
       if (!canvas) return; // canvasが存在しない場合は処理を終了

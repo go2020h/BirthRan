@@ -142,8 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
           <div id="social-links">
             <ul>
               <li><a href="https://x.com/NinjaHachi_" target="_blank" title="忍者ハチ@渋谷愛8" class="x-logo">&#x1D54F;</a></li>
-              <li><a href="https://www.instagram.com/birthran_official/" target="_blank" title="Instagram" class="instagram"><i class="fab fa-instagram"></i></a></li>
-              <li><a href="https://www.youtube.com/channel/birthran" target="_blank" title="YouTube" class="youtube"><i class="fab fa-youtube"></i></a></li>
             </ul>
           </div>
           <div class="footer-links">
@@ -153,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="chart.html">相関図</a>
             <a href="news.html">お知らせ</a>
             <a href="caststaff.html">キャスト＆STAFF</a>
-            <a href="index.html#youtube-section">YouTube</a>
+            <a href="index.html#youtube-section">配信</a>
           </div>
           <div class="copy">
             <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>
