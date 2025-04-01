@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/calendar.css">
+  <link rel="stylesheet" href="css/ranking.css">
   <link rel="stylesheet" href="css/override.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -1125,10 +1126,10 @@
         </div>
 
         <!-- カレンダーポップアップ -->
-        <div class="calendar-popup-overlay" id="message-popup-overlay">
-          <div class="calendar-popup">
-            <button class="calendar-popup-close" id="message-popup-close">&times;</button>
-            <h2 id="message-popup-date"></h2>
+        <div id="message-popup-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000;">
+          <div style="background-color: #fff; border-radius: 10px; padding: 20px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <button id="message-popup-close" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; background: #FF6B88; color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">&times;</button>
+            <h2 id="message-popup-date" style="text-align: center; margin-bottom: 20px; color: #333; font-size: 18px;"></h2>
             <div id="message-popup-content"></div>
           </div>
         </div>
@@ -1154,10 +1155,10 @@
         </div>
 
         <!-- ランキングポップアップ -->
-        <div class="calendar-popup-overlay" id="ranking-popup-overlay">
-          <div class="calendar-popup">
-            <button class="calendar-popup-close" id="ranking-popup-close">&times;</button>
-            <h2 id="ranking-popup-date"></h2>
+        <div id="ranking-popup-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000;">
+          <div style="background-color: #fff; border-radius: 10px; padding: 20px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <button id="ranking-popup-close" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; background: #FF6B88; color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">&times;</button>
+            <h2 id="ranking-popup-date" style="text-align: center; margin-bottom: 20px; color: #333; font-size: 18px;"></h2>
             <div id="ranking-popup-content"></div>
           </div>
         </div>

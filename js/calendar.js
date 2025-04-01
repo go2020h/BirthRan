@@ -23,6 +23,9 @@ async function initCalendar() {
     
     // ボタンクリックのイベントリスナーを設定
     setupButtonListeners();
+    
+    // 日別ランキングを初期化
+    await initDailyRanking();
   } catch (err) {
     console.error('Error initializing calendar:', err);
   }
@@ -52,6 +55,15 @@ function setupTabListeners() {
     $('#month-tab-content').show();
     // カレンダーの再レンダリング
     renderCalendar(currentYear, currentMonth);
+  });
+  
+  // 日別ランキングタブのクリックイベント
+  $('#ranking-tab-btn').off('click').on('click', function() {
+    console.log('Ranking tab clicked');
+    $('.tab-btn').removeClass('active');
+    $(this).addClass('active');
+    $('.tab-content').hide();
+    $('#ranking-tab-content').show();
   });
 }
 
@@ -353,7 +365,7 @@ async function renderWeekView(startDate) {
       const dayElement = $(`
         <div class="${dayClass}" data-date="${formattedDate}" data-day="${currentDate.getDay()}">
           <div class="week-day-number">${currentDate.getDate()}</div>
-          <div class="week-day-name">${['\u65e5','\u6708','\u706b','\u6c34','\u6728','\u91d1','\u571f'][currentDate.getDay()]}</div>
+          <div class="week-day-name">${['日','月','火','水','木','金','土'][currentDate.getDay()]}</div>
           ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="week-day-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name || ''}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
         </div>
       `);
@@ -386,7 +398,7 @@ function showMessagePopup(date, messages) {
     messages.forEach(message => {
       const messageItem = $(`
         <div class="message-item">
-          <div class="message-recipient">${message.recipient_name || ''}</div>
+          <div class="message-recipient">${message.recipient_name}</div>
           <div class="message-text">${message.comment_text}</div>
           <div class="message-author">by ${message.author_name}</div>
         </div>
@@ -397,10 +409,10 @@ function showMessagePopup(date, messages) {
     
     contentDiv.append(messagesList);
   } else {
-    contentDiv.html("<p>\u3053\u3093\u306b\u306e\u30e1\u30c3\u30bb\u30fc\u30b8\u306f\u306a\u3053\u3068\u3067\u3059\u3002</p>");
+    contentDiv.html("<p>この日にメッセージはありません。</p>");
   }
   
-  $("#message-popup-overlay").css("display", "flex");
+  $("#message-popup-overlay").css("display", "block");
   
   // ポップアップを閉じるイベントを再設定
   $("#message-popup-close").off('click').on('click', function() {
@@ -427,8 +439,8 @@ function formatDisplayDate(date) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  const dayOfWeek = ['\u65e5', '\u6708', '\u706b', '\u6c34', '\u6728', '\u91d1', '\u571f'][date.getDay()];
-  return `${year}\u5e74${month}\u6708${day}\u65e5(${dayOfWeek})`;
+  const dayOfWeek = ['日','月','火','水','木','金','土'][date.getDay()];
+  return `${year}年${month}月${day}日(${dayOfWeek})`;
 }
 
 // 週を変更する関数
@@ -470,5 +482,206 @@ function updateWeekTitle() {
   const endDay = weekEnd.getDate();
   const year = currentWeekStart.getFullYear();
   
-  $("#week-view-title").text(`${year}\u5e74${startMonth}\u6708${startDay}\u65e5～${endMonth}\u6708${endDay}\u65e5`);
+  $("#week-view-title").text(`${year}年${startMonth}月${startDay}日～${endMonth}月${endDay}日`);
+}
+
+// 日別ランキングを初期化する関数
+async function initDailyRanking() {
+  console.log('initDailyRanking called');
+  
+  // 今日の曜日を取得
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0: 日曜日, 1: 月曜日, ..., 6: 土曜日
+  
+  console.log('Today:', today.toISOString().split('T')[0], 'Day of week:', dayOfWeek);
+  
+  // 3/20～3/26の日別ランキングを表示
+  // 直接3/20を指定
+  let targetThursday = new Date('2025-03-20'); // 直接3/20を指定
+  
+  console.log('Target Thursday:', targetThursday.toISOString().split('T')[0]);
+  
+  // 7日間の日付を計算
+  const dates = [];
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(targetThursday);
+    date.setDate(targetThursday.getDate() + i);
+    dates.push(date);
+    console.log(`Date ${i}:`, date.toISOString().split('T')[0]);
+  }
+  
+  // 週のタイトルを設定
+  const startMonth = dates[0].getMonth() + 1;
+  const startDay = dates[0].getDate();
+  const endMonth = dates[6].getMonth() + 1;
+  const endDay = dates[6].getDate();
+  const startYear = dates[0].getFullYear();
+  const endYear = dates[6].getFullYear();
+  
+  let titleText = '';
+  if (startYear === endYear) {
+    titleText = `${startYear}年${startMonth}月${startDay}日～${endMonth}月${endDay}日`;
+  } else {
+    titleText = `${startYear}年${startMonth}月${startDay}日～${endYear}年${endMonth}月${endDay}日`;
+  }
+  
+  $("#ranking-week-title").text(titleText);
+  
+  // 日別ランキングを表示するコンテナを取得
+  const dateTabsContainer = $("#ranking-date-tabs");
+  dateTabsContainer.empty();
+  
+  const tabContentsContainer = $("#ranking-tab-contents");
+  tabContentsContainer.empty();
+  
+  // 曜日の名前を配列で定義
+  const dayNames = ['木', '金', '土', '日', '月', '火', '水'];
+  
+  // まず全てのタブとコンテンツの枠組みを作成
+  dates.forEach((date, i) => {
+    const formattedDate = formatDate(date);
+    
+    // タブを表示（曜日のみ）
+    const isActive = i === 0 ? 'active' : '';
+    const tabButton = $(`<button class="ranking-tab-btn ${isActive}" data-date="${formattedDate}">${dayNames[i]}</button>`);
+    
+    // タブクリックイベントを設定
+    tabButton.click(function() {
+      $('.ranking-tab-btn').removeClass('active');
+      $(this).addClass('active');
+      $('.ranking-tab-content').hide();
+      $(`#ranking-content-${formattedDate}`).show();
+    });
+    
+    dateTabsContainer.append(tabButton);
+    
+    // タブコンテンツの枠組みを作成
+    const tabContent = $(`<div id="ranking-content-${formattedDate}" class="ranking-tab-content"></div>`);
+    if (i === 0) {
+      tabContent.show();
+    } else {
+      tabContent.hide();
+    }
+    
+    // 「読み込み中...」の表示を追加
+    tabContent.html('<p class="loading-ranking">読み込み中...</p>');
+    
+    tabContentsContainer.append(tabContent);
+  });
+  
+  // Supabaseからデータを取得
+  try {
+    // 日付を文字列に変換
+    const dateStrings = dates.map(date => formatDate(date));
+    
+    // Supabaseからデータを取得
+    const { data: rankingData, error } = await window.supabase
+      .from('calendar_comments_ranked')
+      .select('comment_date, author_name, comment_text, recipient_name, rank')
+      .in('comment_date', dateStrings)
+      .lte('rank', 3) // ランク3以下のデータのみ
+      .order('rank', { ascending: true });
+    
+    if (error) {
+      console.error('Error fetching ranking data:', error);
+      return;
+    }
+    
+    console.log('Ranking data:', rankingData);
+    
+    // データを日付ごとに整理
+    const rankingsByDate = {};
+    rankingData.forEach(item => {
+      const date = item.comment_date;
+      if (!rankingsByDate[date]) {
+        rankingsByDate[date] = [];
+      }
+      rankingsByDate[date].push(item);
+    });
+    
+    console.log('Rankings by date:', rankingsByDate);
+    
+    // 各日付のコンテンツを更新
+    dates.forEach((date, i) => {
+      const formattedDate = formatDate(date);
+      const tabContent = $(`#ranking-content-${formattedDate}`);
+      tabContent.empty(); // 「読み込み中...」を削除
+      
+      // 日別ランキングデータを取得
+      const dayRankings = rankingsByDate[formattedDate] || [];
+      
+      // ランキングを表示
+      if (dayRankings.length > 0) {
+        const rankingList = $('<div class="ranking-list"></div>');
+        
+        dayRankings.forEach(item => {
+          const rankingItem = $(`
+            <div class="ranking-item" data-date="${formattedDate}" data-rank="${item.rank}">
+              <div class="ranking-position">${item.rank}</div>
+              <div class="ranking-details">
+                <div class="ranking-recipient">${item.recipient_name || ''}</div>
+              </div>
+            </div>
+          `);
+          
+          // ランキングクリックイベントを設定
+          rankingItem.click(function() {
+            const date = $(this).data('date');
+            const rank = $(this).data('rank');
+            const selectedItem = rankingsByDate[date].find(r => r.rank === rank);
+            if (selectedItem) {
+              showRankingPopup(date, selectedItem);
+            }
+          });
+          
+          rankingList.append(rankingItem);
+        });
+        
+        tabContent.append(rankingList);
+      } else {
+        tabContent.html('<p class="no-ranking">この日のランキングはありません。</p>');
+      }
+    });
+  } catch (err) {
+    console.error('Error initializing daily ranking:', err);
+    // エラーが発生した場合でも、エラーメッセージを表示
+    dates.forEach((date, i) => {
+      const formattedDate = formatDate(date);
+      const tabContent = $(`#ranking-content-${formattedDate}`);
+      tabContent.html('<p class="error-ranking">データの読み込みに失敗しました。</p>');
+    });
+  }
+}
+
+// ランキングポップアップを表示する関数
+function showRankingPopup(date, rankingItem) {
+  if (!rankingItem) return;
+  
+  const formattedDate = formatDisplayDate(new Date(date));
+  $("#ranking-popup-date").text(`${formattedDate} - ${rankingItem.rank}位`);
+  
+  const contentDiv = $("#ranking-popup-content");
+  contentDiv.empty();
+  
+  const messageItem = $(`
+    <div class="message-item">
+      <div class="message-recipient">${rankingItem.recipient_name}</div>
+      <div class="message-text">${rankingItem.comment_text}</div>
+      <div class="message-author">by ${rankingItem.author_name}</div>
+    </div>
+  `);
+  
+  contentDiv.append(messageItem);
+  $("#ranking-popup-overlay").css("display", "block");
+  
+  // ポップアップを閉じるイベントを再設定
+  $("#ranking-popup-close").off('click').on('click', function() {
+    $("#ranking-popup-overlay").css("display", "none");
+  });
+  
+  $("#ranking-popup-overlay").off('click').on('click', function(e) {
+    if (e.target === this) {
+      $(this).css("display", "none");
+    }
+  });
 }
