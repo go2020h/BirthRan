@@ -600,7 +600,7 @@
       margin-right: auto;
     }
     
-    /* 番組概要 */
+    /* 番組の概要 */
     .program-overview {
       margin-bottom: 40px;
       background-color: #e8f4fd;
@@ -644,6 +644,8 @@
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      max-width: 1200px;
+      margin: 0 auto;
     }
     
     /* 全体 */
@@ -734,16 +736,6 @@
       margin-bottom: 25px;
       font-weight: bold;
       font-size: 28px;
-    }
-    
-    .youtube-container {
-      position: relative;
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     
     /* 番組概要スタイル */
@@ -1038,9 +1030,9 @@
             <div class="message-button-section" style="background: transparent; box-shadow: none;">
               <div class="message-content">
                 <div class="message-text" style="color: #ffffff; text-align: center;">
-                  <p style="border-bottom: 3px solid gold; display: inline-block; padding-bottom: 0px; margin-bottom: 10px;"><strong>大好きな人、大切なひとへ、</strong></p><br>
-                  <p style="border-bottom: 3px solid gold; display: inline-block; padding-bottom: 0px; margin-bottom: 10px;"><strong>おめでとう、ありがとうの</strong></p><br>
-                  <p style="border-bottom: 3px solid gold; display: inline-block; padding-bottom: 0px; margin-bottom: 10px;"><strong>メッセージを贈ろう</strong></p>
+                  <p style="display: inline-block; padding-bottom: 0px; margin-bottom: 10px;"><strong>大好きな人、大切なひとへ、</strong></p><br>
+                  <p style="display: inline-block; padding-bottom: 0px; margin-bottom: 10px;"><strong>おめでとう、ありがとうの</strong></p><br>
+                  <p style="display: inline-block; padding-bottom: 0px; margin-bottom: 10px;"><strong>メッセージを贈ろう</strong></p>
                 </div>
                 <a href="https://ec.saivision.jp/" target="_blank" class="btn-message" style="background-color: #ff4081; color: #ffffff;">メッセージを送る <i class="fas fa-paper-plane"></i></a>
               </div>
@@ -1057,21 +1049,21 @@
                 <div class="intro-image">
                   <img src="img/about1.jpg" alt="efitプレゼンツ☆ウィークリー・バースデー・ランキング" class="main-image">
                 </div>
-                <div class="intro-content">
+                <div class="intro-content" style="background-color: white; color: #333; padding: 25px; border-radius: 10px; margin: 0 15px;">
                   <h3 class="intro-title">新しいラジオの形を創造する</h3>
-                  <p class="intro-text">「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、ラジオと渋谷愛ビジョンが連動する新しいクロスメディア番組です。毎週木曜日、ラジオ日本神谷町スタジオから生放送でお届けします。</p>
+                  <p class="intro-text" style="color: #333;">「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、ラジオと渋谷愛ビジョンが連動する新しいクロスメディア番組です。毎週木曜日、ラジオ日本神谷町スタジオから生放送でお届けします。</p>
                   <div class="program-details">
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-calendar-alt"></i></span>
-                      <span class="detail-text">放送開始：2025年4月3日（木曜日）</span>
+                      <span class="detail-text" style="color: #333;">放送開始：2025年4月3日（木曜日）</span>
                     </div>
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-clock"></i></span>
-                      <span class="detail-text">放送時間：毎週木曜日 18:00～20:30</span>
+                      <span class="detail-text" style="color: #333;">放送時間：毎週木曜日 18:00～20:30</span>
                     </div>
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-broadcast-tower"></i></span>
-                      <span class="detail-text">放送局：ラジオ日本</span>
+                      <span class="detail-text" style="color: #333;">放送局：ラジオ日本</span>
                     </div>
                   </div>
                 </div>
@@ -1081,15 +1073,15 @@
         </div>
 
         <!-- 次回のゲスト -->
-        <div style="background-color: #1a3a6c; color: white; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 60px 0;">
+        <div class="full-width-section" style="background-color: #1a3a6c; color: white;">
           <div class="container">
             <h2 class="section-title" style="color: #d4af37;">次回のゲスト</h2>
             <div class="program-introduction">
-              <div class="intro-container" style="background-color: transparent; border: none; box-shadow: none;">
+              <div class="intro-container">
                 <div class="intro-image">
                   <img src="img/cast/cast3.jpg" alt="神谷明采" class="main-image">
                 </div>
-                <div class="intro-content">
+                <div class="intro-content" style="background-color: white; color: #333;">
                   <h3 class="intro-title" style="color: #1a3a6c;">神谷明采</h3>
                   <p class="intro-text" style="color: #333;">東京大学大学院生。知的で洞察力のある視点からのトーク、番組に深みを与えています。</p>
                   <div class="program-details">
@@ -1103,7 +1095,7 @@
                     </div>
                   </div>
                   <div style="text-align: center; margin-top: 20px;">
-                    <a href="caststaff.html" class="btn-primary" style="background-color: #1a3a6c; border: none; display: inline-block;">出演者情報を確認する</a>
+                    <a href="caststaff.html" class="btn-primary" style="background-color: #1a3a6c; border: none; display: inline-block; width: 220px; font-size: 14px;">出演者情報を確認する</a>
                   </div>
                 </div>
               </div>
@@ -1111,59 +1103,59 @@
           </div>
         </div>
 
-        <!-- 51FA8005 -->
         <div class="intro-section-wrapper">
           <div class="container">
             <h2 class="section-title">出演者のリアルバイタルデータ</h2>
-            <div class="program-introduction">
+            <div class="program-introduction" style="max-width: 1200px; margin: 0 auto;">
               <div class="intro-container">
- 
-                <div class="intro-content">
+                <div class="intro-content" style="background-color: white; color: #333; padding: 25px; border-radius: 10px; margin: 0 auto;">
                   <h3 class="intro-title">MOTHER Bracelet</h3>
-                  <p class="intro-text">MOTHER Braceletは、体温で充電、充電不要で計測可能でバイタルデータを蓄積する健康チェックデバイスです。</p>
+                  <p class="intro-text" style="color: #333;">MOTHER Braceletは、体温で充電、充電不要で計測可能でバイタルデータを蓄積する健康チェックデバイスです。</p>
                   <div class="program-details">
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-heartbeat"></i></span>
-                      <span class="detail-text">心拍数、睡眠の質、ストレスレベルなどを計測</span>
+                      <span class="detail-text" style="color: #333;">心拍数、睡眠の質、ストレスレベルなどを計測</span>
                     </div>
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-battery-full"></i></span>
-                      <span class="detail-text">体温で充電、充電不要で計測可能</span>
+                      <span class="detail-text" style="color: #333;">体温で充電、充電不要で計測可能</span>
                     </div>
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-chart-line"></i></span>
-                      <span class="detail-text">健康データを蓄積し、分析</span>
+                      <span class="detail-text" style="color: #333;">健康データを蓄積し、分析</span>
                     </div>
                   </div>
                   <div style="text-align: center; margin-top: 20px;">
                     <a href="news.html" class="btn-primary" style="display: inline-block;">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                  </div>                </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        
+
       </div>
     </div>
   </div>
 
   <!-- 誕生日が近い！ゲスト募集中！！ -->
-  <div class="intro-section-wrapper" style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 60px 0; border-top: 3px solid #1a3a6c; border-bottom: 3px solid #1a3a6c;"> 
+  <div class="intro-section-wrapper" style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 60px 0;"> 
     <div class="container">
-      <h2 class="section-title" style="color: #1a3a6c; text-align: center; font-size: 32px; margin-bottom: 30px; position: relative;">
-        <i class="fas fa-birthday-cake" style="margin-right: 10px; color: #d4af37;"></i>誕生日が近い！ゲスト募集中！！
+      <h2 class="section-title" style="color: #1a3a6c; text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; padding: 0 15px;">
+        誕生日が近い！ゲスト募集中！！
       </h2>
-      <div class="program-introduction" style="max-width: 1000px; margin: 0 auto;">
+      <div class="program-introduction" style="max-width: 1000px; margin: 0 auto; padding: 0 15px;">
         <div class="intro-container" style="background-color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(26, 58, 108, 0.15); overflow: hidden;">
         
           <div class="intro-content" style="padding: 30px;">
             <p class="intro-text" style="font-size: 18px; text-align: center; color: #333; margin-bottom: 25px; font-weight: 500;">番組では、誕生日が近いゲストを大募集しています。</p>
             <div class="program-details" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
               <div class="detail-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-                <span class="detail-icon" style="background-color: #1a3a6c; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;"><i class="fas fa-calendar-check"></i></span>
                 <span class="detail-text" style="font-size: 16px; color: #333;">出演日から１か月以内に誕生日を迎える方</span>
               </div>
               <div class="detail-item" style="display: flex; align-items: center;">
-                <span class="detail-icon" style="background-color: #1a3a6c; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;"><i class="fas fa-trophy"></i></span>
                 <span class="detail-text" style="font-size: 16px; color: #333;">バスランでベスト３に入ると自負している方</span>
               </div>
             </div>
@@ -1593,7 +1585,7 @@
       console.log('DOMContentLoaded event fired');
       initBubbles();
       
-      // u9031u9593u30d0u30b9u30e9u30f3u304cu8868u793au3055u308cu308bu3088u3046u306bu4feeu6b63u3057u307eu3059u3002
+      // u9031u9593u30d0u30b9u30e9u30f3u304cu5de6u306bu5bc4u3063u3066u3057u307eu3063u305fu554fu984cu3092u4feeu6b63u3057u307eu3059u3002
       const weekDays = document.getElementById('week-days');
       if (weekDays) {
         console.log('week-days element found, creating default week view');

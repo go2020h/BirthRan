@@ -12,7 +12,7 @@
 }
 
 .section-title:after {
-  content: '';
+  content: none;
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -93,10 +93,9 @@
 }
 
 .intro-title {
-  color: #1a3a6c; /* 青い文字 */
+  color: #1a3a6c; /* u9752u3044u6587u5b57 */
   font-size: 28px;
   margin-bottom: 15px;
-  border-bottom: 2px solid #d4af37; /* ゴールドのボーダー */
   padding-bottom: 10px;
   display: inline-block;
 }
@@ -125,7 +124,7 @@
 }
 
 .detail-icon {
-  color: #1a3a6c; /* 青い文字 */
+  color: #1a3a6c; /* u9752u3044u6587u5b57 */
   font-size: 1.2rem;
   width: 30px;
   height: 30px;
@@ -186,6 +185,7 @@
   justify-content: center; /* u4e2du592eu63c3u3048u306bu5909u66f4 */
   gap: 20px;
   margin-top: 30px;
+  box-sizing: border-box;
 }
 
 .goal-card {
@@ -194,10 +194,25 @@
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 1; /* u5404u30abu30fcu30c9u304cu540cu3058u5e45u306bu306au308bu3088u3046u306bu8a2du5b9a */
+  flex: 1; /* u5404u30cau30fcu30c9u304cu540cu3058u5e45u306bu306au308bu3088u3046u306bu8a2du5b9a */
   position: relative;
   border-top: 4px solid #1a3a6c; /* u4e0au90e8u306bu9752u3044u30dcu30fcu30c0u30fc */
   text-align: center;
+  margin: 0 10px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 400px) {
+  .goal-card {
+    min-width: auto;
+    width: calc(100% - 30px);
+    margin: 0 15px;
+  }
+}
+
+.goal-card:hover {
+  transform: translateY(-5px); /* アニメーション */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* 青い影 */
 }
 
 .goal-icon {
@@ -224,7 +239,7 @@
 }
 
 .goal-card h4:after {
-  content: '';
+  content: none;
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -243,6 +258,73 @@
   text-align: left;
   height: 70px; /* u9ad8u3055u3092u56fau5b9au3059u308b */
   overflow: hidden; /* u30c6u30adu30b9u30c8u304cu306fu307fu51fau3057u305fu5834u5408u306fu975eu8868u793a */
+}
+
+@media screen and (max-width: 767px) {
+  .goals-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .goal-card {
+    width: calc(100% - 30px);
+    margin: 0 15px 20px 15px;
+    height: auto;
+    min-height: 200px;
+    max-width: 100%;
+  }
+  
+  .goal-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    height: auto;
+    overflow: visible;
+  }
+  
+  .goals-section-wrapper .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .program-goals {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* 番組の生い立ちセクションのスマホ表示調整 */
+  .background-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .background-image {
+    max-width: 100%;
+    margin-bottom: 20px;
+    order: -1; /* 画像を上に配置 */
+  }
+  
+  .background-content {
+    padding: 0;
+    width: 100%;
+  }
+  
+  .background-lead-pc {
+    display: none;
+  }
+  
+  .background-lead-sp {
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .background-text p {
+    font-size: 14px;
+    line-height: 1.8;
+  }
 }
 
 /* 番組の生い立ちセクション */
@@ -374,7 +456,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  flex: 1; /* u5404u30abu30fcu30c9u304cu540cu3058u5e45u306bu306au308bu3088u3046u306bu8a2du5b9a */
+  flex: 1; /* u5404u30cau30fcu30c9u304cu540cu3058u5e45u306bu306au308bu3088u3046u306bu8a2du5b9a */
   border-top: 4px solid #1a3a6c; /* u4e0au90e8u306bu9752u3044u30dcu30fcu30c0u30fc */
   text-align: center;
 }
@@ -930,16 +1012,15 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  flex: 1;
-  min-width: 300px;
-  max-width: 350px; /* u6700u5927u5e45u3092u8a2du5b9au3057u3066u30d0u30e9u30f3u30b9u3092u6574u3048u308b */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* アニメーション */
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 10px;
+  box-sizing: border-box;
 }
 
 .goal-card:hover, .participation-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px); /* アニメーション */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* アニメーション */
 }
 
 p {
