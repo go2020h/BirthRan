@@ -34,7 +34,7 @@
 }
 
 .calendar-content h2:after {
-  content: '';
+  content: none;
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -87,24 +87,11 @@
 
 /* 曜日表示 */
 .weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
-  padding: 15px 0;
-  background: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: none; /* u9031u9593u8868u793au3067u306fu66fcu65e5u30d8u30c3u30c0u30fcu3092u975eu8868u793au306bu3059u308b */
 }
 
-.weekdays div:first-child {
-  color: #FF6B88; /* 日曜日色 */
-}
-
-.weekdays div:last-child {
-  color: #5D9CEC; /* 土曜日色 */
+.week-view .weekdays {
+  display: none;
 }
 
 /* カレンダー日付 */
@@ -125,7 +112,7 @@
   font-weight: 500;
   transition: none; /* アニメーションを無効にする */
   background: #f8f9fa;
-  color: #333;
+  color: #000;
   padding: 8px;
   position: relative;
   overflow: hidden;
@@ -136,7 +123,7 @@
 .calendar-day:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* ホバー時のボックスシャドウを変更 */
   transform: none; /* ホバー時の変形を無効にする */
-  border-color: #eee; /* ホバー時のボーダー色を変更 */
+  border-color: #ddd; /* ホバー時のボーダー色を変更 */
 }
 
 .calendar-day .day-number {
@@ -145,7 +132,7 @@
   left: 5px;
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: #000;
 }
 
 .calendar-day .love-message {
@@ -153,7 +140,7 @@
   line-height: 1.3;
   text-align: center;
   margin-top: 20px;
-  color: #666;
+  color: #000;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -164,34 +151,51 @@
 }
 
 .calendar-day.today {
-  background: #f8f9fa; /* 背景色 */
-  border-color: #4A89DC;
-  border-width: 2px; /* ボーダー幅 */
+  background: #f8f9fa; /* 今日の背景色 */
+  border-color: #ddd; /* 今日のボーダー色 */
+  border-width: 2px; /* 今日のボーダー幅 */
 }
 
 .calendar-day.today .day-number,
 .calendar-day.today .love-message {
-  color: #333; /* 文字色 */
+  color: #000; /* 今日の文字色 */
 }
 
 .calendar-day.message-day,
 .calendar-day.broadcast-day {
-  background: #f8f9fa; /* 通常の背景色 */
-  color: #333; /* 通常の文字色 */
-  border-color: #eee; /* 通常のボーダー色 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 通常のボックスシャドウ */
+  background: #f8f9fa; /* メッセージの背景色 */
+  color: #000; /* メッセージの文字色 */
+  border-color: #ddd; /* メッセージのボーダー色 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* メッセージのボックスシャドウ */
 }
 
 .calendar-day.message-day:hover,
 .calendar-day.broadcast-day:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* ホバー時のボックスシャドウを変更 */
-  transform: none; /* ホバー時の変形を無効にする */
-  border-color: #eee; /* ホバー時のボーダー色を変更 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* メッセージのホバー時のボックスシャドウ */
+  transform: none; /* メッセージのホバー時の変形を無効にする */
+  border-color: #ccc; /* メッセージのホバー時のボーダー色 */
+}
+
+.calendar-day.prev-month,
+.calendar-day.next-month {
+  background: #f8f9fa;
+  color: #999; /* 前月・次月の文字色 */
+  border-color: #eee;
+}
+
+.calendar-day.prev-month .day-number,
+.calendar-day.next-month .day-number {
+  color: #999; /* 前月・次月の日付文字色 */
+}
+
+.calendar-day.prev-month .love-message,
+.calendar-day.next-month .love-message {
+  color: #999; /* 前月・次月のメッセージ文字色 */
 }
 
 /* カレンダー凡例 */
 .calendar-legend {
-  display: none; /* 凡例を非表示にする */
+  display: none; /* カレンダー凡例を非表示 */
 }
 
 /* カレンダーポップアップ */
@@ -211,10 +215,10 @@
 
 .calendar-popup {
   background-color: #fff;
-  border-radius: 0 !important; /* 角を丸くしない */
+  border-radius: 10px;
   padding: 20px;
   width: 100%;
-  max-width: 90%;
+  max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
@@ -222,15 +226,11 @@
   animation: popup-fade 0.3s ease;
 }
 
-@keyframes popup-fade {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
 .calendar-popup h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
+  font-size: 18px;
 }
 
 .calendar-popup-close {
@@ -249,11 +249,35 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(255, 107, 136, 0.3);
+  font-size: 20px;
 }
 
 .calendar-popup-close:hover {
   background: #FF99AC;
   box-shadow: 0 6px 12px rgba(255, 107, 136, 0.4);
+}
+
+.message-list {
+  margin-top: 20px;
+}
+
+.message-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 3px solid #ddd;
+}
+
+.message-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.message-text {
+  color: #555;
+  line-height: 1.5;
 }
 
 /* カレンダー表示ボタン */
@@ -282,19 +306,14 @@
   margin-right: 8px;
 }
 
-/* 週間表示 */
-.week-view {
-  margin-bottom: 20px;
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+/* PC表示用スタイル */
+.pc-title {
   display: block;
-  width: 100%;
-  max-width: 800px; /* 最大幅を800pxに設定 */
-  margin-left: auto; /* 左の余白を自動に設定 */
-  margin-right: auto; /* 右の余白を自動に設定 */
-  overflow: hidden;
+}
+
+/* スマートフォン表示用スタイル */
+.sp-title {
+  display: none;
 }
 
 .week-view-title {
@@ -303,122 +322,176 @@
   font-size: 18px;
   color: #333;
   display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .week-view-title {
+    font-size: 16px;
+    padding: 0 10px;
+    text-align: center;
+  }
+  
+  /* スマートフォン表示用スタイル */
+  .pc-title {
+    display: none;
+  }
+  
+  .sp-title {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 .week-days {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   width: 100%;
   min-height: 80px;
   visibility: visible;
   overflow: hidden;
+  margin: 0 auto; /* 中央揃え */
 }
 
 .week-day {
-  height: 50px;
+  height: auto; /* 高さを自動に */
+  min-height: 50px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: row; /* 横並びに */
+  align-items: center; /* 中央揃え */
   justify-content: flex-start;
   background: white;
-  border-radius: 0 !important; /* 角を丸くしない */
-  padding: 5px 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  border: 1px solid #eee;
-  transition: none; /* アニメーションを無効にする */
-  cursor: pointer;
-  overflow: hidden;
+  border-radius: 8px !important; /* 角を丸く */
+  padding: 10px 15px;
+  box-shadow: none;
+  margin-bottom: 10px;
+  border: 1px solid #ddd; /* ボーダーを付ける */
 }
 
-.week-day:hover {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* ホバー時のボックスシャドウを変更 */
-  border-color: #eee; /* ホバー時のボーダー色を変更 */
-  transform: none; /* ホバー時の変形を無効にする */
+.week-day:last-child {
+  margin-bottom: 0;
 }
 
 .week-day-number {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  color: #333 !important; /* 黒色 */
-  margin-right: 5px; /* 右の余白 */
-  min-width: 20px; /* 最小幅 */
+  margin-right: 10px;
+  min-width: 25px;
+  text-align: center;
+  color: #000; /* 文字色を黒に */
 }
 
 .week-day-name {
-  font-weight: bold;
-  margin-right: 15px; /* 右の余白 */
-  color: #333 !important; /* 黒色 */
-  font-size: 11px;
-  min-width: 20px; /* 最小幅 */
-}
-
-.week-day[data-day="0"] .week-day-name { /* 日曜日 */
-  color: #e74c3c !important; /* 赤色 */
-}
-
-.week-day[data-day="6"] .week-day-name { /* 土曜日 */
-  color: #3498db !important; /* 青色 */
-}
-
-.week-day[data-day="1"] .week-day-name,
-.week-day[data-day="2"] .week-day-name,
-.week-day[data-day="3"] .week-day-name,
-.week-day[data-day="4"] .week-day-name,
-.week-day[data-day="5"] .week-day-name {
-  color: #333 !important; /* 黒色 */
-}
-
-.week-day.today {
-  background: #f8f9fa; /* 背景色 */
-  border-color: #4A89DC;
-  border-width: 2px; /* ボーダー幅 */
-}
-
-.week-day.today .week-day-name,
-.week-day.today .week-day-number {
-  color: #333 !important; /* 黒色 */
+  font-size: 14px;
+  color: #000; /* 文字色を黒に */
+  margin-right: 15px;
+  min-width: 25px;
+  text-align: center;
 }
 
 .week-day-message {
   font-size: 12px;
   line-height: 1.4;
-  text-align: left; /* 左寄せ */
-  color: #000 !important; /* 黒色 */
+  text-align: left; /* 左揃え */
+  color: #000 !important; /* 文字色を黒に */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-clamp: 2;
   max-height: 30px;
-  flex: 1; /* 余白を全て使用 */
-  border-radius: 0 !important; /* 角を丸くしない */
-  background-color: rgba(155, 89, 182, 0.1); /* 薄い紫色の背景 */
-  padding: 3px 6px; /* パディングを追加 */
-  margin-left: 5px; /* 左側の余白 */
-  border-left: 3px solid #9b59b6; /* 左側に紫色のボーダー */
-  font-weight: 500; /* やや太字 */
+  flex: 1; /* 余白を均等に */
+  border-radius: 0 !important; /* 角を丸く */
+  background-color: #f8f9fa; /* 背景色を白に */
+  padding: 3px 6px; /* パディングを付ける */
+  margin-left: 5px; /* 左余白を付ける */
+  border-left: 3px solid #ddd; /* 左ボーダーを付ける */
+  font-weight: 500; /* 文字の太さを調整 */
 }
 
 .author-name {
   font-weight: bold;
   margin-right: 4px;
-  color: #9b59b6; /* 紫色 */
+  color: #000; /* 文字色を黒に */
 }
 
 .comment-text {
-  color: #333;
+  color: #000; /* 文字色を黒に */
+}
+
+.recipient-name {
+  color: #000; /* 文字色を黒に */
+  font-weight: bold;
 }
 
 .week-day.has-message {
-  background: rgba(155, 89, 182, 0.05); /* 薄い紫色の背景 */
+  background: #f8f9fa; /* 背景色を白に */
   border-color: #ddd;
-  border-left: 3px solid #9b59b6; /* 左側に紫色のボーダー */
+  border-left: 3px solid #ddd; /* 左ボーダーを付ける */
 }
 
 .week-day.has-message .week-day-name,
 .week-day.has-message .week-day-number,
 .week-day.broadcast .week-day-name,
 .week-day.broadcast .week-day-number {
-  color: #333;
+  color: #000; /* 文字色を黒に */
+}
+
+.week-day.today {
+  background: #f8f9fa; /* 背景色を白に */
+  border-color: #4A89DC;
+  border-width: 2px; /* ボーダー幅を2pxに */
+}
+
+.week-day.today .week-day-name,
+.week-day.today .week-day-number {
+  color: #333 !important; /* 文字色を黒に */
+}
+
+.week-day-message {
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: left; /* 左揃え */
+  color: #000 !important; /* 文字色を黒に */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  max-height: 30px;
+  flex: 1; /* 余白を均等に */
+  border-radius: 0 !important; /* 角を丸く */
+  background-color: #f8f9fa; /* 背景色を白に */
+  padding: 3px 6px; /* パディングを付ける */
+  margin-left: 5px; /* 左余白を付ける */
+  border-left: 3px solid #ddd; /* 左ボーダーを付ける */
+  font-weight: 500; /* 文字の太さを調整 */
+}
+
+/* 日曜日の色設定 */
+.week-day[data-day="0"] .week-day-number,
+.week-day[data-day="0"] .week-day-name { 
+  color: #e74c3c !important; /* 赤色 */
+}
+
+/* 土曜日の色設定 */
+.week-day[data-day="6"] .week-day-number,
+.week-day[data-day="6"] .week-day-name { 
+  color: #3498db !important; /* 青色 */
+}
+
+/* 平日の色設定 */
+.week-day[data-day="1"] .week-day-name,
+.week-day[data-day="2"] .week-day-name,
+.week-day[data-day="3"] .week-day-name,
+.week-day[data-day="4"] .week-day-name,
+.week-day[data-day="5"] .week-day-name {
+  color: #333 !important; /* 黒色 */
 }

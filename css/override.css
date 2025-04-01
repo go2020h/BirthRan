@@ -1,0 +1,100 @@
+/* u7dd1u3068u9752u306eu8272u3092u4e0au66f8u304du3059u308bu30b9u30bfu30a4u30eb */
+
+/* u9031u9593u8868u793au306eu653eu9001u65e5u306eu8272u3092u4e0au66f8u304d */
+.week-day.broadcast,
+.broadcast-day,
+.legend-color.broadcast-day,
+.calendar-day.broadcast-day {
+  background: #f8f9fa !important;
+  color: #000 !important;
+  border-color: #ddd !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* u9031u9593u8868u793au306eu653eu9001u65e5u306eu6587u5b57u8272u3092u4e0au66f8u304d */
+.week-day.broadcast .week-day-name,
+.week-day.broadcast .week-day-number,
+.calendar-day.broadcast-day .day-number,
+.calendar-day.broadcast-day .love-message {
+  color: #000 !important;
+}
+
+/* u51e1u4f8bu306eu8272u3092u4e0au66f8u304d */
+.legend-item .legend-color.broadcast-day {
+  background: #f8f9fa !important;
+  border: 1px solid #ddd !important;
+}
+
+.legend-item .legend-color.message-day {
+  background: #f8f9fa !important;
+  border: 1px solid #ddd !important;
+}
+
+/* u30e1u30c3u30bbu30fcu30b8u65e5u306eu8272u3092u4e0au66f8u304d */
+.week-day.message-day,
+.message-day,
+.calendar-day.message-day {
+  background: #f8f9fa !important;
+  color: #000 !important;
+  border-color: #ddd !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* u30e1u30c3u30bbu30fcu30b8u65e5u306eu6587u5b57u8272u3092u4e0au66f8u304d */
+.week-day.message-day .week-day-name,
+.week-day.message-day .week-day-number,
+.calendar-day.message-day .day-number,
+.calendar-day.message-day .love-message {
+  color: #000 !important;
+}
+
+/* u9752u8272u3092u4e0au66f8u304d */
+.calendar-day.today {
+  background: #f8f9fa !important;
+  border-color: #ddd !important;
+  border-width: 2px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* u9031u9593u8868u793au306eu4ecau65e5u306eu8272u3092u4e0au66f8u304d */
+.week-day.today {
+  background: #f8f9fa !important;
+  border-color: #ddd !important;
+  border-width: 2px !important;
+}
+
+/* u571fu66dcu65e5u306eu8272u3092u9ed2u306bu4e0au66f8u304d */
+.week-day[data-day="6"] .week-day-number,
+.week-day[data-day="6"] .week-day-name,
+.calendar-day:nth-child(7n) .day-number {
+  color: #000 !important;
+}
+
+/* u65e5u66dcu65e5u306eu8272u3092u9ed2u306bu4e0au66f8u304d */
+.week-day[data-day="0"] .week-day-number,
+.week-day[data-day="0"] .week-day-name,
+.calendar-day:nth-child(7n+1) .day-number {
+  color: #000 !important;
+}
+
+/* u30abu30ecu30f3u30c0u30fcu30d8u30c3u30c0u30fcu306eu30b0u30e9u30c7u30fcu30b7u30e7u30f3u3092u4e0au66f8u304d */
+.calendar-header h3 {
+  color: #000 !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #000 !important;
+  background-clip: initial !important;
+}
+
+/* u30abu30ecu30f3u30c0u30fcu30cau30d3u30b1u30fcu30b7u30e7u30f3u30dcu30bfu30f3u306eu8272u3092u4e0au66f8u304d */
+.calendar-nav-btn {
+  background: #f8f9fa !important;
+  color: #000 !important;
+  border: 1px solid #ddd !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+.calendar-nav-btn:hover {
+  background: #f0f0f0 !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}

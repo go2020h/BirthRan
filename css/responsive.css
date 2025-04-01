@@ -371,6 +371,90 @@
     font-size: 14px;
   }
   
+  /* 次回のゲストセクションのレスポンシブ対応 */
+  .intro-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .intro-image {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .intro-content {
+    max-width: 100%;
+    padding: 15px;
+  }
+  
+  .intro-title {
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .intro-text {
+    text-align: center;
+  }
+  
+  .program-details {
+    margin: 15px auto 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    background-color: rgba(240, 248, 255, 0.7);
+    border-left: none;
+    border-top: 3px solid #1a3a6c;
+  }
+  
+  .detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .detail-text {
+    text-align: left;
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-word;
+    padding-top: 3px;
+  }
+  
+  .detail-icon {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    font-size: 1rem;
+  }
+  
+  .week-days {
+    gap: 5px;
+  }
+  
+  .week-day {
+    height: 70px;
+    padding: 5px;
+  }
+  
+  .week-day-name {
+    font-size: 12px;
+  }
+  
+  .week-day-number {
+    font-size: 16px;
+  }
+  
   /* スマホ用ブレイク */
   .sp-br {
     display: none;
@@ -431,6 +515,29 @@
     width: 100%;
     height: 0.5em;
   }
+  
+  .btn-primary, .btn-secondary {
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 14px;
+    white-space: normal;
+    box-sizing: border-box;
+    word-break: break-word;
+  }
+  
+  /* u30dcu30bfu30f3u306eu30b3u30f3u30c6u30cau306eu8abfu6574 */
+  .intro-content [style*="text-align: center"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+  
+  /* u30dcu30bfu30f3u306eu30a2u30a4u30b3u30f3u306eu8abfu6574 */
+  .btn-primary i, .btn-secondary i {
+    margin-left: 5px;
+  }
 }
 
 /* 共通スタイル */
@@ -474,10 +581,5 @@
   
   .section-title {
     font-size: 22px;
-  }
-  
-  .btn-primary, .btn-secondary {
-    width: 100%;
-    text-align: center;
   }
 }

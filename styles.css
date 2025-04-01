@@ -2906,27 +2906,27 @@ footer .copy {
 }
 
 .calendar-day.broadcast-day {
-  background: linear-gradient(135deg, #A0D468 0%, #8CC152 100%);
-  color: #fff;
+  background: #f8f9fa; /* u7dd1u8272u3092u524au9664u3057u3001u7d20u306eu80ccu666fu8272u306bu5909u66f4u3057u307eu3059 */
+  color: #333;
   font-weight: bold;
   box-shadow: 0 8px 15px rgba(160, 212, 104, 0.4);
   border-color: #8CC152;
 }
 
 .calendar-day.broadcast-day .love-message {
-  color: #fff;
+  color: #333;
 }
 
 .calendar-day.message-day {
-  background: linear-gradient(135deg, #AC92EC 0%, #967ADC 100%);
-  color: #fff;
+  background: #f8f9fa; /* u7dd1u8272u3092u524au9664u3057u3001u7d20u306eu80ccu666fu8272u306bu5909u66f4u3057u307eu3059 */
+  color: #333;
   font-weight: bold;
   box-shadow: 0 8px 15px rgba(172, 146, 236, 0.4);
   border-color: #967ADC;
 }
 
 .calendar-day.message-day .love-message {
-  color: #fff;
+  color: #333;
 }
 
 .calendar-day.selected {
@@ -2969,11 +2969,11 @@ footer .copy {
 }
 
 .broadcast-day {
-  background: linear-gradient(135deg, #A0D468 0%, #8CC152 100%);
+  background: #f8f9fa; /* u7dd1u8272u3092u524au9664u3057u3001u7d20u306eu80ccu666fu8272u306bu5909u66f4u3057u307eu3059 */
 }
 
 .message-day {
-  background: linear-gradient(135deg, #AC92EC 0%, #967ADC 100%);
+  background: #f8f9fa; /* u7dd1u8272u3092u524au9664u3057u3001u7d20u306eu80ccu666fu8272u306bu5909u66f4u3057u307eu3059 */
 }
 
 .legend-text {
@@ -3262,7 +3262,7 @@ footer .copy {
 .calendar-day.broadcast-day,
 .week-day.has-message,
 .week-day.broadcast {
-  background: #f8f9fa !important; /* u901au5e38u306eu80ccu666fu8272u306bu30eau30bbu30c3u30c8 */
+  background: #f8f8f8 !important; /* u901au5e38u306eu80ccu666fu8272u306bu30eau30bbu30c3u30c8 */
   color: #333 !important; /* u901au5e38u306eu30c6u30adu30b9u30c8u8272u306bu30eau30bbu30c3u30c8 */
   border-color: #eee !important; /* u901au5e38u306eu30dcu30fcu30c0u30fcu8272u306bu30eau30bbu30c3u30c8 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important; /* u901au5e38u306eu30b7u30e3u30c9u30a6u306bu30eau30bbu30c3u30c8 */
@@ -3289,4 +3289,30 @@ footer .copy {
 .week-day.today .week-day-name,
 .week-day.today .week-day-number {
   color: #333 !important;
+}
+
+.week-day.broadcast {
+  background: #f8f8f8;
+  color: #333;
+  font-weight: bold;
+  box-shadow: 0 8px 15px rgba(160, 212, 104, 0.4);
+  border-color: #8CC152;
+}
+
+.week-day.broadcast .week-day-name,
+.week-day.broadcast .week-day-number {
+  color: #333;
+}
+
+.week-day.message-day {
+  background: #f8f8f8;
+  color: #333;
+  font-weight: bold;
+  box-shadow: 0 8px 15px rgba(172, 146, 236, 0.4);
+  border-color: #967ADC;
+}
+
+.week-day.message-day .week-day-name,
+.week-day.message-day .week-day-number {
+  color: #333;
 }
