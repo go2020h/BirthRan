@@ -206,16 +206,19 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    z-index: 90;
+    z-index: 9999; /* フッターのz-indexより大きい値に設定 */
     padding: 60px 0 20px;
     overflow-y: auto;
     margin: 0;
     box-sizing: border-box;
     border-left: 1px solid rgba(255, 255, 255, 0.2);
+    max-height: 100vh; /* 最大高さを画面の高さに制限 */
   }
   
+  /* メニューがアクティブ時 */
   .menu.active {
-    display: flex;
+    display: flex !important;
+    z-index: 9999 !important; /* 必ずz-indexを9999に設定 */
   }
   
   .menu li {

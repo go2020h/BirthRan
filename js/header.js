@@ -129,20 +129,47 @@ document.addEventListener('DOMContentLoaded', function() {
   const setupHamburgerMenu = function() {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const menu = document.querySelector('.menu');
+    const menuOuter = document.querySelector('.menu_outer');
     
     // ハンバーガーメニューがクリックされたときの処理
     if (hamburgerMenu && menu) {
-      hamburgerMenu.addEventListener('click', function() {
-        hamburgerMenu.classList.toggle('active');
-        menu.classList.toggle('active');
-        // メニューが開いているときにスクロールを無効化
-        if (menu.classList.contains('active')) {
-          document.body.style.overflow = 'hidden';
-        } else {
+      hamburgerMenu.addEventListener('click', function(event) {
+        // クリックイベントの伝播を停止
+        event.stopPropagation();
+        console.log('ハンバーガーメニューがクリックされました');
+        
+        // 現在の状態を取得
+        const isActive = menu.classList.contains('active');
+        
+        if (isActive) {
+          // メニューを閉じる
+          hamburgerMenu.classList.remove('active');
+          menu.classList.remove('active');
+          menu.style.display = 'none';
           document.body.style.overflow = '';
+        } else {
+          // メニューを開く
+          hamburgerMenu.classList.add('active');
+          menu.classList.add('active');
+          menu.style.display = 'flex';
+          menu.style.zIndex = '9999';
+          document.body.style.overflow = 'hidden';
         }
       });
     }
+    
+    // メニュー外をクリックしたときにメニューを閉じる
+    document.addEventListener('click', function(event) {
+      if (menu && menu.classList.contains('active')) {
+        // クリックした要素がメニュー外である場合
+        if (!menu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+          hamburgerMenu.classList.remove('active');
+          menu.classList.remove('active');
+          menu.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      }
+    });
   };
   
   // 初期設定
@@ -171,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (hamburgerMenu && menu) {
         hamburgerMenu.classList.remove('active');
         menu.classList.remove('active');
+        menu.style.display = 'none';
         document.body.style.overflow = '';
       }
     }

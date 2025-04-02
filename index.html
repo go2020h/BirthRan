@@ -1032,6 +1032,71 @@
       }
     }
   </style>
+  <script>
+    // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu5236u5fa1u7528u306eu30b9u30afu30eau30d7u30c8
+    document.addEventListener('DOMContentLoaded', function() {
+      // u30d5u30c3u30bfu30fcu306ez-indexu3092u4e0bu3052u308b
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.style.zIndex = '5';
+      }
+      
+      // u30e1u30cbu30e5u30fcu306ez-indexu3092u4e0au3052u308b
+      const menu = document.querySelector('.menu');
+      if (menu) {
+        menu.style.zIndex = '9999';
+      }
+    });
+  </script>
+  
+  <!-- u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu7528u306eu8ffdu52a0u30b9u30afu30eau30d7u30c8 -->
+  <script>
+    // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu306eu52d5u4f5cu3092u4feeu6b63
+    document.addEventListener('DOMContentLoaded', function() {
+      // u65e2u5b58u306eu30b9u30afu30eau30d7u30c8u3092u7121u52b9u5316
+      const oldScripts = document.querySelectorAll('script[src*="header.js"], script[src*="responsive.js"]');
+      oldScripts.forEach(script => {
+        script.setAttribute('data-disabled', 'true');
+      });
+      
+      // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu3068u30e1u30cbu30e5u30fcu3092u53d6u5f97
+      const hamburger = document.querySelector('.hamburger-menu');
+      const menu = document.querySelector('.menu');
+      
+      if (hamburger && menu) {
+        // u65e2u5b58u306eu30a4u30d9u30f3u30c8u30eau30b9u30cau30fcu3092u524au9664
+        const newHamburger = hamburger.cloneNode(true);
+        hamburger.parentNode.replaceChild(newHamburger, hamburger);
+        
+        // u65b0u3057u3044u30afu30eau30c3u30afu30a4u30d9u30f3u30c8u3092u8ffdu52a0
+        newHamburger.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          console.log('u30cfu30f3u30d0u30fcu30acu30fcu30afu30eau30c3u30af');
+          
+          // u73feu5728u306eu72b6u614bu3092u78bau8a8d
+          const isActive = menu.classList.contains('active');
+          
+          // u72b6u614bu306bu5fdcu3058u3066u30afu30e9u30b9u3092u5207u308au66ffu3048
+          if (isActive) {
+            // u30e1u30cbu30e5u30fcu3092u9589u3058u308b
+            newHamburger.classList.remove('active');
+            menu.classList.remove('active');
+            menu.style.display = 'none';
+            document.body.style.overflow = '';
+          } else {
+            // u30e1u30cbu30e5u30fcu3092u958bu304f
+            newHamburger.classList.add('active');
+            menu.classList.add('active');
+            menu.style.display = 'flex';
+            menu.style.zIndex = '9999';
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      }
+    });
+  </script>
 </head>
 <body id="home">
   <!-- ヘッダープレースホルダー -->

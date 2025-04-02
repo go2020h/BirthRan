@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
       margin-left: calc(50% - 50vw) !important;
       margin-right: calc(50% - 50vw) !important;
       position: relative !important;
-      z-index: 100 !important;
+      z-index: 5 !important; /* z-indexを下げる */
       box-sizing: border-box !important;
       overflow: hidden !important;
     }
