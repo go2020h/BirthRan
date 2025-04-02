@@ -237,6 +237,8 @@
 /* u756au7d44u7d39u4ecbu30bbu30afu30b7u30e7u30f3 */
 .program-introduction {
   margin-bottom: 0; /* u4e0bu90e8u306eu30deu30fcu30b8u30f3u30920u306bu8a2du5b9a */
+  max-width: 1200px; /* u4ed6u306eu30bbu30afu30b7u30e7u30f3u3068u540cu3058u5e45u306bu8a2du5b9a */
+  margin: 0 auto; /* u4e2du592eu63c3u3048 */
 }
 
 .intro-section-wrapper {
@@ -499,6 +501,22 @@
   gap: 20px;
 }
 
+/* u30b2u30b9u30c8u52dfu96c6u30b3u30f3u30c6u30cau306eu30b9u30bfu30a4u30eb */
+.guest-recruitment-container {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(26, 58, 108, 0.15);
+  overflow: hidden;
+}
+
+/* u30b9u30deu30dbu8868u793au306eu30e1u30c7u30a3u30a2u30afu30a8u30ea */
+@media screen and (max-width: 768px) {
+  .guest-recruitment-container {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
 /* u30d0u30b9u30e9u30f3u30adu30e3u30f3u30c0u30fcu306eu30bfu30d6u5207u308au66ffu3048u6a5fu80fdu306bu5fc5u8981u306aCSSu3092u8ffdu52a0u3057u307eu3059u3002 */
 
 /* u30d0u30b9u30e9u30f3u30adu30e3u30f3u30c0u30fcu306eu30bfu30d6u5207u308au66ffu3048 */
@@ -575,8 +593,8 @@
   background: linear-gradient(135deg, #5D9CEC 0%, #4A89DC 100%);
   padding: 40px 20px;
   border-radius: 10px;
-  text-align: center;
   color: white;
+  text-align: center;
 }
 
 .message-content {

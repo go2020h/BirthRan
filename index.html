@@ -1277,6 +1277,27 @@
                       <span class="detail-text" style="color: #333;">健康データを蓄積し、分析</span>
                     </div>
                   </div>
+                  
+                  <!-- バイタルデータ表示枠 -->
+                  <div style="margin-top: 30px; border: 2px dashed #1a3a6c; border-radius: 10px; padding: 20px; background-color: #f8f9fa;">
+                    <h4 style="text-align: center; color: #1a3a6c; margin-bottom: 15px; font-size: 18px;">出演者リアルタイムバイタルデータ</h4>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 20px;">
+                      <div style="text-align: center; padding: 10px; min-width: 120px;">
+                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">心拍数</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #1a3a6c;">-- bpm</div>
+                      </div>
+                      <div style="text-align: center; padding: 10px; min-width: 120px;">
+                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">ストレスレベル</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #1a3a6c;">--</div>
+                      </div>
+                      <div style="text-align: center; padding: 10px; min-width: 120px;">
+                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">活動量</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #1a3a6c;">-- kcal</div>
+                      </div>
+                    </div>
+                    <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 0;">※ 現在準備中です。4月3日の放送開始後にリアルタイムデータを表示します。</p>
+                  </div>
+                  
                   <div style="text-align: center; margin-top: 20px;">
                     <a href="news.html" class="btn-primary" style="display: inline-block;">詳細を見る <i class="fas fa-arrow-right"></i></a>
                   </div>
@@ -1287,40 +1308,58 @@
         </div>
 
         <!-- 誕生日が近い！ゲスト募集中！！ -->
-        <div class="intro-section-wrapper" style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 60px 0;"> 
+        <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 60px 0; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); box-sizing: border-box;"> 
           <div class="container">
             <h2 class="section-title" style="color: #1a3a6c; text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; padding: 0 15px;">
               誕生日が近い！ゲスト募集中！！
             </h2>
-            <div class="program-introduction" style="max-width: 1000px; margin: 0 auto; padding: 0 15px;">
-              <div class="intro-container" style="background-color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(26, 58, 108, 0.15); overflow: hidden;">
+            <div class="program-introduction">
+              <div class="guest-recruitment-container">
         
-                <div class="intro-content" style="padding: 30px;">
-                  <p class="intro-text" style="font-size: 18px; text-align: center; color: #333; margin-bottom: 25px; font-weight: 500;">番組では、誕生日が近いゲストを大募集しています。</p>
-                  <div class="program-details" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
-                    <div class="detail-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-                      <span class="detail-text" style="font-size: 16px; color: #333;">出演日から１か月以内に誕生日を迎える方</span>
+                <div class="guest-recruitment-content" style="padding: 30px;">
+                  <p class="guest-recruitment-text" style="font-size: 18px; text-align: center; color: #333; margin-bottom: 25px; font-weight: 500;">番組では、誕生日が近いゲストを大募集しています。</p>
+                  <div class="guest-requirements" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                    <div class="requirement-item" style="display: flex; align-items: center; margin-bottom: 15px;">
+                      <span class="requirement-text" style="font-size: 16px; color: #333;">出演日から１か月以内に誕生日を迎える方</span>
                     </div>
-                    <div class="detail-item" style="display: flex; align-items: center;">
-                      <span class="detail-text" style="font-size: 16px; color: #333;">バスランでベスト３に入ると自負している方</span>
+                    <div class="requirement-item" style="display: flex; align-items: center;">
+                      <span class="requirement-text" style="font-size: 16px; color: #333;">バスランでベスト３に入ると自負している方</span>
                     </div>
                   </div>
                   <h4 style="margin-top: 20px; color: #1a3a6c; font-size: 20px; text-align: center; padding-bottom: 10px; border-bottom: 2px solid #d4af37; margin-bottom: 20px;">ゲスト出演してくださった方には、誕生日プレゼントとして</h4>
-                  <ol class="present-list" style="padding-left: 20px; margin-bottom: 25px;">
-                    <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #e0e0e0;">
-                      <strong style="color: #1a3a6c; font-size: 18px; display: block; margin-bottom: 5px;">渋谷愛ビジョンの放映枠</strong>
-                      <p style="margin: 0; color: #555; line-height: 1.6;">20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供させていただきます。<br>
-                      ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。</p>
-                    </li>
-                    <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #e0e0e0;">
-                      <strong style="color: #1a3a6c; font-size: 18px; display: block; margin-bottom: 5px;">MOTHER Bracelet</strong>
-                      <p style="margin: 0; color: #555; line-height: 1.6;">体温で充電、充電不要で計測可能でバイタルデータを蓄積するMOTHER　Braceletで健康チェック。</p>
-                    </li>
-                    <li style="margin-bottom: 15px;">
-                      <strong style="color: #1a3a6c; font-size: 18px; display: block; margin-bottom: 5px;">今月のバースデープレゼント</strong>
-                      <p style="margin: 0; color: #555; line-height: 1.6;">毎月どんな商品をセレクトするのか！？お楽しみに～。</p>
-                    </li>
-                  </ol>
+                  <div class="present-items" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+                    <div class="present-item" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed #e0e0e0;">
+                      <div class="present-header" style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <span class="present-number" style="background-color: #1a3a6c; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">1</span>
+                        <strong style="color: #1a3a6c; font-size: 18px;">渋谷愛ビジョンの放映枠</strong>
+                      </div>
+                      <div class="present-content" style="padding-left: 34px;">
+                        <p style="margin: 0 0 8px 0; color: #555; line-height: 1.6; font-weight: bold;">▶ 20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供</p>
+                        <p style="margin: 0; color: #555; line-height: 1.6;">ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。</p>
+                      </div>
+                    </div>
+                    
+                    <div class="present-item" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed #e0e0e0;">
+                      <div class="present-header" style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <span class="present-number" style="background-color: #1a3a6c; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">2</span>
+                        <strong style="color: #1a3a6c; font-size: 18px;">MOTHER Bracelet</strong>
+                      </div>
+                      <div class="present-content" style="padding-left: 34px;">
+                        <p style="margin: 0; color: #555; line-height: 1.6;">体温で充電、充電不要で計測可能でバイタルデータを蓄積するMOTHER　Braceletで健康チェック。</p>
+                      </div>
+                    </div>
+                    
+                    <div class="present-item">
+                      <div class="present-header" style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <span class="present-number" style="background-color: #1a3a6c; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">3</span>
+                        <strong style="color: #1a3a6c; font-size: 18px;">今月のバースデープレゼント</strong>
+                      </div>
+                      <div class="present-content" style="padding-left: 34px;">
+                        <p style="margin: 0; color: #555; line-height: 1.6;">毎月どんな商品をセレクトするのか！？お楽しみに～。</p>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <p style="margin-top: 15px; text-align: center; font-weight: 500; color: #333; font-size: 16px;">以上、愛が詰まった３つのサービス＆商品をプレゼントさせていただきます。</p>
                   <div style="text-align: center; margin-top: 30px;">
                     <a href="#" class="btn-primary" style="display: inline-block; background: linear-gradient(135deg, #1a3a6c 0%, #0f2a5c 100%); border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px; box-shadow: 0 5px 15px rgba(26, 58, 108, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(26, 58, 108, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(26, 58, 108, 0.3)'">応募する <i class="fas fa-arrow-right"></i></a>
@@ -1337,6 +1376,49 @@
 
   <!-- フッター -->
   <div id="footer-placeholder"></div>
+
+  <!-- お問い合わせフォームダイアログ -->
+  <div id="contact-form-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000;">
+    <div style="background-color: #fff; border-radius: 10px; padding: 30px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+      <button id="contact-form-close" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; background: #FF6B88; color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">&times;</button>
+      <h2 style="text-align: center; margin-bottom: 20px; color: #1a3a6c; font-size: 24px;">ゲスト応募フォーム</h2>
+      
+      <form id="contact-form" style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-name" style="font-weight: bold; color: #333;">お名前 <span style="color: #FF6B88;">*</span></label>
+          <input type="text" id="contact-name" name="name" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-email" style="font-weight: bold; color: #333;">メールアドレス <span style="color: #FF6B88;">*</span></label>
+          <input type="email" id="contact-email" name="email" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-message" style="font-weight: bold; color: #333;">応募内容 <span style="color: #FF6B88;">*</span></label>
+          <textarea id="contact-message" name="message" rows="5" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; resize: vertical;"></textarea>
+        </div>
+        
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+          <button type="submit" style="background: linear-gradient(135deg, #1a3a6c 0%, #0f2a5c 100%); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px rgba(0, 0, 0, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)'">送信する</button>
+        </div>
+      </form>
+      
+      <div id="form-success" style="display: none; text-align: center; margin-top: 20px;">
+        <i class="fas fa-check-circle" style="font-size: 48px; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="color: #4CAF50; margin-bottom: 10px;">送信完了</h3>
+        <p style="color: #666;">応募ありがとうございます。内容を確認の上、ご連絡させていただきます。</p>
+        <button id="form-success-close" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer;">閉じる</button>
+      </div>
+      
+      <div id="form-error" style="display: none; text-align: center; margin-top: 20px;">
+        <i class="fas fa-exclamation-circle" style="font-size: 48px; color: #f44336; margin-bottom: 15px;"></i>
+        <h3 style="color: #f44336; margin-bottom: 10px;">エラー</h3>
+        <p style="color: #666;">送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。</p>
+        <button id="form-error-close" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer;">閉じる</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // 現在の日付を取得
@@ -1397,6 +1479,63 @@
       });
     });
     
+    // お問い合わせフォームの処理
+    $(document).ready(function() {
+      // 応募するボタンをクリックしたときにダイアログを表示
+      $(document).on('click', '.btn-primary', function(e) {
+        if ($(this).text().includes('応募する')) {
+          e.preventDefault();
+          $('#contact-form-dialog').css('display', 'block');
+        }
+      });
+      
+      // ダイアログを閉じる
+      $('#contact-form-close').click(function() {
+        $('#contact-form-dialog').css('display', 'none');
+      });
+      
+      // 成功メッセージを閉じる
+      $('#form-success-close').click(function() {
+        $('#contact-form-dialog').css('display', 'none');
+        $('#contact-form').css('display', 'flex');
+        $('#form-success').css('display', 'none');
+        $('#contact-form')[0].reset();
+      });
+      
+      // エラーメッセージを閉じる
+      $('#form-error-close').click(function() {
+        $('#form-error').css('display', 'none');
+        $('#contact-form').css('display', 'flex');
+      });
+      
+      // フォーム送信処理
+      $('#contact-form').submit(function(e) {
+        e.preventDefault();
+        
+        const name = $('#contact-name').val();
+        const email = $('#contact-email').val();
+        const message = $('#contact-message').val();
+        
+        // フォームデータを整形
+        const content = `お名前: ${name}<br>メールアドレス: ${email}<br>応募内容:<br>${message}`;
+        
+        // Webhookに送信
+        $.ajax({
+          url: 'https://hook.us1.make.com/uihk0fyhk1aoyuao28dnpg3igwhkk4af',
+          type: 'POST',
+          data: JSON.stringify({ content: content }),
+          contentType: 'application/json',
+          success: function(response) {
+            $('#contact-form').css('display', 'none');
+            $('#form-success').css('display', 'block');
+          },
+          error: function(xhr, status, error) {
+            $('#form-error').css('display', 'block');
+            console.error('Error:', error);
+          }
+        });
+      });
+    });
   </script>
   <script src="js/header.js"></script>
   <script src="js/script.js"></script>
