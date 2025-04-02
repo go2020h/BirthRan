@@ -247,7 +247,7 @@
   
   .calendar-content, .youtube-section, .program-info,
   .weekly-highlight, .vital-data-section {
-    padding: 20px;
+    padding: 10px 5px;
   }
   
   .calendar-content h2, .youtube-section h2, .program-info h2,
@@ -256,7 +256,7 @@
   }
   
   .weekdays, .calendar-days {
-    gap: 5px;
+    gap: 2px;
   }
   
   .calendar-day {

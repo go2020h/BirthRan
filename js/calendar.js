@@ -196,7 +196,7 @@ async function renderCalendar(year, month) {
       const dayElement = $(`
         <div class="${dayClass}" data-date="${formattedDate}">
           <div class="day-number">${dayNumber}</div>
-          ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="love-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name || ''}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
+          ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="love-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
         </div>
       `);
       
@@ -215,21 +215,30 @@ async function renderCalendar(year, month) {
       const formattedDate = formatDate(currentDate);
       
       let dayClass = "calendar-day";
-      if (currentDate.getFullYear() === today.getFullYear() && 
-          currentDate.getMonth() === today.getMonth() && 
-          currentDate.getDate() === today.getDate()) {
-        dayClass += " today";
-      }
+      // if (currentDate.getFullYear() === today.getFullYear() && 
+      //     currentDate.getMonth() === today.getMonth() && 
+      //     currentDate.getDate() === today.getDate()) {
+      //   dayClass += " today";
+      // }
       
-      // 木曜日（4）の場合、放送日クラスを追加
-      if (currentDate.getDay() === 4) {
-        dayClass += " broadcast-day";
+      // メッセージを表示
+      let messageContent = '';
+      if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+        const message = messagesByDate[formattedDate][0];
+        console.log(`Message for ${formattedDate}:`, message);
+        
+        // メッセージを表示
+        messageContent = `<div class="love-message">
+          <span class="recipient-name">${message.recipient_name}</span>
+        </div>`;
+      } else {
+        console.log(`No message for ${formattedDate}`);
       }
       
       const dayElement = $(`
         <div class="${dayClass}" data-date="${formattedDate}">
           <div class="day-number">${i}</div>
-          ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="love-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name || ''}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
+          ${messageContent}
         </div>
       `);
       
@@ -262,7 +271,7 @@ async function renderCalendar(year, month) {
       const dayElement = $(`
         <div class="${dayClass}" data-date="${formattedDate}">
           <div class="day-number">${dayNumber}</div>
-          ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="love-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name || ''}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
+          ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="love-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
         </div>
       `);
       
@@ -351,22 +360,31 @@ async function renderWeekView(startDate) {
       const formattedDate = formatDate(currentDate);
       
       let dayClass = "week-day";
-      if (currentDate.getFullYear() === today.getFullYear() && 
-          currentDate.getMonth() === today.getMonth() && 
-          currentDate.getDate() === today.getDate()) {
-        dayClass += " today";
-      }
+      // if (currentDate.getFullYear() === today.getFullYear() && 
+      //     currentDate.getMonth() === today.getMonth() && 
+      //     currentDate.getDate() === today.getDate()) {
+      //   dayClass += " today";
+      // }
       
-      // 木曜日（4）の場合、放送日クラスを追加
-      if (currentDate.getDay() === 4) {
-        dayClass += " broadcast-day";
+      // メッセージを表示
+      let messageContent = '';
+      if (messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0) {
+        const message = messagesByDate[formattedDate][0];
+        console.log(`Message for ${formattedDate}:`, message);
+        
+        // メッセージを表示
+        messageContent = `<div class="week-day-message">
+          <span class="recipient-name">${message.recipient_name}</span>
+          <span class="comment-text">${message.comment_text}</span>
+          <span class="author-name">by ${message.author_name}</span>
+        </div>`;
       }
       
       const dayElement = $(`
         <div class="${dayClass}" data-date="${formattedDate}" data-day="${currentDate.getDay()}">
           <div class="week-day-number">${currentDate.getDate()}</div>
           <div class="week-day-name">${['日','月','火','水','木','金','土'][currentDate.getDay()]}</div>
-          ${messagesByDate[formattedDate] && messagesByDate[formattedDate].length > 0 ? `<div class="week-day-message"><span class="recipient-name">${messagesByDate[formattedDate][0].recipient_name || ''}</span><span class="comment-text">${messagesByDate[formattedDate][0].comment_text}</span> by <span class="author-name">${messagesByDate[formattedDate][0].author_name}</span></div>` : ''}
+          ${messageContent}
         </div>
       `);
       
@@ -617,9 +635,9 @@ async function initDailyRanking() {
         dayRankings.forEach(item => {
           const rankingItem = $(`
             <div class="ranking-item" data-date="${formattedDate}" data-rank="${item.rank}">
-              <div class="ranking-position">${item.rank}</div>
+              <div class="ranking-position${item.rank <= 3 ? ' top-rank rank-' + item.rank : ''}">${item.rank}</div>
               <div class="ranking-details">
-                <div class="ranking-recipient">${item.recipient_name || ''}</div>
+                <div class="ranking-recipient">${item.recipient_name}</div>
               </div>
             </div>
           `);

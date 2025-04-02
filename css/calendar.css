@@ -148,6 +148,21 @@
   line-clamp: 4;
   max-height: 60px;
   border-radius: 0 !important; /* 角を丸くしない */
+  z-index: 1; /* u91cdu306au308au306eu554fu984cu3092u89e3u6c7au3059u308bu305fu3081u306ez-index */
+}
+
+.calendar-day .love-message .recipient-name {
+  display: block;
+  font-weight: bold;
+  color: #1a3a6c;
+  margin-bottom: 2px;
+  z-index: 2; /* u91cdu306au308au306eu554fu984cu3092u89e3u6c7au3059u308bu305fu3081u306ez-index */
+}
+
+.calendar-day .love-message .comment-text,
+.calendar-day .love-message .author-by,
+.calendar-day .love-message .author-name {
+  display: none; /* PCu8868u793au3067u3082u975eu8868u793a */
 }
 
 .calendar-day.today {
@@ -347,6 +362,65 @@
     display: block;
     text-align: center;
     width: 100%;
+  }
+  
+  /* スマホ表示でのカレンダー日付セルのスタイル */
+  .calendar-day {
+    height: 80px; /* 高さを少し小さく */
+    padding: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 中央揃え */
+  }
+  
+  .calendar-day .day-number {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 12px;
+  }
+  
+  .calendar-day .love-message {
+    margin-top: 15px;
+    font-size: 12px;
+    line-height: 1.2;
+    width: 100%;
+    text-align: center;
+    padding: 0 2px;
+  }
+  
+  /* recipient-nameのみを表示するスタイル */
+  .calendar-day .love-message .recipient-name {
+    display: block;
+    font-weight: bold;
+    color: #1a3a6c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .calendar-day .love-message .comment-text,
+  .calendar-day .love-message .author-name {
+    display: none; /* スマホ表示では非表示 */
+  }
+  
+  /* スマートフォン表示でのカレンダー日付セルのスタイル */
+  .calendar-content {
+    padding: 10px 5px; /* 左右のパディングを5pxに変更 */
+  }
+  
+  .calendar-section {
+    padding: 0 10px; /* 左右のパディングを10pxに変更 */
+  }
+  
+  /* カレンダー日付のグリッド間隔を変更 */
+  .calendar-days {
+    gap: 2px; /* グリッド間隔を2pxに変更 */
   }
 }
 
