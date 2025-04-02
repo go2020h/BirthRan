@@ -651,6 +651,26 @@ async function initDailyRanking() {
       tabContent.html('<p class="error-ranking">データの読み込みに失敗しました。</p>');
     });
   }
+
+  setTimeout(function() {
+    console.log('Forcing Thursday tab to be active');
+    
+    // すべてのランキングコンテンツを非表示
+    $('.ranking-tab-content').hide();
+    
+    // 木曜日のタブ（最初のタブ）を取得してアクティブにする
+    const thursdayTab = $('.ranking-tab-btn:first');
+    
+    // すべてのタブから active クラスを削除し、木曜日のタブに active クラスを追加
+    $('.ranking-tab-btn').removeClass('active');
+    thursdayTab.addClass('active');
+    
+    // 木曜日タブに対応するコンテンツを表示
+    const thursdayDate = thursdayTab.data('date');
+    $(`#ranking-content-${thursdayDate}`).show();
+    
+    console.log('Thursday tab activated:', thursdayDate);
+  }, 300);
 }
 
 // ランキングポップアップを表示する関数
