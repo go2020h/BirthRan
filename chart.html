@@ -202,6 +202,131 @@
       color: #555;
     }
     
+    /* 番組の目的セクション用スタイル */
+    .goals-section-wrapper {
+      background-color: #f8f9fa;
+      padding: 50px 0 60px;
+      color: #000;
+    }
+    
+    .program-goals {
+      margin-bottom: 0;
+      text-align: center;
+    }
+    
+    .intro-title {
+      color: #1a3a6c;
+      font-size: 28px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .goals-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      box-sizing: border-box;
+    }
+    
+    .goal-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex: 1;
+      position: relative;
+      border-top: 4px solid #1a3a6c;
+      text-align: center;
+      margin: 0 10px;
+      max-width: 300px;
+      min-width: 250px;
+    }
+    
+    .goal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+    
+    .goal-icon {
+      width: 70px;
+      height: 70px;
+      background-color: rgba(26, 58, 108, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #1a3a6c;
+      font-size: 2rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .goal-card:hover .goal-icon {
+      transform: scale(1.1);
+      background-color: rgba(26, 58, 108, 0.15);
+    }
+    
+    .goal-card h4 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #333;
+      font-weight: 600;
+    }
+    
+    .goal-card p {
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    @media (max-width: 992px) {
+      .goals-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .goal-card {
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .goals-section-wrapper {
+        padding: 40px 0;
+      }
+      
+      .intro-title {
+        font-size: 24px;
+      }
+      
+      .goal-card {
+        padding: 15px;
+      }
+      
+      .goal-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+      
+      .goal-card h4 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    }
+    
     /* タブ切り替えスタイル */
     .tab-container {
       margin-top: 20px;
@@ -439,8 +564,34 @@
     <div class="title-section-wrapper">
       <div class="wrap">
         <section id="contents">
-          <h2 class="section-title">クロスメディア展開</h2>
+          <h2 class="section-title">番組の目的</h2>
         </section>
+      </div>
+    </div>
+
+    <!-- 番組の目的 -->
+    <div class="goals-section-wrapper">
+      <div class="container">
+        <div class="program-goals">
+          <h3 class="intro-title" style="text-align: center; margin-bottom: 30px;">番組の目的</h3>
+          <div class="goals-container">
+            <div class="goal-card">
+              <div class="goal-icon"><i class="fas fa-chart-line"></i></div>
+              <h4>聴取率No.1を目指す</h4>
+              <p>ラジオ日本局内で『聴取率』『SNS（X）』のフォロワー数でNo.1を目指します。リスナーの皆様と一緒に成長する番組を作ります。</p>
+            </div>
+            <div class="goal-card">
+              <div class="goal-icon"><i class="fas fa-tv"></i></div>
+              <h4>クロスメディア展開</h4>
+              <p>渋谷愛ビジョンと連動するクロスメディア展開を実現。ラジオの枠を超えた新しいエンターテイメントをお届けします。</p>
+            </div>
+            <div class="goal-card">
+              <div class="goal-icon"><i class="fas fa-mobile-alt"></i></div>
+              <h4>魅力的なWEB＆SNS展開</h4>
+              <p>公式サイトやSNSを通じて、番組の魅力を最大限に伝えます。リスナーとの双方向コミュニケーションを大切にします。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

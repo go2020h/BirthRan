@@ -41,15 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
     headerPlaceholder.style.display = 'none';
   }
   
-  // メニューアイテムを生成
+  // メニュー項目を定義
   const menuItems = [
     {href: 'index.html', text: 'ホーム'},
-    {href: 'about.html', text: 'はじめに'},
-    {href: 'story.html', text: 'あらすじ'},
-    {href: 'chart.html', text: '相関図'},
-    {href: 'news.html', text: 'お知らせ'},
+    {href: 'story.html', text: '番組構成'},
     {href: 'caststaff.html', text: 'キャスト＆STAFF'},
-    {href: 'index.html#youtube-section', text: '配信'}
+    {href: 'chart.html', text: '番組の目的'}
   ];
   
   // アクティブメニューアイテムを決定
@@ -59,16 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
       activeMenuIndex = 1;
       break;
     case 'story':
+      activeMenuIndex = 1;
+      break;
+    case 'caststaff':
       activeMenuIndex = 2;
       break;
     case 'chart':
       activeMenuIndex = 3;
-      break;
-    case 'news':
-      activeMenuIndex = 4;
-      break;
-    case 'caststaff':
-      activeMenuIndex = 5;
       break;
   }
   

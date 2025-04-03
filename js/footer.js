@@ -164,12 +164,9 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="footer-links">
             <a href="index.html">ホーム</a>
-            <a href="about.html">はじめに</a>
-            <a href="story.html">あらすじ</a>
-            <a href="chart.html">相関図</a>
-            <a href="news.html">お知らせ</a>
+            <a href="story.html">番組構成</a>
             <a href="caststaff.html">キャスト＆STAFF</a>
-            <a href="index.html#youtube-section">配信</a>
+            <a href="chart.html">番組の目的</a>
           </div>
           <div class="copy">
             <small>Copyright &copy; 2025 efitプレゼンツ☆ウィークリー・バースデー・ランキング, All Rights Reserved.</small>

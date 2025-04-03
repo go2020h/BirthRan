@@ -646,12 +646,54 @@
     /* 出演者のリアルバイタルデータ */
     .vital-data-section {
       margin: 40px 0;
-      background-color: #fce4ec;
+      background-color: #1a3a6c;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       max-width: 1200px;
       margin: 0 auto;
+      color: #fff;
+    }
+    
+    .vital-data-section .intro-container {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .vital-data-section .intro-content {
+      background-color: transparent;
+    }
+    
+    .vital-data-section .detail-icon {
+      color: #fff;
+    }
+    
+    .vital-data-section .detail-text {
+      color: #fff;
+    }
+    
+    .vital-data-section .background-text {
+      color: #fff;
+    }
+    
+    .vital-data-section .background-lead {
+      color: #fff;
+    }
+    
+    .vital-data-section .background-lead-pc {
+      border-bottom: 2px solid #d4af37;
+    }
+    
+    .vital-data-section .background-lead-sp {
+      border-bottom: 2px solid #d4af37;
+    }
+    
+    .vital-data-section .background-text p {
+      color: #fff;
+    }
+    
+    .vital-data-section .btn-primary {
+      background-color: #d4af37;
+      color: #1a3a6c;
     }
     
     /* 全体 */
@@ -718,7 +760,7 @@
     .calendar-section {
       margin: 0 auto;
       max-width: 1200px;
-    
+   
     }
     
     /* YouTube-LIVEスタイル */
@@ -802,10 +844,11 @@
     
     /* 出演者のリアルバイタルデータスタイル */
     .vital-data-wrapper {
-      background-color: #fce4ec;
+      background-color: #2a4a7c;
       padding: 40px 0;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
+      color: #fff;
     }
     
     .vital-data-section {
@@ -1032,27 +1075,347 @@
         display: none;
       }
     }
-  </style>
-  <script>
-    // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu5236u5fa1u7528u306eu30b9u30afu30eau30d7u30c8
-    document.addEventListener('DOMContentLoaded', function() {
-      // u30d5u30c3u30bfu30fcu306ez-indexu3092u4e0bu3052u308b
-      const footer = document.querySelector('footer');
-      if (footer) {
-        footer.style.zIndex = '5';
+    
+    /* ゲストプレゼント */
+    .guest-present-container {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      overflow-x: hidden;
+      max-width: 100%;
+      box-sizing: border-box;
+      width: 100%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .guest-present-item {
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+      border-bottom: 1px dashed #e0e0e0;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .guest-present-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .guest-present-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .guest-present-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    
+    .guest-present-number {
+      background-color: #1a3a6c;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .guest-present-item:hover .guest-present-number {
+      transform: scale(1.1);
+      background-color: #0f2a5c;
+    }
+    
+    .guest-present-title {
+      color: #1a3a6c;
+      font-size: 20px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .guest-present-item:hover .guest-present-title {
+      color: #0f2a5c;
+    }
+    
+    .guest-present-content {
+      padding-left: 40px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .guest-present-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    
+    .guest-present-img-container {
+      flex: 0 0 100%;
+      margin-right: 0;
+      margin-bottom: 15px;
+      max-width: 100%;
+      box-sizing: border-box;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .guest-present-item:hover .guest-present-img-container {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .guest-present-img {
+      width: 100%;
+      border-radius: 8px;
+      transition: all 0.5s ease;
+      display: block;
+    }
+    
+    .guest-present-item:hover .guest-present-img {
+      transform: scale(1.03);
+    }
+    
+    .guest-present-text {
+      flex: 1;
+      min-width: 200px;
+      padding-top: 5px;
+    }
+    
+    .guest-present-text p {
+      margin: 0 0 12px 0;
+      color: #555;
+      line-height: 1.7;
+      word-break: break-word;
+    }
+    
+    .guest-present-text p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .guest-present-text p.bold {
+      font-weight: bold;
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .guest-present-text p.bold:before {
+      content: '\25b6';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #1a3a6c;
+    }
+    
+    @media (max-width: 767px) {
+      .guest-present-container {
+        padding: 15px 10px;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
       }
       
-      // u30e1u30cbu30e5u30fcu306ez-indexu3092u4e0au3052u308b
-      const menu = document.querySelector('.menu');
-      if (menu) {
-        menu.style.zIndex = '9999';
+      .present-items {
+        padding: 15px 10px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
-    });
-  </script>
-  
-  <!-- u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu7528u306eu8ffdu52a0u30b9u30afu30eau30d7u30c8 -->
+      
+      .guest-present-content {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      
+      .guest-present-img-container {
+        flex: 0 0 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        max-width: 100%;
+      }
+      
+      .guest-present-text {
+        width: 100%;
+        padding-top: 0;
+      }
+      
+      .guest-present-text p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      
+      .guest-present-text p.bold {
+        font-size: 15px;
+        padding-left: 18px;
+      }
+      
+      .guest-present-title {
+        font-size: 18px;
+      }
+      
+      .guest-present-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      .guest-present-number {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+      
+      .guest-present-title {
+        text-align: center;
+        width: 100%;
+      }
+    }
+    
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .guest-present-img-container {
+        flex: 0 0 240px;
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      .guest-present-img-container {
+        flex: 0 0 220px;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .guest-present-flex {
+        flex-direction: row;
+      }
+      
+      .guest-present-img-container {
+        flex: 0 0 200px;
+        margin-right: 20px;
+        margin-bottom: 0;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .guest-present-container {
+        padding: 15px 10px;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+      }
+      
+      .guest-present-flex {
+        flex-direction: column;
+      }
+      
+      .guest-present-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      .guest-present-number {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+      
+      .guest-present-title {
+        text-align: center;
+        width: 100%;
+      }
+      
+      .guest-present-img-container {
+        flex: 0 0 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        max-width: 100%;
+      }
+      
+      .guest-present-text {
+        width: 100%;
+        padding-top: 0;
+      }
+      
+      .guest-present-text p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      
+      .guest-present-text p.bold {
+        font-size: 15px;
+        padding-left: 18px;
+      }
+      
+      .guest-present-title {
+        font-size: 18px;
+      }
+    }
+    
+    /* 番組の生い立ちセクションのスマホ表示対応 */
+    @media (max-width: 767px) {
+      .background-container {
+        flex-direction: column !important;
+      }
+      .background-image {
+        max-width: 100% !important;
+        margin-bottom: 20px;
+      }
+      .background-lead-pc {
+        display: none !important;
+      }
+      .background-lead-sp {
+        display: block !important;
+      }
+    }
+    
+    /* スマホ表示対応 */
+    @media (max-width: 767px) {
+      .background-container {
+        flex-direction: column !important;
+      }
+      .background-image {
+        max-width: 100% !important;
+        margin-bottom: 20px;
+      }
+      .background-lead-pc {
+        display: none !important;
+      }
+      .background-lead-sp {
+        display: block !important;
+      }
+    }
+  </style>
   <script>
-    // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu306eu52d5u4f5cu3092u4feeu6b63
+    // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu7528u306eu8ffdu52a0u30b9u30afu30eau30d7u30c8
     document.addEventListener('DOMContentLoaded', function() {
       // u65e2u5b58u306eu30b9u30afu30eau30d7u30c8u3092u7121u52b9u5316
       const oldScripts = document.querySelectorAll('script[src*="header.js"], script[src*="responsive.js"]');
@@ -1060,7 +1423,7 @@
         script.setAttribute('data-disabled', 'true');
       });
       
-      // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu3068u30e1u30cbu30e5u30fcu3092u53d6u5f97
+      // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu3092u53d6u5f97
       const hamburger = document.querySelector('.hamburger-menu');
       const menu = document.querySelector('.menu');
       
@@ -1074,13 +1437,54 @@
           e.preventDefault();
           e.stopPropagation();
           
-          console.log('u30cfu30f3u30d0u30fcu30acu30fcu30afu30eau30c3u30af');
+          console.log('u30cfu30f3u30d0u30fcu30afu30eau30c3u30af');
           
-          // u73feu5728u306eu72b6u614bu3092u78bau8a8d
-          const isActive = menu.classList.contains('active');
+          // u72b6u614bu306bu5fdcu3058u3066u753bu50cfu30b5u30a4u30bau304cu9069u5207u306bu5909u308fu308bu3088u3046u3001u30e1u30c7u30a3u30a2u30afu30a8u30eau3092u8ffd u52a0u3057u307eu3057u305fu3002
+          if (menu.classList.contains('active')) {
+            // u30e1u30cbu30e5u30fcu3092u9589u3058u308b
+            newHamburger.classList.remove('active');
+            menu.classList.remove('active');
+            menu.style.display = 'none';
+            document.body.style.overflow = '';
+          } else {
+            // u30e1u30cbu30e5u30fcu3092u958bu304f
+            newHamburger.classList.add('active');
+            menu.classList.add('active');
+            menu.style.display = 'flex';
+            menu.style.zIndex = '9999';
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      }
+    });
+  </script>
+  <script>
+    // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu306eu52d5u4f5cu3092u4feeu6b63
+    document.addEventListener('DOMContentLoaded', function() {
+      // u65e2u5b58u306eu30b9u30afu30eau30d7u30c8u3092u7121u52b9u5316
+      const oldScripts = document.querySelectorAll('script[src*="header.js"], script[src*="responsive.js"]');
+      oldScripts.forEach(script => {
+        script.setAttribute('data-disabled', 'true');
+      });
+      
+      // u30cfu30f3u30d0u30fcu30acu30fcu30e1u30cbu30e5u30fcu3092u53d6u5f97
+      const hamburger = document.querySelector('.hamburger-menu');
+      const menu = document.querySelector('.menu');
+      
+      if (hamburger && menu) {
+        // u65e2u5b58u306eu30a4u30d9u30f3u30c8u30eau30b9u30cau30fcu3092u524au9664
+        const newHamburger = hamburger.cloneNode(true);
+        hamburger.parentNode.replaceChild(newHamburger, hamburger);
+        
+        // u65b0u3057u3044u30afu30eau30c3u30afu30a4u30d9u30f3u30c8u3092u8ffdu52a0
+        newHamburger.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
           
-          // u72b6u614bu306bu5fdcu3058u3066u30afu30e9u30b9u3092u5207u308au66ffu3048
-          if (isActive) {
+          console.log('u30cfu30f3u30d0u30fcu30afu30eau30c3u30af');
+          
+          // u72b6u614bu306bu5fdcu3058u3066u753bu50cfu30b5u30a4u30bau304cu9069u5207u306bu5909u308fu308bu3088u3046u3001u30e1u30c7u30a3u30a2u30afu30a8u30eau3092u8ffd u52a0u3057u307eu3057u305fu3002
+          if (menu.classList.contains('active')) {
             // u30e1u30cbu30e5u30fcu3092u9589u3058u308b
             newHamburger.classList.remove('active');
             menu.classList.remove('active');
@@ -1254,13 +1658,16 @@
                 <a href="https://ec.saivision.jp/" target="_blank" class="btn-message" style="background-color: #ff4081; color: #ffffff;">メッセージを送る <i class="fas fa-paper-plane"></i></a>
               </div>
             </div>
-          </div>
         </div>
 
         <!-- 番組の概要 -->
         <div class="intro-section-wrapper">
           <div class="container">
-            <h2 class="section-title">番組の概要</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+              <div style="text-align: center;">
+                <h2 class="section-title" style="background-color: #ffffff; color: #1a3a6c; display: inline-block; padding: 5px 15px; border-radius: 5px;">番組の概要</h2>
+              </div>
+            </div>
             <div class="program-introduction">
               <div class="intro-container">
                 <div class="intro-image">
@@ -1268,7 +1675,7 @@
                 </div>
                 <div class="intro-content" style="background-color: white; color: #333; padding: 25px; border-radius: 10px; margin: 0 15px;">
                   <h3 class="intro-title">新しいラジオの形を創造する</h3>
-                  <p class="intro-text" style="color: #333;">「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、ラジオと渋谷愛ビジョンが連動する新しいクロスメディア番組です。毎週木曜日、ラジオ日本神谷町スタジオから生放送でお届けします。</p>
+                  <p class="intro-text" style="color: #333; word-break: break-word;">「efitプレゼンツ☆ウィークリー・バースデー・ランキング」は、ラジオと渋谷愛ビジョンが連動する新しいクロスメディア番組です。毎週木曜日、ラジオ日本神谷町スタジオから生放送でお届けします。</p>
                   <div class="program-details">
                     <div class="detail-item">
                       <span class="detail-icon"><i class="fas fa-calendar-alt"></i></span>
@@ -1289,30 +1696,22 @@
           </div>
         </div>
 
-        <!-- 次回のゲスト -->
-        <div class="full-width-section" style="background-color: #1a3a6c; color: white;">
-          <div class="container">
-            <h2 class="section-title" style="color: #d4af37;">次回のゲスト</h2>
-            <div class="program-introduction">
-              <div class="intro-container">
-                <div class="intro-image">
-                  <img src="img/cast/cast3.jpg" alt="神谷明采" class="main-image">
+        <!-- 番組の生い立ち -->
+        <div class="background-section-wrapper" style="background-color: #e6f2ff; padding: 60px 0; color: #000;">
+          <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+            <div class="program-background" style="margin-bottom: 0;">
+              <h3 class="intro-title" style="text-align: center; margin-bottom: 30px; color: #1a3a6c; font-size: 28px; padding-bottom: 10px; display: inline-block;">番組の生い立ち</h3>
+              <div class="background-container" style="display: flex; flex-direction: row; gap: 30px; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.05); transition: transform 0.3s ease; align-items: center;">
+                <div class="background-image" style="overflow: hidden; border-radius: 8px; border: 3px solid #fff; flex: 1; max-width: 40%;">
+                  <img src="img/about3.jpg" alt="番組の生い立ち" class="background-img" style="width: 100%; height: auto; display: block; transition: transform 0.5s ease;">
                 </div>
-                <div class="intro-content" style="background-color: white; color: #333;">
-                  <h3 class="intro-title" style="color: #1a3a6c;">神谷明采</h3>
-                  <p class="intro-text" style="color: #333;">東京大学大学院生。知的で洞察力のある視点からのトーク、番組に深みを与えています。</p>
-                  <div class="program-details">
-                    <div class="detail-item">
-                      <span class="detail-icon" style="background-color: rgba(26, 58, 108, 0.2); color: #1a3a6c;"><i class="fas fa-birthday-cake"></i></span>
-                      <span class="detail-text" style="color: #333;">誕生日：4月19日</span>
-                    </div>
-                    <div class="detail-item">
-                      <span class="detail-icon" style="background-color: rgba(26, 58, 108, 0.2); color: #1a3a6c;"><i class="fas fa-calendar-day"></i></span>
-                      <span class="detail-text" style="color: #333;">出演日：4月3日</span>
-                    </div>
-                  </div>
-                  <div style="text-align: center; margin-top: 20px;">
-                    <a href="caststaff.html" class="btn-primary" style="background-color: #1a3a6c; border: none; display: inline-block; width: 220px; font-size: 14px;">出演者情報を確認する</a>
+                <div class="background-content" style="flex: 1.5; padding: 20px;">
+                  <p class="background-lead background-lead-pc" style="display: block; font-size: 24px; font-weight: bold; color: #1a3a6c; margin-bottom: 20px; line-height: 1.5; text-align: left; border-bottom: 2px solid #d4af37; padding-bottom: 10px; word-break: break-word;">「おめでとう」と「ありがとう」の<br>愛を伝えるラジオ番組</p>
+                  <p class="background-lead background-lead-sp" style="display: none; font-size: 20px; font-weight: bold; color: #1a3a6c; margin-bottom: 15px; line-height: 1.5; text-align: center;">「おめでとう」と<br>「ありがとう」の<br>愛を伝えるラジオ番組</p>
+                  <div class="background-text" style="line-height: 1.8;">
+                    <p style="margin-bottom: 15px; color: #333; word-break: break-word;">この番組は「大好きな人、大切なひとへ、「おめでとう」や「ありがとう」愛を伝えるメッセ―ジボードとして誕生した『渋谷愛ビジョン』と『ラジオ日本』がコラボしてお届けする愛溢れるラジオ番組」として生まれました。</p>
+                    <p style="margin-bottom: 15px; color: #333; word-break: break-word;">既存の「渋谷愛ビジョン」という街頭ビジョンでのメッセージ発信の仕組みを活用し、ラジオという音声メディアと組み合わせることで、より多くの人に「おめでとう」「ありがとう」というポジティブなメッセージを広げていきます。</p>
+                    <p style="color: #333; word-break: break-word;">「ラジオ番組の公式WEB＆SNSはおざなりで魅了的なものがない…」という問題意識から、ウェブとSNSを効果的に活用した新しいラジオ番組の形を生み出します。</p>
                   </div>
                 </div>
               </div>
@@ -1320,51 +1719,51 @@
           </div>
         </div>
 
-        <div class="intro-section-wrapper">
+        <div class="intro-section-wrapper" style="background-color: #2a4a7c;">
           <div class="container">
-            <h2 class="section-title">出演者のリアルバイタルデータ</h2>
+            <h2 class="section-title" style="color: #fff;">出演者のリアルバイタルデータ</h2>
             <div class="program-introduction" style="max-width: 1200px; margin: 0 auto;">
-              <div class="intro-container">
-                <div class="intro-content" style="background-color: white; color: #333; padding: 25px; border-radius: 10px; margin: 0 auto;">
-                  <h3 class="intro-title">MOTHER Bracelet</h3>
-                  <p class="intro-text" style="color: #333;">MOTHER Braceletは、体温で充電、充電不要で計測可能でバイタルデータを蓄積する健康チェックデバイスです。</p>
+              <div class="intro-container" style="background-color: rgba(255, 255, 255, 0.2);">
+                <div class="intro-content" style="background-color: transparent; color: #fff; padding: 25px; border-radius: 10px; margin: 0 auto;">
+                  <h3 class="intro-title" style="color: #fff;">MOTHER Bracelet</h3>
+                  <p class="intro-text" style="color: #fff; word-break: break-word;">MOTHER Braceletは、体温で充電、充電不要で計測可能でバイタルデータを蓄積する健康チェックデバイスです。</p>
                   <div class="program-details">
                     <div class="detail-item">
-                      <span class="detail-icon"><i class="fas fa-heartbeat"></i></span>
-                      <span class="detail-text" style="color: #333;">心拍数、睡眠の質、ストレスレベルなどを計測</span>
+                      <span class="detail-icon" style="color: #fff;"><i class="fas fa-heartbeat"></i></span>
+                      <span class="detail-text" style="color: #fff;">心拍数、睡眠の質、ストレスレベルなどを計測</span>
                     </div>
                     <div class="detail-item">
-                      <span class="detail-icon"><i class="fas fa-battery-full"></i></span>
-                      <span class="detail-text" style="color: #333;">体温で充電、充電不要で計測可能</span>
+                      <span class="detail-icon" style="color: #fff;"><i class="fas fa-battery-full"></i></span>
+                      <span class="detail-text" style="color: #fff;">体温で充電、充電不要で計測可能</span>
                     </div>
                     <div class="detail-item">
-                      <span class="detail-icon"><i class="fas fa-chart-line"></i></span>
-                      <span class="detail-text" style="color: #333;">健康データを蓄積し、分析</span>
+                      <span class="detail-icon" style="color: #fff;"><i class="fas fa-chart-line"></i></span>
+                      <span class="detail-text" style="color: #fff;">健康データを蓄積し、分析</span>
                     </div>
                   </div>
                   
-                  <!-- バイタルデータ表示枠 -->
-                  <div style="margin-top: 30px; border: 2px dashed #1a3a6c; border-radius: 10px; padding: 20px; background-color: #f8f9fa;">
-                    <h4 style="text-align: center; color: #1a3a6c; margin-bottom: 15px; font-size: 18px;">出演者リアルタイムバイタルデータ</h4>
+                  <!-- リアルタイムデータ表示エリア -->
+                  <div style="margin-top: 30px; border: 2px dashed #fff; border-radius: 10px; padding: 20px; background-color: rgba(255, 255, 255, 0.1);">
+                    <h4 style="text-align: center; color: #fff; margin-bottom: 15px; font-size: 18px;">出演者リアルタイムバイタルデータ</h4>
                     <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 20px;">
                       <div style="text-align: center; padding: 10px; min-width: 120px;">
-                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">心拍数</div>
-                        <div style="font-size: 16px; font-weight: bold; color: #1a3a6c;">-- bpm</div>
+                        <div style="font-size: 14px; color: #fff; margin-bottom: 5px;">心拍数</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #fff;">-- bpm</div>
                       </div>
                       <div style="text-align: center; padding: 10px; min-width: 120px;">
-                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">ストレスレベル</div>
-                        <div style="font-size: 16px; font-weight: bold; color: #1a3a6c;">--</div>
+                        <div style="font-size: 14px; color: #fff; margin-bottom: 5px;">ストレスレベル</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #fff;">--</div>
                       </div>
                       <div style="text-align: center; padding: 10px; min-width: 120px;">
-                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">活動量</div>
-                        <div style="font-size: 16px; font-weight: bold; color: #1a3a6c;">-- kcal</div>
+                        <div style="font-size: 14px; color: #fff; margin-bottom: 5px;">活動量</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #fff;">-- kcal</div>
                       </div>
                     </div>
-                    <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 0;">※ 現在準備中です。4月3日の放送開始後にリアルタイムデータを表示します。</p>
+                    <p style="text-align: center; color: #fff; font-style: italic; margin-bottom: 0;">※ 現在準備中です。4月3日の放送開始後にリアルタイムデータを表示します。</p>
                   </div>
                   
                   <div style="text-align: center; margin-top: 20px;">
-                    <a href="news.html" class="btn-primary" style="display: inline-block;">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://mother-bracelet.com" target="_blank"class="btn-primary" style="display: inline-block; background-color: #d4af37; color: #1a3a6c;">詳細を見る <i class="fas fa-arrow-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -1373,11 +1772,11 @@
         </div>
 
         <!-- 誕生日が近い！ゲスト募集中！！ -->
-        <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 60px 0; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); box-sizing: border-box;"> 
+        <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 80px 0 60px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); box-sizing: border-box;">
           <div class="container">
-            <h2 class="section-title" style="color: #1a3a6c; text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; padding: 0 15px;">
-              誕生日が近い！ゲスト募集中！！
-            </h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+              <h2 class="section-title" style="background-color: #ffffff; color: #1a3a6c; display: inline-block; padding: 5px 15px; border-radius: 5px;">誕生日が近い！ゲスト募集中！！</h2>
+            </div>
             <div class="program-introduction">
               <div class="guest-recruitment-container">
         
@@ -1392,49 +1791,72 @@
                     </div>
                   </div>
                   <h4 style="margin-top: 20px; color: #1a3a6c; font-size: 20px; text-align: center; padding-bottom: 10px; border-bottom: 2px solid #d4af37; margin-bottom: 20px;">ゲスト出演してくださった方には、誕生日プレゼントとして</h4>
-                  <div class="present-items" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
-                    <div class="present-item" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed #e0e0e0;">
-                      <div class="present-header" style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <span class="present-number" style="background-color: #1a3a6c; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">1</span>
-                        <strong style="color: #1a3a6c; font-size: 18px;">渋谷愛ビジョンの放映枠</strong>
+                  <div class="present-items" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-bottom: 25px; overflow-x: hidden; max-width: 100%; box-sizing: border-box; width: 100%; margin-left: auto; margin-right: auto;">
+                    <div class="guest-present-container">
+                      <div class="guest-present-item">
+                        <div class="guest-present-header" style="flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px;">
+                          <span class="guest-present-number" style="margin-right: 0; margin-bottom: 10px;">1</span>
+                          <strong class="guest-present-title" style="text-align: center; width: 100%;">渋谷愛ビジョンの放映枠</strong>
+                        </div>
+                        <div class="guest-present-content">
+                          <div class="guest-present-flex">
+                            <div class="guest-present-img-container">
+                              <img src="img/home1.jpg" alt="渋谷愛ビジョン" class="guest-present-img">
+                            </div>
+                            <div class="guest-present-text">
+                              <p class="bold" style="font-weight: bold; color: #333; font-size: 16px; margin-bottom: 10px; position: relative; padding-left: 20px;">20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供</p>
+                              <p style="margin: 0 0 12px 0; color: #555; line-height: 1.7; word-break: break-word;">ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="present-content" style="padding-left: 34px;">
-                        <p style="margin: 0 0 8px 0; color: #555; line-height: 1.6; font-weight: bold;">▶ 20時00分30秒～20時5分00秒（4分30秒間）を1週間無償でご提供</p>
-                        <p style="margin: 0; color: #555; line-height: 1.6;">ミュージックビデオや映画・ドラマのPRはもちろんのこと、自らが発信したい映像を放映して渋谷で注目を浴びましょう。</p>
+                      
+                      <div class="guest-present-item">
+                        <div class="guest-present-header" style="flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px;">
+                          <span class="guest-present-number" style="margin-right: 0; margin-bottom: 10px;">2</span>
+                          <strong class="guest-present-title" style="text-align: center; width: 100%;">MOTHER Bracelet</strong>
+                        </div>
+                        <div class="guest-present-content">
+                          <div class="guest-present-flex">
+                            <div class="guest-present-img-container">
+                              <img src="img/home2.jpg" alt="MOTHER Bracelet" class="guest-present-img">
+                            </div>
+                            <div class="guest-present-text">
+                              <p style="margin: 0 0 12px 0; color: #555; line-height: 1.7; word-break: break-word; position: relative; padding-left: 20px;" class="bold">体温で充電、充電不要で計測可能でバイタルデータを蓄積するMOTHER　Braceletで健康チェック。</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div class="present-item" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed #e0e0e0;">
-                      <div class="present-header" style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <span class="present-number" style="background-color: #1a3a6c; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">2</span>
-                        <strong style="color: #1a3a6c; font-size: 18px;">MOTHER Bracelet</strong>
-                      </div>
-                      <div class="present-content" style="padding-left: 34px;">
-                        <p style="margin: 0; color: #555; line-height: 1.6;">体温で充電、充電不要で計測可能でバイタルデータを蓄積するMOTHER　Braceletで健康チェック。</p>
-                      </div>
-                    </div>
-                    
-                    <div class="present-item">
-                      <div class="present-header" style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <span class="present-number" style="background-color: #1a3a6c; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">3</span>
-                        <strong style="color: #1a3a6c; font-size: 18px;">今月のバースデープレゼント</strong>
-                      </div>
-                      <div class="present-content" style="padding-left: 34px;">
-                        <p style="margin: 0; color: #555; line-height: 1.6;">毎月どんな商品をセレクトするのか！？お楽しみに～。</p>
+                      
+                      <div class="guest-present-item" style="border-bottom: none;">
+                        <div class="guest-present-header" style="flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px;">
+                          <span class="guest-present-number" style="margin-right: 0; margin-bottom: 10px;">3</span>
+                          <strong class="guest-present-title" style="text-align: center; width: 100%;">今月のバースデープレゼント</strong>
+                        </div>
+                        <div class="guest-present-content">
+                          <div class="guest-present-flex">
+                            <div class="guest-present-img-container">
+                              <img src="img/home3.png" alt="今月のバースデープレゼント" class="guest-present-img">
+                            </div>
+                            <div class="guest-present-text">
+                              <p class="bold" style="font-weight: bold; color: #333; font-size: 16px; margin-bottom: 10px; position: relative; padding-left: 20px;">SHIBUYA HACHIKO SPICE</p>
+                              <p style="margin: 0 0 12px 0; color: #555; line-height: 1.7; word-break: break-word;">渋谷発の高級スパイス「渋谷八香唐辛子」。厚みのある香りと爽快な辛さが特徴で、和洋問わず様々な料理に一振り加えるだけで深みと高級感を与える至高の一品です。</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   
                   <p style="margin-top: 15px; text-align: center; font-weight: 500; color: #333; font-size: 16px;">以上、愛が詰まった３つのサービス＆商品をプレゼントさせていただきます。</p>
                   <div style="text-align: center; margin-top: 30px;">
-                    <a href="#" class="btn-primary" style="display: inline-block; background: linear-gradient(135deg, #1a3a6c 0%, #0f2a5c 100%); border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px; box-shadow: 0 5px 15px rgba(26, 58, 108, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(26, 58, 108, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(26, 58, 108, 0.3)'">応募する <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="btn-primary" style="display: inline-block; background: linear-gradient(135deg, #1a3a6c 0%, #0f2a5c 100%); border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0, 0, 0, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'">応募する <i class="fas fa-arrow-right"></i></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -1455,12 +1877,32 @@
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-birthday" style="font-weight: bold; color: #333;">誕生日 <span style="color: #FF6B88;">*</span></label>
+          <input type="date" id="contact-birthday" name="birthday" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-preferred-date" style="font-weight: bold; color: #333;">ゲスト出演希望日 <span style="color: #FF6B88;">*</span></label>
+          <input type="date" id="contact-preferred-date" name="preferred_date" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-agency" style="font-weight: bold; color: #333;">所属事務所 <span style="color: #FF6B88;">*</span></label>
+          <input type="text" id="contact-agency" name="agency" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="contact-manager" style="font-weight: bold; color: #333;">担当者名 <span style="color: #FF6B88;">*</span></label>
+          <input type="text" id="contact-manager" name="manager" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
           <label for="contact-email" style="font-weight: bold; color: #333;">メールアドレス <span style="color: #FF6B88;">*</span></label>
           <input type="email" id="contact-email" name="email" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 5px;">
-          <label for="contact-message" style="font-weight: bold; color: #333;">応募内容 <span style="color: #FF6B88;">*</span></label>
+          <label for="contact-message" style="font-weight: bold; color: #333;">応募の動機 <span style="color: #FF6B88;">*</span></label>
           <textarea id="contact-message" name="message" rows="5" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; resize: vertical;"></textarea>
         </div>
         
