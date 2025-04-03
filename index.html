@@ -1772,7 +1772,7 @@
         </div>
 
         <!-- 誕生日が近い！ゲスト募集中！！ -->
-        <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 80px 0 60px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); box-sizing: border-box;">
+        <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); padding: 60px 0; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); box-sizing: border-box;"> 
           <div class="container">
             <div style="text-align: center; margin-bottom: 20px;">
               <h2 class="section-title" style="background-color: #ffffff; color: #1a3a6c; display: inline-block; padding: 5px 15px; border-radius: 5px;">誕生日が近い！ゲスト募集中！！</h2>
@@ -2020,11 +2020,15 @@
         e.preventDefault();
         
         const name = $('#contact-name').val();
+        const birthday = $('#contact-birthday').val();
+        const preferredDate = $('#contact-preferred-date').val();
+        const agency = $('#contact-agency').val();
+        const manager = $('#contact-manager').val();
         const email = $('#contact-email').val();
         const message = $('#contact-message').val();
         
         // フォームデータを整形
-        const content = `お名前: ${name}<br>メールアドレス: ${email}<br>応募内容:<br>${message}`;
+        const content = `お名前: ${name}<br>誕生日: ${birthday}<br>ゲスト出演希望日: ${preferredDate}<br>所属事務所: ${agency}<br>担当者名: ${manager}<br>メールアドレス: ${email}<br>応募の動機:<br>${message}`;
         
         // Webhookに送信
         $.ajax({
